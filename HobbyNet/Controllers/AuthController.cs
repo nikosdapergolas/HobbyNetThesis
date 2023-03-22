@@ -29,7 +29,7 @@ namespace HobbyNet.Controllers
         /// </summary>
         /// <param name="request">This is the body in the post method that contains 
         /// a username, a password, an email, a firstname and a lastname</param>
-        /// <returns>Returns the User object that is crated and saved</returns>
+        /// <returns>Returns the User object that is crated and saved.</returns>
         [HttpPost("register")]
         public ActionResult<User> Register(UserSignUpDTO request)
         {
