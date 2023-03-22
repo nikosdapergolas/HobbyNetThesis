@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace EFDataAccessLibrary.Models
 {
+    // This is the main User object
     public class User
     {
         public int Id { get; set; }
