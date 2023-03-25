@@ -66,6 +66,10 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 //=============================================================================================
 // Adding my own dependency injection
 builder.Services.AddScoped<IAuthService, AuthService>();
+
+// Automating the Dependecy Injection process for every service I Add
+//builder.Services.RegisterAssemblyTypes()
+
 //=============================================================================================
 
 var app = builder.Build();

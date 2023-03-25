@@ -5,17 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EFDataAccessLibrary.Models
+namespace EFDataAccessLibrary.Models;
+
+public class Comment
 {
-    public class Comment
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        [Required]
-        [MaxLength(250)]
-        public string body { get; set; }
+    [Required]
+    [MaxLength(250)]
+    public string body { get; set; }
 
-        [Required]
-        public User user { get; set; }
-    }
+    [Required]
+    public User user { get; set; }
 }

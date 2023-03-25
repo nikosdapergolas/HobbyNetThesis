@@ -5,13 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EFDataAccessLibrary.Models
-{
-    public class Like
-    {
-        public int Id { get; set; }
+namespace EFDataAccessLibrary.Models;
 
-        [Required]
-        public User user { get; set; }
-    }
+public class Like
+{
+    public int Id { get; set; }
+
+    [Required]
+    public User user { get; set; }
 }

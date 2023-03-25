@@ -5,24 +5,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EFDataAccessLibrary.Models
+namespace EFDataAccessLibrary.Models;
+
+public class Post
 {
-    public class Post
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        [Required]
-        public User user { get; set; }
+    [Required]
+    public User user { get; set; }
 
-        [Required]
-        public Hobby hobby { get; set; }
+    [Required]
+    public Hobby hobby { get; set; }
 
-        [Required]
-        [MaxLength(250)]
-        public string body { get; set; }
+    [Required]
+    [MaxLength(250)]
+    public string body { get; set; }
 
-        public List<Comment>? comments { get; set; }
+    public List<Comment>? comments { get; set; }
 
-        public List<Like>? postLikes { get; set; }
-    }
+    public List<Like>? postLikes { get; set; }
 }

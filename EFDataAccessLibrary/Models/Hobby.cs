@@ -5,14 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EFDataAccessLibrary.Models
-{
-    public class Hobby
-    {
-        public int Id { get; set; }
+namespace EFDataAccessLibrary.Models;
 
-        [Required]
-        [MaxLength(60)]
-        public string hobbyName { get; set; }
-    }
+public class Hobby
+{
+    public int Id { get; set; }
+
+    [Required]
+    [MaxLength(60)]
+    public string hobbyName { get; set; }
 }
