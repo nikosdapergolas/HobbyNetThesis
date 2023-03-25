@@ -3,6 +3,7 @@ using EFDataAccessLibrary.Models;
 using EFDataAccessLibrary.Models.DataTransferObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,13 @@ public class AuthService : IAuthService
 {
     private readonly DatabaseContext _context;
     private readonly IConfiguration _configuration;
+    private readonly ILogger _logger;
 
-    public AuthService(DatabaseContext context, IConfiguration configuration)
+    public AuthService(DatabaseContext context, IConfiguration configuration, ILogger<User> logger)
     {
         _context = context;
         _configuration = configuration;
+        _logger = logger;
     }
     public User Register(UserSignUpDTO request)
     {
@@ -38,6 +41,13 @@ public class AuthService : IAuthService
         user.firstname = request.Firstname;
         user.lastname = request.Lastname;
         user.Roles.Add(role);
+
+        _logger.LogInformation("User tries to register using the following info: {username},{passwordHash},{email},{firstname},{lastname}"
+            ,user.username
+            ,user.passwordHash
+            ,user.email
+            ,user.firstname
+            ,user.lastname);
 
         _context.Users.Add(user);
         _context.SaveChanges();

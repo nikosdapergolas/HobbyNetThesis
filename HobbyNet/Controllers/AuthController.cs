@@ -34,6 +34,7 @@ public class AuthController : ControllerBase
     public ActionResult<User> Register(UserSignUpDTO request)
     {
         var registeredUser = _authService.Register(request);
+        //_logger.LogInformation("Displaying this jason file: {json}",registeredUser);
         return Ok(registeredUser);
     }
 
