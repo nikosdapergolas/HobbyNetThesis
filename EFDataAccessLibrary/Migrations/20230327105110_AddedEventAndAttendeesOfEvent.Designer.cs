@@ -4,6 +4,7 @@ using EFDataAccessLibrary.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFDataAccessLibrary.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230327105110_AddedEventAndAttendeesOfEvent")]
+    partial class AddedEventAndAttendeesOfEvent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,68 +53,6 @@ namespace EFDataAccessLibrary.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("EFDataAccessLibrary.Models.Event", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("eventName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("hobbyId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("eventName")
-                        .IsUnique();
-
-                    b.HasIndex("hobbyId");
-
-                    b.ToTable("Events");
-                });
-
-            modelBuilder.Entity("EFDataAccessLibrary.Models.EventAttendee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("EventId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("attendeeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventId");
-
-                    b.HasIndex("attendeeId");
-
-                    b.ToTable("EventAttendees");
-                });
-
             modelBuilder.Entity("EFDataAccessLibrary.Models.Hobby", b =>
                 {
                     b.Property<int>("Id")
@@ -131,9 +72,6 @@ namespace EFDataAccessLibrary.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("hobbyName")
-                        .IsUnique();
 
                     b.ToTable("Hobbies");
                 });
@@ -268,32 +206,6 @@ namespace EFDataAccessLibrary.Migrations
                     b.Navigation("user");
                 });
 
-            modelBuilder.Entity("EFDataAccessLibrary.Models.Event", b =>
-                {
-                    b.HasOne("EFDataAccessLibrary.Models.Hobby", "hobby")
-                        .WithMany()
-                        .HasForeignKey("hobbyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("hobby");
-                });
-
-            modelBuilder.Entity("EFDataAccessLibrary.Models.EventAttendee", b =>
-                {
-                    b.HasOne("EFDataAccessLibrary.Models.Event", null)
-                        .WithMany("attendees")
-                        .HasForeignKey("EventId");
-
-                    b.HasOne("EFDataAccessLibrary.Models.User", "attendee")
-                        .WithMany()
-                        .HasForeignKey("attendeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("attendee");
-                });
-
             modelBuilder.Entity("EFDataAccessLibrary.Models.Hobby", b =>
                 {
                     b.HasOne("EFDataAccessLibrary.Models.User", null)
@@ -340,11 +252,6 @@ namespace EFDataAccessLibrary.Migrations
                     b.HasOne("EFDataAccessLibrary.Models.User", null)
                         .WithMany("Roles")
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("EFDataAccessLibrary.Models.Event", b =>
-                {
-                    b.Navigation("attendees");
                 });
 
             modelBuilder.Entity("EFDataAccessLibrary.Models.Post", b =>

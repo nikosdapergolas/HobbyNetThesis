@@ -15,6 +15,10 @@ public class DatabaseContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<User>().HasIndex(u => u.username).IsUnique();
+
+        modelBuilder.Entity<Hobby>().HasIndex(h => h.hobbyName).IsUnique();
+
+        modelBuilder.Entity<Event>().HasIndex(e => e.eventName).IsUnique();
     }
     public DbSet<User> Users { get; set; }
     public DbSet<Hobby> Hobbies { get; set; }
@@ -22,4 +26,6 @@ public class DatabaseContext : DbContext
     public DbSet<Post> Posts { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Like> Likes { get; set; }
+    public DbSet<Event> Events  { get; set; }
+    public DbSet<EventAttendee> EventAttendees { get; set; }
 }
