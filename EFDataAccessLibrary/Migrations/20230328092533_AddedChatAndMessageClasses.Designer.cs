@@ -4,6 +4,7 @@ using EFDataAccessLibrary.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFDataAccessLibrary.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230328092533_AddedChatAndMessageClasses")]
+    partial class AddedChatAndMessageClasses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +51,10 @@ namespace EFDataAccessLibrary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ChatId")
-                        .HasColumnType("int");
-
                     b.Property<int>("memberId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ChatId");
 
                     b.HasIndex("memberId");
 
@@ -210,9 +208,6 @@ namespace EFDataAccessLibrary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ChatId")
-                        .HasColumnType("int");
-
                     b.Property<string>("messageBody")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -222,8 +217,6 @@ namespace EFDataAccessLibrary.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ChatId");
 
                     b.ToTable("Messages");
                 });
@@ -333,10 +326,6 @@ namespace EFDataAccessLibrary.Migrations
 
             modelBuilder.Entity("EFDataAccessLibrary.Models.ChatMember", b =>
                 {
-                    b.HasOne("EFDataAccessLibrary.Models.Chat", null)
-                        .WithMany("members")
-                        .HasForeignKey("ChatId");
-
                     b.HasOne("EFDataAccessLibrary.Models.User", "member")
                         .WithMany()
                         .HasForeignKey("memberId")
@@ -409,13 +398,6 @@ namespace EFDataAccessLibrary.Migrations
                     b.Navigation("user");
                 });
 
-            modelBuilder.Entity("EFDataAccessLibrary.Models.Message", b =>
-                {
-                    b.HasOne("EFDataAccessLibrary.Models.Chat", null)
-                        .WithMany("chatMessages")
-                        .HasForeignKey("ChatId");
-                });
-
             modelBuilder.Entity("EFDataAccessLibrary.Models.Post", b =>
                 {
                     b.HasOne("EFDataAccessLibrary.Models.Hobby", "hobby")
@@ -440,13 +422,6 @@ namespace EFDataAccessLibrary.Migrations
                     b.HasOne("EFDataAccessLibrary.Models.User", null)
                         .WithMany("Roles")
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("EFDataAccessLibrary.Models.Chat", b =>
-                {
-                    b.Navigation("chatMessages");
-
-                    b.Navigation("members");
                 });
 
             modelBuilder.Entity("EFDataAccessLibrary.Models.Event", b =>

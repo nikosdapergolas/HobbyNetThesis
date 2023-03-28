@@ -29,5 +29,5 @@ public class Event
     [Required]
     public Hobby hobby { get; set; }
 
-    public List<EventAttendee> attendees { get; set; }
+    public List<EventAttendee> attendees { get; set; } = new List<EventAttendee>();
 }

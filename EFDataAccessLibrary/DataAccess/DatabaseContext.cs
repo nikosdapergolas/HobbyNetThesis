@@ -28,4 +28,7 @@ public class DatabaseContext : DbContext
     public DbSet<Like> Likes { get; set; }
     public DbSet<Event> Events  { get; set; }
     public DbSet<EventAttendee> EventAttendees { get; set; }
+    public DbSet<Chat> Chats { get; set; }
+    public DbSet<Message> Messages { get; set; }
+    public DbSet<ChatMember> ChatMembers { get; set; }
 }
