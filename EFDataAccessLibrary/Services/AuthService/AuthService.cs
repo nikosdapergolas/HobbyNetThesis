@@ -82,7 +82,10 @@ public class AuthService : IAuthService
     }
     public string createToken(User user)
     {
-        var roles = _context.Roles.Where(r => r.Id.Equals(user.Id)).ToList();
+        //var roles = _context.Roles.Where(r => r.Id.Equals(user.Id)).ToList();
+        var roles = _context.Roles.FromSqlRaw($"spCheckUserRoles {user.Id}").ToList();
+        //var roles = _context.Users.Where(r => r.Id.Equals(user.Id)).Include(u => u.Roles.Find(i => i.roleName));
+        //var roles = _context.Users.Where(u => u.Id.Equals(user.Id)).Include(i => i.Roles).ToList();
 
         List<Claim> claims = new List<Claim>()
         {

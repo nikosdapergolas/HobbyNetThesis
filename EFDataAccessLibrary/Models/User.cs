@@ -26,11 +26,11 @@ public class User
     public string email { get; set; }
 
     [Required]
-    [MaxLength(50)]
+    [MaxLength(45)]
     public string firstname { get; set; }
 
     [Required]
-    [MaxLength(50)]
+    [MaxLength(45)]
     public string lastname { get; set; }
 
 
