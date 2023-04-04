@@ -42,11 +42,19 @@ namespace HobbyNet.Controllers
             }
         }
 
-        // POST api/Users
-        [HttpPost]
-        public async Task<string> CreateAdminUser([FromBody] string value)
+        // POST api/Users/RegisterAdmin/5
+        [HttpPost("RegisterAdmin")]
+        public async Task<ActionResult> CreateAdminUser(int id)
         {
-            return "value";
+            var response = await _usersService.CreateAdminUser(id);
+            if(response == null) 
+            {
+                return NotFound($"The user with id: {id} was not found");
+            }
+            else
+            {
+                return Ok(response);
+            }
         }
 
         // PUT api/Users/5

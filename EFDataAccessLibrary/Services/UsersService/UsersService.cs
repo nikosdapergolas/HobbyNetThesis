@@ -37,9 +37,22 @@ public class UsersService : IUsersService
         return user;
     }
 
-    public async Task<IEnumerable<string>> CreateAdminUser()
+    public async Task<string> CreateAdminUser(int id)
     {
-        throw new NotImplementedException();
+        var user = await GetOneUser(id);
+        if(user == null)
+        {
+            return null;
+        }
+        else
+        {
+            //Role role = new Role();
+            //role.roleName = "Admin";
+            //_context.Roles.Add("Admin", id);
+            _context.Roles.FromSqlRaw($"spUpgradeUserToAdmin {id}");
+            _context.SaveChangesAsync();
+            return $"User with id {id} has been granted Admin privileges";
+        }
     }
 
     public async Task<IEnumerable<string>> EditUser()

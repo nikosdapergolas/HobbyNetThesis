@@ -169,7 +169,6 @@ S:\visual_studio_projects\web_projects\Thesis\HobbyNet\obj\Debug\net6.0\HobbyNet
 S:\visual_studio_projects\web_projects\Thesis\HobbyNet\obj\Debug\net6.0\HobbyNet.AssemblyInfoInputs.cache
 S:\visual_studio_projects\web_projects\Thesis\HobbyNet\obj\Debug\net6.0\HobbyNet.AssemblyInfo.cs
 S:\visual_studio_projects\web_projects\Thesis\HobbyNet\obj\Debug\net6.0\HobbyNet.csproj.CoreCompileInputs.cache
-S:\visual_studio_projects\web_projects\Thesis\HobbyNet\obj\Debug\net6.0\HobbyNet.MvcApplicationPartsAssemblyInfo.cs
 S:\visual_studio_projects\web_projects\Thesis\HobbyNet\obj\Debug\net6.0\HobbyNet.MvcApplicationPartsAssemblyInfo.cache
 S:\visual_studio_projects\web_projects\Thesis\HobbyNet\obj\Debug\net6.0\staticwebassets\msbuild.HobbyNet.Microsoft.AspNetCore.StaticWebAssets.props
 S:\visual_studio_projects\web_projects\Thesis\HobbyNet\obj\Debug\net6.0\staticwebassets\msbuild.build.HobbyNet.props

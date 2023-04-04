@@ -11,7 +11,7 @@ public interface IUsersService
 {
     public Task<IEnumerable<User>> GetAllUsers();
     public Task<User> GetOneUser(int id);
-    public Task<IEnumerable<string>> CreateAdminUser();
+    public Task<string> CreateAdminUser(int id);
     public Task<IEnumerable<string>> EditUser();
     public Task<IEnumerable<string>> DeleteUser();
 
