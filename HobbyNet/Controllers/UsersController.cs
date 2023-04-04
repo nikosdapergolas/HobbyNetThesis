@@ -21,26 +21,25 @@ namespace HobbyNet.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public async Task<IEnumerable<string>> GetAllUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
             var users = await _usersService.GetAllUsers();
-            return (IEnumerable<string>)Ok(users);
+            return Ok(users);
         }
 
         // GET api/Users/5
         [HttpGet("{id}")]
-        public async Task<User> GetOneUser(int id)
+        public async Task<ActionResult<User>> GetOneUser(int id)
         {
-            //var user = await _usersService.GetOneUser(id);
-            //if (user == null) 
-            //{
-            //    return NotFound(id);
-            //}
-            //else
-            //{
-            //    return Ok(user);
-            //}
-            return new User();
+            var user = await _usersService.GetOneUser(id);
+            if (user == null)
+            {
+                return NotFound($"The user with id: {id} was not found");
+            }
+            else
+            {
+                return Ok(user);
+            }
         }
 
         // POST api/Users

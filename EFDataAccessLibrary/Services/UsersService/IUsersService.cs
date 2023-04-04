@@ -10,7 +10,7 @@ namespace EFDataAccessLibrary.Services.UsersService;
 public interface IUsersService
 {
     public Task<IEnumerable<User>> GetAllUsers();
-    public Task<IEnumerable<string>> GetOneUser(int id);
+    public Task<User> GetOneUser(int id);
     public Task<IEnumerable<string>> CreateAdminUser();
     public Task<IEnumerable<string>> EditUser();
     public Task<IEnumerable<string>> DeleteUser();

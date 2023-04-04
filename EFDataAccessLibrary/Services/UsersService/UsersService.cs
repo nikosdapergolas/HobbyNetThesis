@@ -20,14 +20,21 @@ public class UsersService : IUsersService
 
     public async Task<IEnumerable<User>> GetAllUsers()
     {
-        IEnumerable<User> users = new List<User>();
-        users = _context.Users;
+        var users = await _context.Users
+            .Include(h => h.Hobbies)
+            .Include(r => r.Roles)
+            .ToListAsync();
         return users;
     }
 
-    public async Task<IEnumerable<string>> GetOneUser(int id)
+    public async Task<User> GetOneUser(int id)
     {
-        throw new NotImplementedException();
+        var user = await _context.Users
+            .Where(i => i.Id.Equals(id))
+            .Include(h => h.Hobbies)
+            .Include(r => r.Roles)
+            .FirstOrDefaultAsync();
+        return user;
     }
 
     public async Task<IEnumerable<string>> CreateAdminUser()
@@ -44,30 +51,4 @@ public class UsersService : IUsersService
     {
         throw new NotImplementedException();
     }
-
-    //public async Task<IEnumerable<User>> GetAllUsers()
-    //{
-    //    var users = _context.Users.AsAsyncEnumerable();
-    //    return (IEnumerable<User>)users;
-    //}
-
-    //public async Task<IEnumerable<string>> GetOneUser(int id)
-    //{
-    //    throw new NotImplementedException();
-    //}
-
-    //public async Task<IEnumerable<string>> CreateAdminUser()
-    //{
-    //    throw new NotImplementedException();
-    //}
-
-    //public async Task<IEnumerable<string>> EditUser()
-    //{
-    //    throw new NotImplementedException();
-    //}
-
-    //public async Task<IEnumerable<string>> DeleteUser()
-    //{
-    //    throw new NotImplementedException();
-    //}
 }
