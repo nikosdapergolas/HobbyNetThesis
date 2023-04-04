@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 using Serilog;
+using EFDataAccessLibrary.Services.UsersService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -73,6 +74,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 //=============================================================================================
 // Adding my own dependency injection
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUsersService, UsersService>();
 //=============================================================================================
 
 var app = builder.Build();
