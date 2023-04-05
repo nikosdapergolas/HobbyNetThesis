@@ -1,4 +1,5 @@
 ﻿using EFDataAccessLibrary.Models;
+using EFDataAccessLibrary.Models.DataTransferObjects;
 using EFDataAccessLibrary.Services.UsersService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +10,7 @@ namespace HobbyNet.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class UsersController : ControllerBase
     {
         private readonly IUsersService _usersService;
@@ -57,11 +58,19 @@ namespace HobbyNet.Controllers
             }
         }
 
-        // PUT api/Users/5
-        [HttpPut("{id}")]
-        public async Task<string> EditUser(int id, [FromBody] string value)
+        // PUT api/Users/
+        [HttpPut]
+        public async Task<ActionResult> EditUser(UserEditDTO userEditDTO)
         {
-            return "value";
+            var response = await _usersService.EditUser(userEditDTO);
+            if (response == null)
+            {
+                return NotFound($"The user with id: {userEditDTO.Id} was not found");
+            }
+            else
+            {
+                return Ok(response);
+            }
         }
 
         // DELETE api/Users/5
