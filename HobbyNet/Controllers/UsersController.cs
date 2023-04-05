@@ -58,7 +58,7 @@ namespace HobbyNet.Controllers
             }
         }
 
-        // PUT api/Users/
+        // PUT api/Users
         [HttpPut]
         public async Task<ActionResult> EditUser(UserEditDTO userEditDTO)
         {

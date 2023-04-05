@@ -68,14 +68,6 @@ public class UsersService : IUsersService
         }
         else
         {
-            //User editedUser = new User();
-            //editedUser.Id = userEditDTO.Id;
-            //editedUser.firstname = userEditDTO.firstname;
-            //editedUser.lastname = userEditDTO.lastname;
-            //editedUser.email = userEditDTO.email;
-            //editedUser.username = userEditDTO.username;
-            //editedUser.passwordHash = user.passwordHash;
-
             await _context.Users
                 .Where(i => i.Id.Equals(userEditDTO.Id))
                 .ExecuteUpdateAsync(s => s
@@ -84,7 +76,6 @@ public class UsersService : IUsersService
                     .SetProperty(e => e.email, f => userEditDTO.email)
                     .SetProperty(u => u.username, u => userEditDTO.username)
                 );
-            //await _context.SaveChangesAsync();
 
             return $"User with id {userEditDTO.Id} has been edited Successfully";
         }
