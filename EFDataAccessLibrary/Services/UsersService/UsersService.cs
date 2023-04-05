@@ -40,8 +40,10 @@ public class UsersService : IUsersService
 
     public async Task<string> CreateAdminUser(int id)
     {
-        var user = await GetOneUser(id);
-        if(user == null)
+        //var user = await GetOneUser(id);
+        var user = await _context.Users.FindAsync(id);
+
+        if (user == null)
         {
             return null;
         }
@@ -61,7 +63,9 @@ public class UsersService : IUsersService
 
     public async Task<string> EditUser(UserEditDTO userEditDTO)
     {
-        var user = await GetOneUser(userEditDTO.Id);
+        //var user = await GetOneUser(userEditDTO.Id);
+        var user = await _context.Users.FindAsync(userEditDTO.Id);
+
         if (user == null)
         {
             return null;
@@ -81,8 +85,21 @@ public class UsersService : IUsersService
         }
     }
 
-    public async Task<IEnumerable<string>> DeleteUser()
+    public async Task<string> DeleteUser(int id)
     {
-        throw new NotImplementedException();
+        //var user = await GetOneUser(id);
+        var user = await _context.Users.FindAsync(id);
+        if (user == null)
+        {
+            return null;
+        }
+        else
+        {
+            await _context.Users
+                .Where(i => i.Id.Equals(id))
+                .ExecuteDeleteAsync();
+
+            return $"User with id {id} has been Deleted Successfully";
+        }
     }
 }

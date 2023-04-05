@@ -75,9 +75,17 @@ namespace HobbyNet.Controllers
 
         // DELETE api/Users/5
         [HttpDelete("{id}")]
-        public async Task<string> DeleteUser(int id)
+        public async Task<ActionResult> DeleteUser(int id)
         {
-            return "value";
+            var response = await _usersService.DeleteUser(id);
+            if (response == null)
+            {
+                return NotFound($"The user with id: {id} was not found");
+            }
+            else
+            {
+                return Ok(response);
+            }
         }
     }
 }

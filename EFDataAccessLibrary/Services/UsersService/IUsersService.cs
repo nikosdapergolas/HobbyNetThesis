@@ -14,6 +14,6 @@ public interface IUsersService
     public Task<User> GetOneUser(int id);
     public Task<string> CreateAdminUser(int id);
     public Task<string> EditUser(UserEditDTO userEditDTO);
-    public Task<IEnumerable<string>> DeleteUser();
+    public Task<string> DeleteUser(int id);
 
 }
