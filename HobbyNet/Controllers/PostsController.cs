@@ -1,6 +1,7 @@
 ﻿using EFDataAccessLibrary.Models;
 using EFDataAccessLibrary.Models.DataTransferObjects;
 using EFDataAccessLibrary.Services.PostsService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,6 +21,7 @@ public class PostsController : ControllerBase
 
     // GET: api/Posts
     [HttpGet]
+    [Authorize]
     public async Task<ActionResult<IEnumerable<Post>>> GetAllPosts()
     {
         var posts = await _postsService.GetAllPosts();
@@ -28,6 +30,7 @@ public class PostsController : ControllerBase
 
     // GET api/Posts/5
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<ActionResult<Post>> GetOnePost(int id)
     {
         var post = await _postsService.GetOnePost(id);
@@ -43,6 +46,7 @@ public class PostsController : ControllerBase
 
     // POST api/Posts/AdminPost
     [HttpPost("AdminPost")]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult> CreatePostByAdmin()
     {
         var response = await _postsService.CreatePostByAdmin();
@@ -51,6 +55,7 @@ public class PostsController : ControllerBase
 
     // POST api/Posts/UserPost
     [HttpPost("UserPost")]
+    [Authorize(Roles = "User")]
     public async Task<ActionResult> CreatePostByUser()
     {
         var response = await _postsService.CreatePostByUser();
@@ -59,6 +64,7 @@ public class PostsController : ControllerBase
 
     // PUT api/Posts/5
     [HttpPut("{id}")]
+    [Authorize]
     public async Task<ActionResult> EditPost(PostEditDTO postEditDTO)
     {
         var response = await _postsService.EditPost(postEditDTO);
@@ -74,6 +80,7 @@ public class PostsController : ControllerBase
 
     // DELETE api/Posts/5
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult> DeletePost(int id)
     {
         var response = await _postsService.DeletePost(id);
