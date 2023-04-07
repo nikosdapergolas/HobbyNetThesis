@@ -26,6 +26,22 @@ public class PostsController : ControllerBase
         return Ok(posts);
     }
 
+    // GET: api/Posts/Search/?searchTerm=abc
+    [HttpGet("Search")]
+    [Authorize]
+    public async Task<ActionResult<IEnumerable<Post>>> SearchPost(string searchTerm)
+    {
+        var posts = await _postsService.SearchPost(searchTerm);
+        if (posts.Count().Equals(0))
+        {
+            return NotFound($"There are no posts that match the search term: {searchTerm}");
+        }
+        else
+        {
+            return Ok(posts);
+        }
+    }
+
     // GET api/Posts/5
     [HttpGet("{id}")]
     [Authorize]

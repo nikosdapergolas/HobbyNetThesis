@@ -29,6 +29,14 @@ public class PostsService : IPostsService
 
     }
 
+    public async Task<IEnumerable<Post>> SearchPost(string searchTerm)
+    {
+        var posts = await _context.Posts
+            .Where(b => b.body.Contains(searchTerm))
+            .ToListAsync();
+        return posts;
+    }
+
     public async Task<Post> GetOnePost(int id)
     {
         var post = await _context.Posts

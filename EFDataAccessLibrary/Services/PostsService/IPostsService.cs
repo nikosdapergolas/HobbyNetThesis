@@ -11,6 +11,7 @@ namespace EFDataAccessLibrary.Services.PostsService;
 public interface IPostsService
 {
     public Task<IEnumerable<Post>> GetAllPosts();
+    public Task<IEnumerable<Post>> SearchPost(string searchTerm);
     public Task<Post> GetOnePost(int id);
     public Task<string> CreatePostByAdmin();
     public Task<string> CreatePostByUser();

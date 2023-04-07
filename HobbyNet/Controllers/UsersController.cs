@@ -8,7 +8,6 @@ namespace HobbyNet.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
     public class UsersController : ControllerBase
     {
         private readonly IUsersService _usersService;
@@ -20,21 +19,23 @@ namespace HobbyNet.Controllers
 
         // GET: api/Users
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
             var users = await _usersService.GetAllUsers();
             return Ok(users);
         }
 
-        // GET: api/Users/Search/searchTerm
+        // GET: api/Users/Search/?searchTerm=abc
         [HttpGet("Search")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<User>>> SearchUsers(string searchTerm)
         {
             var users = await _usersService.SearchUsers(searchTerm);
 
             if (users.Count().Equals(0))
             {
-                return NotFound($"There are no users that mach the search term: {searchTerm}");
+                return NotFound($"There are no users that match the search term: {searchTerm}");
             }
             else
             {
@@ -44,6 +45,7 @@ namespace HobbyNet.Controllers
 
         // GET api/Users/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<User>> GetOneUser(int id)
         {
             var user = await _usersService.GetOneUser(id);
@@ -59,6 +61,7 @@ namespace HobbyNet.Controllers
 
         // POST api/Users/RegisterAdmin/5
         [HttpPost("RegisterAdmin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> CreateAdminUser(int id)
         {
             var response = await _usersService.CreateAdminUser(id);
@@ -74,6 +77,7 @@ namespace HobbyNet.Controllers
 
         // PUT api/Users
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> EditUser(UserEditDTO userEditDTO)
         {
             var response = await _usersService.EditUser(userEditDTO);
@@ -89,6 +93,7 @@ namespace HobbyNet.Controllers
 
         // DELETE api/Users/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteUser(int id)
         {
             var response = await _usersService.DeleteUser(id);
