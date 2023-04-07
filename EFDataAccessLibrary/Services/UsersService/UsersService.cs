@@ -28,6 +28,19 @@ public class UsersService : IUsersService
         return users;
     }
 
+    public async Task<IEnumerable<UserSearchResultDTO>> SearchUsers(string searchTerm)
+    {
+        var users = await _context.Users
+            .Where(u => u.username.Contains(searchTerm))
+            .Select(x => new UserSearchResultDTO()
+            {
+                Id = x.Id,
+                username = x.username
+            })
+            .ToListAsync();
+        return users;
+    }
+
     public async Task<User> GetOneUser(int id)
     {
         var user = await _context.Users

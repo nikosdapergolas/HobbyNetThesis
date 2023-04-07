@@ -10,8 +10,8 @@ namespace EFDataAccessLibrary.Services.PostsService;
 
 public interface IPostsService
 {
-    public Task<IEnumerable<User>> GetAllPosts();
-    public Task<User> GetOnePost(int id);
+    public Task<IEnumerable<Post>> GetAllPosts();
+    public Task<Post> GetOnePost(int id);
     public Task<string> CreatePostByAdmin();
     public Task<string> CreatePostByUser();
     public Task<string> EditPost(PostEditDTO postEditDTO);

@@ -26,6 +26,22 @@ namespace HobbyNet.Controllers
             return Ok(users);
         }
 
+        // GET: api/Users/Search/searchTerm
+        [HttpGet("Search")]
+        public async Task<ActionResult<IEnumerable<User>>> SearchUsers(string searchTerm)
+        {
+            var users = await _usersService.SearchUsers(searchTerm);
+
+            if (users.Count().Equals(0))
+            {
+                return NotFound($"There are no users that mach the search term: {searchTerm}");
+            }
+            else
+            {
+                return Ok(users);
+            }            
+        }
+
         // GET api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetOneUser(int id)
