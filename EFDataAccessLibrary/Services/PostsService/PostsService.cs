@@ -47,14 +47,34 @@ public class PostsService : IPostsService
         return post;
     }
 
-    public async Task<string> CreatePostByAdmin()
+    public async Task<Post> CreatePostByUser(Post post)
     {
-        throw new NotImplementedException();
+        var user = await _context.Users.FindAsync(post.user);
+        var hobby = await _context.Hobbies.FindAsync(post.hobby);
+
+        if (user is null || hobby is null) 
+        {
+            return null;
+        }
+        else
+        {
+            return post;
+        }
     }
 
-    public async Task<string> CreatePostByUser()
+    public async Task<Post> CreatePostByAdmin(Post post)
     {
-        throw new NotImplementedException();
+        var user = await _context.Users.FindAsync(post.user);
+        var hobby = await _context.Hobbies.FindAsync(post.hobby);
+
+        if (user is null || hobby is null)
+        {
+            return null;
+        }
+        else
+        {
+            return post;
+        }
     }
 
     public async Task<string> EditPost(PostEditDTO postEditDTO)

@@ -103,7 +103,7 @@ public class PostsController : ControllerBase
             return NotFound($"The post with id: {id} was not found");
         }
         else 
-        { 
+        {
             return Ok(response);
         }
     }
