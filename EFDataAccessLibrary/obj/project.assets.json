@@ -3780,26 +3780,36 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nikos\\.nuget\\packages\\": {}
+    "C:\\Users\\nikos\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "S:\\syncfusion\\WPF\\21.1.35\\ToolboxNuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nikos\\Source\\Repos\\HobbyNetThesis\\EFDataAccessLibrary\\EFDataAccessLibrary.csproj",
+      "projectUniqueName": "S:\\visual_studio_projects\\web_projects\\Thesis\\EFDataAccessLibrary\\EFDataAccessLibrary.csproj",
       "projectName": "EFDataAccessLibrary",
-      "projectPath": "C:\\Users\\nikos\\Source\\Repos\\HobbyNetThesis\\EFDataAccessLibrary\\EFDataAccessLibrary.csproj",
+      "projectPath": "S:\\visual_studio_projects\\web_projects\\Thesis\\EFDataAccessLibrary\\EFDataAccessLibrary.csproj",
       "packagesPath": "C:\\Users\\nikos\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nikos\\Source\\Repos\\HobbyNetThesis\\EFDataAccessLibrary\\obj\\",
+      "outputPath": "S:\\visual_studio_projects\\web_projects\\Thesis\\EFDataAccessLibrary\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "S:\\syncfusion\\WPF\\21.1.35\\ToolboxNuGetPackages"
+      ],
       "configFilePaths": [
         "C:\\Users\\nikos\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Syncfusion Toolbox for WPF.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "S:\\syncfusion\\WinUI\\21.1.35\\NuGetPackages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3865,7 +3875,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

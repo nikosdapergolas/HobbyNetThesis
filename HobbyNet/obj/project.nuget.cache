@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dZxsbF77AD22OC3gfTXWNW4UY4REWtfgN50YsmuOG/p8wIxgJl2urlvvJYYtPW6Wl4s8oy+nV7CHNGF3yRdE0Q==",
+  "dgSpecHash": "NdrHni8cAMOS3i3XqYAs2dARTrvO58PtR1669OP3n6OCKrTpl8mNY7K3FxenJ1RB2T/EpoJIBot18JLF1TQGxw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nikos\\Source\\Repos\\HobbyNetThesis\\HobbyNet\\HobbyNet.csproj",
+  "projectFilePath": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\HobbyNet.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nikos\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\nikos\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
