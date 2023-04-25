@@ -58,22 +58,38 @@ public class PostsController : ControllerBase
         }
     }
 
-    // POST api/Posts/AdminPost
-    [HttpPost("AdminPost")]
-    [Authorize(Roles = "Admin")]
-    public async Task<ActionResult> CreatePostByAdmin()
-    {
-        var response = await _postsService.CreatePostByAdmin();
-        return Ok(response);
-    }
-
     // POST api/Posts/UserPost
     [HttpPost("UserPost")]
     [Authorize(Roles = "User")]
-    public async Task<ActionResult> CreatePostByUser()
+    public async Task<ActionResult> CreatePostByUser(Post post)
     {
-        var response = await _postsService.CreatePostByUser();
-        return Ok(response);
+        var response = await _postsService.CreatePostByUser(post);
+
+        if (response == null)
+        {
+            return BadRequest();
+        }
+        else
+        {
+            return Ok(response);
+        }
+    }
+
+    // POST api/Posts/AdminPost
+    [HttpPost("AdminPost")]
+    [Authorize(Roles = "Admin")]
+    public async Task<ActionResult> CreatePostByAdmin(Post post)
+    {
+        var response = await _postsService.CreatePostByAdmin(post);
+
+        if(response == null)
+        {
+            return BadRequest();
+        }
+        else
+        {
+            return Ok(response);
+        }
     }
 
     // PUT api/Posts/5
