@@ -4626,44 +4626,34 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nikos\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "S:\\syncfusion\\WPF\\21.1.35\\ToolboxNuGetPackages": {}
+    "C:\\Users\\nikos\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\HobbyNet.csproj",
+      "projectUniqueName": "C:\\Users\\nikos\\Source\\Repos\\HobbyNetThesis\\HobbyNet\\HobbyNet.csproj",
       "projectName": "HobbyNet",
-      "projectPath": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\HobbyNet.csproj",
+      "projectPath": "C:\\Users\\nikos\\Source\\Repos\\HobbyNetThesis\\HobbyNet\\HobbyNet.csproj",
       "packagesPath": "C:\\Users\\nikos\\.nuget\\packages\\",
-      "outputPath": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\obj\\",
+      "outputPath": "C:\\Users\\nikos\\Source\\Repos\\HobbyNetThesis\\HobbyNet\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "S:\\syncfusion\\WPF\\21.1.35\\ToolboxNuGetPackages"
-      ],
       "configFilePaths": [
         "C:\\Users\\nikos\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Syncfusion Toolbox for WPF.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
-        "S:\\syncfusion\\WinUI\\21.1.35\\NuGetPackages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "S:\\visual_studio_projects\\web_projects\\Thesis\\EFDataAccessLibrary\\EFDataAccessLibrary.csproj": {
-              "projectPath": "S:\\visual_studio_projects\\web_projects\\Thesis\\EFDataAccessLibrary\\EFDataAccessLibrary.csproj"
+            "C:\\Users\\nikos\\Source\\Repos\\HobbyNetThesis\\EFDataAccessLibrary\\EFDataAccessLibrary.csproj": {
+              "projectPath": "C:\\Users\\nikos\\Source\\Repos\\HobbyNetThesis\\EFDataAccessLibrary\\EFDataAccessLibrary.csproj"
             }
           }
         }
@@ -4732,7 +4722,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }
