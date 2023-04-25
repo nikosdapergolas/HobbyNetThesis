@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "n3NM89rqLSZvNs96L2ha2VeG7WGORjYDATZAaInqN0c8Dffr9qKfE1/SGTzWH4LmnTbbp5dJDe3f5ENFBThRwg==",
+  "dgSpecHash": "itvMIu1GkVs1ymx6XpnXbrq17Reof4lrSIpSHa0g7HJXcPBf3iHzopq4KO45KIRK2cBZ6tFnJzf1QRTSyQ3ZSw==",
   "success": true,
-  "projectFilePath": "S:\\visual_studio_projects\\web_projects\\Thesis\\EFDataAccessLibrary\\EFDataAccessLibrary.csproj",
+  "projectFilePath": "C:\\Users\\nikos\\Source\\Repos\\HobbyNetThesis\\EFDataAccessLibrary\\EFDataAccessLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nikos\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\nikos\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
