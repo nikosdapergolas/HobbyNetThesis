@@ -11,6 +11,7 @@ using System.Text;
 using Serilog;
 using EFDataAccessLibrary.Services.UsersService;
 using EFDataAccessLibrary.Services.PostsService;
+using EFDataAccessLibrary.Services.HobbiesService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -77,6 +78,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IPostsService, PostsService>();
+builder.Services.AddScoped<IHobbiesService, HobbiesService>();
 //=============================================================================================
 
 var app = builder.Build();
