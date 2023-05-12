@@ -11,8 +11,6 @@ public class PostEditDTO
 {
     public int Id { get; set; }
 
-    public Hobby hobby { get; set; }
-
     [MaxLength(250)]
     public string body { get; set; }
 }

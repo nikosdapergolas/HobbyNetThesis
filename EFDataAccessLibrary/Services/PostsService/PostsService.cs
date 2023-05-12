@@ -79,11 +79,39 @@ public class PostsService : IPostsService
 
     public async Task<string> EditPost(PostEditDTO postEditDTO)
     {
-        throw new NotImplementedException();
+        var post = await _context.Posts.FindAsync(postEditDTO.Id);
+
+        if (post is null)
+        {
+            return null;
+        }
+        else
+        {
+            await _context.Posts
+                .Where(i => i.Id.Equals(post.Id))
+                .ExecuteUpdateAsync(s => s
+                    .SetProperty(b => b.body, b => postEditDTO.body)
+                );
+
+            return $"Post with Id: {postEditDTO.Id} has been edited successfully";
+        }
     }
 
     public async Task<string> DeletePost(int id)
     {
-        throw new NotImplementedException();
+        var post = await _context.Posts.FindAsync(id);
+
+        if (post is null)
+        {
+            return null;
+        }
+        else
+        {
+            await _context.Posts
+                .Where(i => i.Id.Equals(post.Id))
+                .ExecuteDeleteAsync();
+
+            return $"Post with Id: {id} has been deleted successfully";
+        }
     }
 }
