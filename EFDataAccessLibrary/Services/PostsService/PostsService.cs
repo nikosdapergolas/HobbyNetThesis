@@ -58,6 +58,9 @@ public class PostsService : IPostsService
         }
         else
         {
+            await _context.AddAsync(post);
+            await _context.SaveChangesAsync();
+
             return post;
         }
     }
@@ -73,6 +76,9 @@ public class PostsService : IPostsService
         }
         else
         {
+            await _context.AddAsync(post);
+            await _context.SaveChangesAsync();
+
             return post;
         }
     }
