@@ -1,5 +1,6 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
@@ -20,17 +21,23 @@ public class HobbiesService : IHobbiesService
 
     public async Task<IEnumerable<Hobby>> GetAllHobbies()
     {
-        throw new NotImplementedException();
+        var hobbies = await _context.Hobbies
+            .ToListAsync();
+        return hobbies;
     }
 
     public async Task<IEnumerable<Hobby>> SearchHobby(string searchTerm)
     {
-        throw new NotImplementedException();
+        var hobbies = await _context.Hobbies
+            .Where(s => s.hobbyName.Contains(searchTerm))
+            .ToListAsync();
+        return hobbies;
     }
 
     public async Task<Hobby> GetOneHobby(int id)
     {
-        throw new NotImplementedException();
+        var hobby = await _context.Hobbies.FindAsync(id);
+        return hobby;
     }
 
     public async Task<Hobby> CreateHobby(Hobby hobby)
