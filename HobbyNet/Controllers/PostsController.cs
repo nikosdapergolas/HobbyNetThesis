@@ -67,6 +67,7 @@ public class PostsController : ControllerBase
 
         if (response == null)
         {
+            // User or Hobby does not exist
             return BadRequest();
         }
         else
@@ -84,6 +85,7 @@ public class PostsController : ControllerBase
 
         if(response == null)
         {
+            // User or Hobby does not exist
             return BadRequest();
         }
         else

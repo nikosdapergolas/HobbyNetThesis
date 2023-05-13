@@ -68,6 +68,7 @@ public class HobbiesController : ControllerBase
 
         if (response == null)
         {
+            // That means that this hobby already exists
             return BadRequest();
         }
         else
