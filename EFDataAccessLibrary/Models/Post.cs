@@ -12,10 +12,10 @@ public class Post
     public int Id { get; set; }
 
     [Required]
-    public User user { get; set; }
+    public string Username { get; set; }
 
     [Required]
-    public Hobby hobby { get; set; }
+    public string HobbyName { get; set; }
 
     [Required]
     [MaxLength(250)]

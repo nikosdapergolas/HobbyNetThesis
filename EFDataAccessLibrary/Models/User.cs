@@ -34,6 +34,6 @@ public class User
     public string lastname { get; set; }
 
 
-    public List<Hobby> Hobbies { get; set; } = new List<Hobby>();
+    public List<HobbiesOfUsers> Hobbies { get; set; } = new List<HobbiesOfUsers>();
     public List<Role> Roles { get; set; } = new List<Role>();
 }

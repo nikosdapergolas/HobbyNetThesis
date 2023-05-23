@@ -49,8 +49,12 @@ public class PostsService : IPostsService
 
     public async Task<Post> CreatePostByUser(Post post)
     {
-        var user = await _context.Users.FindAsync(post.user);
-        var hobby = await _context.Hobbies.FindAsync(post.hobby);
+        var user = await _context.Users //.FindAsync(post.Username);
+            .Where(u => u.username.Equals(post.Username))
+            .FirstOrDefaultAsync();
+        var hobby = await _context.Hobbies //.FindAsync(post.HobbyName);
+            .Where(h => h.hobbyName.Equals(post.HobbyName))
+            .FirstOrDefaultAsync();
 
         if (user is null || hobby is null) 
         {
@@ -67,8 +71,8 @@ public class PostsService : IPostsService
 
     public async Task<Post> CreatePostByAdmin(Post post)
     {
-        var user = await _context.Users.FindAsync(post.user);
-        var hobby = await _context.Hobbies.FindAsync(post.hobby);
+        var user = await _context.Users.FindAsync(post.Username);
+        var hobby = await _context.Hobbies.FindAsync(post.HobbyName);
 
         if (user is null || hobby is null)
         {
