@@ -51,6 +51,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 builder.Services.AddHttpContextAccessor();
 
+// Here I add Cors Policy
+builder.Services.AddCors(policy =>
+{
+    policy.AddPolicy("OpenCorsPolicy" , opt => opt
+        .AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+    );
+});
+
 // Here I add reference to the Entity Framework
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
@@ -91,6 +101,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Configure to actually Use Cors
+app.UseCors("OpenCorsPolicy");
 
 app.UseAuthentication();
 
