@@ -14,24 +14,24 @@
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </div>
-        @*My Own Nav Links*@
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="verifyauth">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Verify Authentication
-            </NavLink>
-        </div>
+        @*My Own Nav Links*@        
         <AuthorizeView>
             <Authorized>
                 <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="verifyauth">
+                        <span class="oi oi-check" aria-hidden="true"></span> Verify Authentication
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
                     <NavLink class="nav-link" href="logout">
-                        <span class="oi oi-list-rich" aria-hidden="true"></span> Logout
+                        <span class="oi oi-account-logout" aria-hidden="true"></span> Logout
                     </NavLink>
                 </div>
             </Authorized>
             <NotAuthorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="login">
-                        <span class="oi oi-list-rich" aria-hidden="true"></span> Login
+                        <span class="oi oi-account-login" aria-hidden="true"></span> Login
                     </NavLink>
                 </div>
             </NotAuthorized>
