@@ -1,6 +1,8 @@
 {
   "cacheBootResources": true,
-  "config": [ ],
+  "config": [
+    "appsettings.json"
+  ],
   "debugBuild": true,
   "entryAssembly": "HobbyNetWebApp",
   "icuDataMode": 0,
@@ -198,13 +200,13 @@
       "mscorlib.dll": "sha256-C3gpWQMELcHYfrHU\/1agQUvWTtSNs9Ul2suMxcKFnIc=",
       "netstandard.dll": "sha256-CgGkoZQx73t3qchcsu85kgBcgrjNEOiudArOwKNb18k=",
       "System.Private.CoreLib.dll": "sha256-6nUSjiT7okMlkN897OnDypwppYuK7JxTahOClXkAuwE=",
-      "HobbyNetWebApp.dll": "sha256-wN46rqst5vFXYizcwln4Ea09ITVItw9NTfb4EvU7nU0="
+      "HobbyNetWebApp.dll": "sha256-2YNFw2vBkc27LOYkYKmju8u4l6fdn14X11Deh0xPk1w="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "HobbyNetWebApp.pdb": "sha256-Sn0c7rPr8UWYMjOmZcroR0hcRYyqafBSm14IAIUwQ+8="
+      "HobbyNetWebApp.pdb": "sha256-vltH5UYefNLPhNRXvY5qYL7s\/7dtPKfd3Afuo\/gN8V4="
     },
     "runtime": {
       "dotnet.6.0.16.b840udmqjh.js": "sha256-GT2gK+GjOisRXJY+9yh6H8s6K\/KDIsaFMFIgWvAnttY=",

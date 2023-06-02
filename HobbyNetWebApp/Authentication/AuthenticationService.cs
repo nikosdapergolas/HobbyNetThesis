@@ -11,19 +11,27 @@ public class AuthenticationService : IAuthenticationService
     private readonly HttpClient _client;
     private readonly AuthenticationStateProvider _authStateProvider;
     private readonly ILocalStorageService _localStorageService;
+    private readonly IConfiguration _config;
+    private string authTokenStoragekey;
 
     public AuthenticationService(HttpClient client,
                                  AuthenticationStateProvider authStateProvider,
-                                 ILocalStorageService localStorageService)
+                                 ILocalStorageService localStorageService,
+                                 IConfiguration config)
     {
         _client = client;
         _authStateProvider = authStateProvider;
         _localStorageService = localStorageService;
+        _config = config;
+        authTokenStoragekey = _config["authTokenStoragekey"];
     }
 
     public async Task<string> Login(AuthenticationUserModel userForAuthentication)
     {
-        var authResult = await _client.PostAsJsonAsync("/api/Auth/login", userForAuthentication);
+        //string api = _config["apiLocation"] + _config["tokenEndpoint"];
+        string api = _config["tokenEndpoint"];
+
+        var authResult = await _client.PostAsJsonAsync(api, userForAuthentication);
 
         var result = await authResult.Content.ReadAsStringAsync();
 
@@ -32,7 +40,7 @@ public class AuthenticationService : IAuthenticationService
             return null;
         }
 
-        await _localStorageService.SetItemAsync("authToken", result);
+        await _localStorageService.SetItemAsync(authTokenStoragekey, result);
 
         ((AuthStateProvider)_authStateProvider).NotifyUserAuthentication(result);
 
@@ -43,7 +51,7 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task Logout()
     {
-        await _localStorageService.RemoveItemAsync("authToken");
+        await _localStorageService.RemoveItemAsync(authTokenStoragekey);
         // Casting it to the right type (To the class that i made that extends AuthenticationStateProvider)
         ((AuthStateProvider)_authStateProvider).NotifyUserLogout();
         _client.DefaultRequestHeaders.Authorization = null;
