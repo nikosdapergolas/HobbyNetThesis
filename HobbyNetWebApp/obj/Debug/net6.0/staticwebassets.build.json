@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yiXs7vtjFePGHUMhjFWM0YpQVTYqgfuAV76SAlIkSQc=",
+  "Hash": "lemetdnoRKd9oUc5NiFm5XRDwiav4KCrh7Jp1nbqMCI=",
   "Source": "HobbyNetWebApp",
   "BasePath": "/",
   "Mode": "Root",
@@ -7172,23 +7172,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\index.html"
-    },
-    {
-      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\wwwroot\\sample-data\\weather.json",
-      "SourceId": "HobbyNetWebApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "sample-data/weather.json",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\sample-data\\weather.json"
     }
   ]
 }

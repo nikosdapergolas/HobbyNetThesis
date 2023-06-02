@@ -20,14 +20,6 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebApp/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebApp/Pages/FetchData.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
 [S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebApp/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -42,10 +34,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebApp/Pages/VerifyAuth.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmVyaWZ5QXV0aC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebApp/Shared/SurveyPrompt.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebApp/_Imports.razor]

@@ -200,13 +200,13 @@
       "mscorlib.dll": "sha256-C3gpWQMELcHYfrHU\/1agQUvWTtSNs9Ul2suMxcKFnIc=",
       "netstandard.dll": "sha256-CgGkoZQx73t3qchcsu85kgBcgrjNEOiudArOwKNb18k=",
       "System.Private.CoreLib.dll": "sha256-6nUSjiT7okMlkN897OnDypwppYuK7JxTahOClXkAuwE=",
-      "HobbyNetWebApp.dll": "sha256-2YNFw2vBkc27LOYkYKmju8u4l6fdn14X11Deh0xPk1w="
+      "HobbyNetWebApp.dll": "sha256-19ST6uybUUEQhTEtPc++6BLWNuBLumfNg+JUdUgY\/ic="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "HobbyNetWebApp.pdb": "sha256-vltH5UYefNLPhNRXvY5qYL7s\/7dtPKfd3Afuo\/gN8V4="
+      "HobbyNetWebApp.pdb": "sha256-jKk4bRsEn6VqzwfTO7u\/ZyJLn1oOeiEq7PnEbwkNm8A="
     },
     "runtime": {
       "dotnet.6.0.16.b840udmqjh.js": "sha256-GT2gK+GjOisRXJY+9yh6H8s6K\/KDIsaFMFIgWvAnttY=",
