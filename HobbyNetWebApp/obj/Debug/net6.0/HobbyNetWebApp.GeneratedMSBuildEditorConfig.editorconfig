@@ -32,6 +32,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebApp/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebApp/Pages/Logout.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nb3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebApp/Pages/VerifyAuth.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmVyaWZ5QXV0aC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebApp/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

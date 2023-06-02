@@ -1,0 +1,64 @@
+﻿@page "/VerifyAuth"
+
+<h3>Verify Auth</h3>
+
+@*<AuthorizeView>
+    <Authorized>
+        <button @onclick="Logout" class="btn btn-danger">Logout</button>
+    </Authorized>
+    <NotAuthorized>
+        <button @onclick="Logout" class="btn btn-primary">Login</button>
+    </NotAuthorized>
+</AuthorizeView>*@
+
+@if (isAuthenticated)
+{
+    <h4>@userName is Authenticated</h4>
+    <ul>
+        <li>Access to Admin Role: @isAdmin</li>
+        <li>Access to User Role: @isUser</li>
+    </ul>
+    <br />
+    <h4>Additional info:</h4>
+    <ul>
+        <li>Email: @email</li>
+        <li>Name: @name</li>
+        <li>Surname: @surname</li>
+    </ul>
+}
+else
+{
+    <h4>The user is NOT Authenticated!</h4>
+}
+
+@code {
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; }
+
+    private bool isAuthenticated = false;
+    private string userName = string.Empty;
+    private string name = string.Empty;
+    private string surname = string.Empty;
+    private string email = string.Empty;
+    private bool isAdmin = false;
+    private bool isUser = false;
+
+    // This method allows us to run code ath the very begining of our App
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthState;
+
+        if (authState.User.Identity.IsAuthenticated)
+        {
+            isAuthenticated = true;
+
+            userName = authState.User.FindFirst(ClaimTypes.GivenName).Value;
+            name = authState.User.FindFirst(ClaimTypes.Name).Value;
+            surname = authState.User.FindFirst(ClaimTypes.Surname).Value;
+            email = authState.User.FindFirst(ClaimTypes.Email).Value;
+
+            isAdmin = authState.User.IsInRole("Admin");
+            isUser = authState.User.IsInRole("User");
+        }
+    }
+}

@@ -602,12 +602,9 @@ S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\Ho
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\HobbyNetWebApp.AssemblyInfo.cs
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\HobbyNetWebApp.csproj.CoreCompileInputs.cache
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\HobbyNetWebApp.MvcApplicationPartsAssemblyInfo.cache
-S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\Z42rhZOT.gz
-S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\6rW9CQX2.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\Gs85wDP7.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\nlSSNZSm.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\ArU+DFfU.gz
-S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\Ii2iFmO2.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\vBtV4Jne.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\a7D76PIf.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\Jb3R89o5.gz
@@ -818,3 +815,14 @@ S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\Ho
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\refint\HobbyNetWebApp.dll
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\HobbyNetWebApp.pdb
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\ref\HobbyNetWebApp.dll
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\bin\Debug\net6.0\wwwroot\_framework\Blazored.LocalStorage.dll
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\bin\Debug\net6.0\wwwroot\_framework\Microsoft.AspNetCore.Components.Authorization.dll
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\bin\Debug\net6.0\wwwroot\_framework\Microsoft.AspNetCore.Components.Authorization.dll.gz
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\bin\Debug\net6.0\wwwroot\_framework\Blazored.LocalStorage.dll.gz
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\bin\Debug\net6.0\Blazored.LocalStorage.dll
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\bin\Debug\net6.0\Microsoft.AspNetCore.Components.Authorization.dll
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\jY1saY08.gz
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\PTGe1+wP.gz
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\nGi969Fg.gz
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\Js3rYmtn.gz
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\NXftMw27.gz
