@@ -1,15 +1,9 @@
 ﻿@page "/VerifyAuth"
+@inject HttpClient _client
+@inject IConfiguration _config
+
 
 <h3>Verify Auth</h3>
-
-@*<AuthorizeView>
-    <Authorized>
-        <button @onclick="Logout" class="btn btn-danger">Logout</button>
-    </Authorized>
-    <NotAuthorized>
-        <button @onclick="Logout" class="btn btn-primary">Login</button>
-    </NotAuthorized>
-</AuthorizeView>*@
 
 @if (isAuthenticated)
 {
@@ -25,6 +19,8 @@
         <li>Name: @name</li>
         <li>Surname: @surname</li>
     </ul>
+    <br />
+    @*<h4>@result</h4>*@
 }
 else
 {
@@ -60,5 +56,11 @@ else
             isAdmin = authState.User.IsInRole("Admin");
             isUser = authState.User.IsInRole("User");
         }
+
+        // See all users in console
+        //string api = _config["getAllUsersEndpoint"];
+
+        //var result = await _client.GetFromJsonAsync<List<User>(api);
+        //Console.WriteLine(result);
     }
 }

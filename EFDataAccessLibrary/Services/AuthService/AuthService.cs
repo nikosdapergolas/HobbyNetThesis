@@ -49,8 +49,16 @@ public class AuthService : IAuthService
             ,user.firstname
             ,user.lastname);
 
-        _context.Users.Add(user);
-        _context.SaveChanges();
+        try
+        {
+            _context.Users.Add(user);
+            _context.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return null;
+        }
 
         return user;
     }
