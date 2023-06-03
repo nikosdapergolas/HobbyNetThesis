@@ -23,7 +23,15 @@ namespace HobbyNet.Controllers
         public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
             var users = await _usersService.GetAllUsers();
-            return Ok(users);
+
+            if (users is not null)
+            {
+                return Ok(users);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // GET: api/Users/Search/?searchTerm=abc
@@ -35,7 +43,7 @@ namespace HobbyNet.Controllers
 
             if (users.Count().Equals(0))
             {
-                return NotFound($"There are no users that match the search term: {searchTerm}");
+                return NotFound();
             }
             else
             {
@@ -49,13 +57,14 @@ namespace HobbyNet.Controllers
         public async Task<ActionResult<User>> GetOneUser(int id)
         {
             var user = await _usersService.GetOneUser(id);
-            if (user == null)
+
+            if (user is not null)
             {
-                return NotFound($"The user with id: {id} was not found");
+                return Ok(user);
             }
             else
             {
-                return Ok(user);
+                return NotFound();
             }
         }
 
@@ -65,13 +74,14 @@ namespace HobbyNet.Controllers
         public async Task<ActionResult> CreateAdminUser(int id)
         {
             var response = await _usersService.CreateAdminUser(id);
-            if(response == null) 
+
+            if(response is not null)
             {
-                return NotFound($"The user with id: {id} was not found");
+                return Ok(response);
             }
             else
             {
-                return Ok(response);
+                return BadRequest();
             }
         }
 
@@ -81,13 +91,14 @@ namespace HobbyNet.Controllers
         public async Task<ActionResult> EditUser(UserEditDTO userEditDTO)
         {
             var response = await _usersService.EditUser(userEditDTO);
-            if (response == null)
+
+            if (response is not null)
             {
-                return NotFound($"The user with id: {userEditDTO.Id} was not found");
+                return Ok(response);
             }
             else
             {
-                return Ok(response);
+                return BadRequest();
             }
         }
 
@@ -97,13 +108,14 @@ namespace HobbyNet.Controllers
         public async Task<ActionResult> DeleteUser(int id)
         {
             var response = await _usersService.DeleteUser(id);
-            if (response == null)
+
+            if (response is not null)
             {
-                return NotFound($"The user with id: {id} was not found");
+                return Ok(response);
             }
             else
             {
-                return Ok(response);
+                return BadRequest();
             }
         }
     }
