@@ -1,0 +1,32 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HobbyNetWebApp.Models.Resused;
+
+public class User
+{
+    public int Id { get; set; }
+
+    [Required]
+    [MaxLength(100)]
+    public string username { get; set; }
+
+    [Required]
+    [MaxLength(500)]
+    public string passwordHash { get; set; }
+
+    [Required]
+    [MaxLength(150)]
+    public string email { get; set; }
+
+    [Required]
+    [MaxLength(45)]
+    public string firstname { get; set; }
+
+    [Required]
+    [MaxLength(45)]
+    public string lastname { get; set; }
+
+
+    public List<HobbiesOfUsers> Hobbies { get; set; } = new List<HobbiesOfUsers>();
+    public List<Role> Roles { get; set; } = new List<Role>();
+}

@@ -45,7 +45,7 @@ public class AuthenticationService : IAuthenticationService
 
         ((AuthStateProvider)_authStateProvider).NotifyUserAuthentication(result);
 
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.Replace("\"", ""));
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result);
 
         return result;
     }

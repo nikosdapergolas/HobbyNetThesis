@@ -1,6 +1,5 @@
 ﻿@page "/VerifyAuth"
-@inject HttpClient _client
-@inject IConfiguration _config
+@inject IUserService userService
 
 
 <h3>Verify Auth</h3>
@@ -58,9 +57,10 @@ else
         }
 
         // See all users in console
-        //string api = _config["getAllUsersEndpoint"];
-
-        //var result = await _client.GetFromJsonAsync<List<User>(api);
-        //Console.WriteLine(result);
+        List<User> result = await userService.GetUsers();
+        foreach (var item in result)
+        {
+            Console.WriteLine(item.firstname + " " + item.lastname);
+        }
     }
 }
