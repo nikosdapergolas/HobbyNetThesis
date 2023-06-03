@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyNet", "HobbyNet.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFDataAccessLibrary", "..\EFDataAccessLibrary\EFDataAccessLibrary.csproj", "{21C9A004-A7EE-4526-80D0-075D56E4F0F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyNetWebApp", "..\HobbyNetWebApp\HobbyNetWebApp.csproj", "{9123D0EB-FF3E-4061-9171-D32659636EFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyNetWebApp", "..\HobbyNetWebApp\HobbyNetWebApp.csproj", "{9123D0EB-FF3E-4061-9171-D32659636EFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

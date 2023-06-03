@@ -36,7 +36,20 @@
             <button type="submit" class="btn btn-success">Login</button>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <NavLink class="nav-link" href="register">Register</NavLink>
+        </div>
+    </div>
+    
 </EditForm>
+
+@if (showAuthenticationError)
+{
+    <div class="text-danger">
+        @authenticationErrorText
+    </div>
+}
 
 @code {
     private AuthenticationUserModel model = new();
