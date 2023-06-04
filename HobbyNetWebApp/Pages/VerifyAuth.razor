@@ -55,12 +55,20 @@ else
             isAdmin = authState.User.IsInRole("Admin");
             isUser = authState.User.IsInRole("User");
         }
-
-        // See all users in console
-        List<User> result = await userService.GetUsers();
-        foreach (var item in result)
+        
+        try
         {
-            Console.WriteLine(item.firstname + " " + item.lastname);
+            // See all users in console
+            List<User> result = await userService.GetUsers();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.firstname + " " + item.lastname);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
         }
     }
 }

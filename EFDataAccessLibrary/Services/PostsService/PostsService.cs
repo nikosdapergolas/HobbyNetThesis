@@ -1,10 +1,12 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
 using EFDataAccessLibrary.Models.DataTransferObjects;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,10 +15,12 @@ namespace EFDataAccessLibrary.Services.PostsService;
 public class PostsService : IPostsService
 {
     private readonly DatabaseContext _context;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public PostsService(DatabaseContext context)
+    public PostsService(DatabaseContext context, IHttpContextAccessor httpContextAccessor)
     {
         _context = context;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     public async Task<IEnumerable<Post>> GetAllPosts()
@@ -79,8 +83,13 @@ public class PostsService : IPostsService
             .Where(h => h.hobbyName.Equals(postCreateDTO.HobbyName))
             .FirstOrDefaultAsync();
 
-        // Prepei na prosthesw allo ena check, oti o xrhsthw pou exei kanei log in 
-        // me ton xrhsth pou leei to object oti exei kanei to post, einai o idios xrisths
+        // Checking to see if The logged in user is the same as the one who does the post creation
+        if (_httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.GivenName) 
+            != postCreateDTO.Username)
+        {
+            return null;
+        }
+
         if (user is null || hobby is null) 
         {
             return null;
@@ -107,37 +116,6 @@ public class PostsService : IPostsService
         }
     }
 
-    //public async Task<Post> CreatePostByAdmin(PostCreateDTO postCreateDTO)
-    //{
-    //    var user = await _context.Users.FindAsync(postCreateDTO.Username);
-    //    var hobby = await _context.Hobbies.FindAsync(postCreateDTO.HobbyName);
-
-    //    if (user is null || hobby is null)
-    //    {
-    //        return null;
-    //    }
-    //    else
-    //    {
-    //        try
-    //        {
-    //            Post post = new();
-    //            post.Username = postCreateDTO.Username;
-    //            post.HobbyName = postCreateDTO.HobbyName;
-    //            post.body = postCreateDTO.body;
-
-    //            await _context.AddAsync(post);
-    //            await _context.SaveChangesAsync();
-
-    //            return post;
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            await Console.Out.WriteLineAsync(ex.Message);
-    //            return null;
-    //        }
-    //    } 
-    //}
-
     public async Task<string> EditPost(PostEditDTO postEditDTO)
     {
         var post = await _context.Posts.FindAsync(postEditDTO.Id);
@@ -148,20 +126,30 @@ public class PostsService : IPostsService
         }
         else
         {
-            try
+            // Checking to see if The logged in user is the same
+            // as the one who did the original post creation
+            if (_httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.GivenName)
+                != post.Username)
             {
-                await _context.Posts
-                    .Where(i => i.Id.Equals(post.Id))
-                    .ExecuteUpdateAsync(s => s
-                        .SetProperty(b => b.body, b => postEditDTO.body)
-                    );
-
-                return $"Post with Id: {postEditDTO.Id} has been edited successfully";
-            }
-            catch (Exception ex)
-            {
-                await Console.Out.WriteLineAsync(ex.Message);
                 return null;
+            }
+            else
+            {
+                try
+                {
+                    await _context.Posts
+                        .Where(i => i.Id.Equals(post.Id))
+                        .ExecuteUpdateAsync(s => s
+                            .SetProperty(b => b.body, b => postEditDTO.body)
+                        );
+
+                    return $"Post with Id: {postEditDTO.Id} has been edited successfully";
+                }
+                catch (Exception ex)
+                {
+                    await Console.Out.WriteLineAsync(ex.Message);
+                    return null;
+                }
             }
         }
     }

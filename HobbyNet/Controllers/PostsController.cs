@@ -72,7 +72,7 @@ public class PostsController : ControllerBase
 
     // POST api/Posts/UserPost
     [HttpPost("UserPost")]
-    [Authorize(Roles = "User")]
+    [Authorize]
     public async Task<ActionResult> CreatePostByUser(PostCreateDTO post)
     {
         var response = await _postsService.CreatePostByUser(post);
@@ -83,31 +83,12 @@ public class PostsController : ControllerBase
         }
         else
         {
-            // User or Hobby does not exist
             return BadRequest();
         }
     }
 
-    // POST api/Posts/AdminPost
-    //[HttpPost("AdminPost")]
-    //[Authorize(Roles = "Admin")]
-    //public async Task<ActionResult> CreatePostByAdmin(PostCreateDTO post)
-    //{
-    //    var response = await _postsService.CreatePostByAdmin(post);
-
-    //    if(response is not null)
-    //    {
-    //        return Ok(response);
-    //    }
-    //    else
-    //    {
-    //        // User or Hobby does not exist
-    //        return BadRequest();
-    //    }
-    //}
-
     // PUT api/Posts/5
-    [HttpPut("{id}")]
+    [HttpPut()]
     [Authorize]
     public async Task<ActionResult> EditPost(PostEditDTO postEditDTO)
     {
@@ -125,7 +106,7 @@ public class PostsController : ControllerBase
 
     // DELETE api/Posts/5
     [HttpDelete("{id}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public async Task<ActionResult> DeletePost(int id)
     {
         var response = await _postsService.DeletePost(id);
