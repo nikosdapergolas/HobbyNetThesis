@@ -23,7 +23,15 @@ public class HobbiesController : ControllerBase
     public async Task<ActionResult<IEnumerable<Hobby>>> GetAllHobbies()
     {
         var hobbies = await _service.GetAllHobbies();
-        return Ok(hobbies);
+
+        if (hobbies is not null)
+        {
+            return Ok(hobbies);
+        }
+        else
+        {
+            return BadRequest();
+        }
     }
 
     // GET: api/Hobbies/Search/?searchTerm=abc
@@ -33,13 +41,21 @@ public class HobbiesController : ControllerBase
     {
         var hobbies = await _service.SearchHobby(searchTerm);
 
-        if (hobbies.Count().Equals(0))
+        if (hobbies is not null)
         {
-            return NotFound($"There are no hobbies that match the search term: {searchTerm}");
+            if (hobbies.Count().Equals(0))
+            {
+                return NotFound();
+            }
+            else
+            {
+
+                return Ok(hobbies);
+            }
         }
         else
         {
-            return Ok(hobbies);
+            return BadRequest();
         }
     }
 
@@ -49,13 +65,14 @@ public class HobbiesController : ControllerBase
     public async Task<ActionResult<Hobby>> GetOneHobby(int id)
     {
         var hobby = await _service.GetOneHobby(id);
-        if (hobby == null)
+
+        if (hobby is not null)
         {
-            return NotFound($"The hobby with id: {id} was not found");
+            return Ok(hobby);
         }
         else
         {
-            return Ok(hobby);
+            return NotFound();
         }
     }
 
@@ -66,14 +83,13 @@ public class HobbiesController : ControllerBase
     {
         var response = await _service.CreateHobby(hobby);
 
-        if (response == null)
+        if (response is not null)
         {
-            // That means that this hobby already exists
-            return BadRequest();
+            return Ok(response);
         }
         else
         {
-            return Ok(response);
+            return BadRequest();
         }
     }
 
@@ -83,13 +99,14 @@ public class HobbiesController : ControllerBase
     public async Task<ActionResult> EditHobby(Hobby hobby)
     {
         var response = await _service.EditHobby(hobby);
-        if (response == null)
+
+        if (response is not null)
         {
-            return NotFound($"The hobby with id: {hobby.Id} was not found");
+            return Ok(response);
         }
         else
         {
-            return Ok(response);
+            return BadRequest();
         }
     }
 
@@ -99,13 +116,14 @@ public class HobbiesController : ControllerBase
     public async Task<ActionResult> DeleteHobby(int id)
     {
         var response = await _service.DeleteHobby(id);
-        if (response == null)
+
+        if (response is not null)
         {
-            return NotFound($"The hobby with id: {id} was not found");
+            return Ok(response);
         }
         else
         {
-            return Ok(response);
+            return BadRequest();
         }
     }
 }

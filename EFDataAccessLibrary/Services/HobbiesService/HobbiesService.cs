@@ -23,23 +23,47 @@ public class HobbiesService : IHobbiesService
 
     public async Task<IEnumerable<Hobby>> GetAllHobbies()
     {
-        var hobbies = await _context.Hobbies
-            .ToListAsync();
-        return hobbies;
+        try
+        {
+            var hobbies = await _context.Hobbies
+                .ToListAsync();
+            return hobbies;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null;
+        }
     }
 
     public async Task<IEnumerable<Hobby>> SearchHobby(string searchTerm)
     {
-        var hobbies = await _context.Hobbies
-            .Where(s => s.hobbyName.Contains(searchTerm))
-            .ToListAsync();
-        return hobbies;
+        try
+        {
+            var hobbies = await _context.Hobbies
+                .Where(s => s.hobbyName.Contains(searchTerm))
+                .ToListAsync();
+            return hobbies;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null;
+        }
     }
 
     public async Task<Hobby> GetOneHobby(int id)
     {
-        var hobby = await _context.Hobbies.FindAsync(id);
-        return hobby;
+        try
+        {
+            var hobby = await _context.Hobbies.FindAsync(id);
+            return hobby;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null;
+        }
     }
 
     public async Task<Hobby> CreateHobby(Hobby hobby)
@@ -50,10 +74,18 @@ public class HobbiesService : IHobbiesService
 
         if (hobbyFound is null)
         {
-            await _context.AddAsync(hobby);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.AddAsync(hobby);
+                await _context.SaveChangesAsync();
 
-            return hobby;
+                return hobby;
+            }
+            catch (Exception ex)
+            {
+                await Console.Out.WriteLineAsync(ex.Message);
+                return null;
+            }
         }
         else
         {
@@ -71,13 +103,21 @@ public class HobbiesService : IHobbiesService
         }
         else
         {
-            await _context.Hobbies
-                .Where(i => i.Id.Equals(hobby.Id))
-                .ExecuteUpdateAsync( s => s
-                    .SetProperty(name => name.hobbyName, name => hobby.hobbyName)
-            );
+            try
+            {
+                await _context.Hobbies
+                    .Where(i => i.Id.Equals(hobby.Id))
+                    .ExecuteUpdateAsync(s => s
+                        .SetProperty(name => name.hobbyName, name => hobby.hobbyName)
+                );
 
-            return $"Hobby with Id: {hobby.Id} has been edited successfully";
+                return $"Hobby with Id: {hobby.Id} has been edited successfully";
+            }
+            catch (Exception ex)
+            {
+                await Console.Out.WriteLineAsync(ex.Message);
+                return null;
+            }
         }
     }
 
@@ -91,11 +131,19 @@ public class HobbiesService : IHobbiesService
         }
         else
         {
-            await _context.Hobbies
-                .Where(i => i.Id.Equals(id))
-                .ExecuteDeleteAsync();
+            try
+            {
+                await _context.Hobbies
+                    .Where(i => i.Id.Equals(id))
+                    .ExecuteDeleteAsync();
 
-            return $"Hobby with Id: {id} has been deleted successfully";
+                return $"Hobby with Id: {id} has been deleted successfully";
+            }
+            catch (Exception ex)
+            {
+                await Console.Out.WriteLineAsync(ex.Message);
+                return null;
+            }
         }
     }
 }
