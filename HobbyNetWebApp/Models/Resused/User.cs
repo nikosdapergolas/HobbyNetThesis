@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace HobbyNetWebApp.Models.Resused;
 
@@ -26,6 +27,9 @@ public class User
     [MaxLength(45)]
     public string lastname { get; set; }
 
+    [MaxLength(2000)]
+    [AllowNull]
+    public string? profileImage { get; set; }
 
     public List<HobbiesOfUsers> Hobbies { get; set; } = new List<HobbiesOfUsers>();
     public List<Role> Roles { get; set; } = new List<Role>();
