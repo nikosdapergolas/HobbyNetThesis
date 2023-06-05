@@ -1,30 +1,27 @@
 ﻿@page "/VerifyAuth"
 @inject IUserService userService
+@attribute [Authorize]
 
 
 <h3>Verify Auth</h3>
 
-@if (isAuthenticated)
-{
-    <h4>@userName is Authenticated</h4>
-    <ul>
-        <li>Access to Admin Role: @isAdmin</li>
-        <li>Access to User Role: @isUser</li>
-    </ul>
-    <br />
-    <h4>Additional info:</h4>
-    <ul>
-        <li>Email: @email</li>
-        <li>Name: @name</li>
-        <li>Surname: @surname</li>
-    </ul>
-    <br />
-    @*<h4>@result</h4>*@
-}
-else
-{
-    <h4>The user is NOT Authenticated!</h4>
-}
+<AuthorizeView>
+    <Authorized>
+        <h4>@userName is Authenticated</h4>
+        <ul>
+            <li>Access to Admin Role: @isAdmin</li>
+            <li>Access to User Role: @isUser</li>
+        </ul>
+        <br />
+        <h4>Additional info:</h4>
+        <ul>
+            <li>Email: @email</li>
+            <li>Name: @name</li>
+            <li>Surname: @surname</li>
+        </ul>
+        <br />
+    </Authorized>
+</AuthorizeView>
 
 @code {
     [CascadingParameter]
