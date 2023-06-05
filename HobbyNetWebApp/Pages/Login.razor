@@ -1,8 +1,7 @@
 ﻿@page "/login"
 @inject IAuthenticationService AuthService
 @inject NavigationManager NavManager
-
-<h3>Login</h3>
+@inject IConfiguration _config
 
 @if (showAuthenticationError == true)
 {
@@ -11,38 +10,55 @@
     </div>
 }
 
-<EditForm Model="model" OnValidSubmit="ExecuteLogin" class="card card-body bg-light mt-5" >
-    <DataAnnotationsValidator/>
-    <ValidationSummary/>
-
-    <div class="form-group row">
-        <label for="username" class="col-md-2 col-form-label">Username:</label>
-        <div class="col-md-10">
-            <InputText id="username" class="form-controll" @bind-Value="model.Username" />
-            <ValidationMessage For="@(() => model.Username)" />
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="password" class="col-md-2 col-form-label">Password:</label>
-        <div class="col-md-10">
-            <InputText type="password" id="password" class="form-controll" @bind-Value="model.Password" />
-            <ValidationMessage For="@(() => model.Password)" />
-        </div>
-    </div>
-
+<div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <button type="submit" class="btn btn-success">Login</button>
+        <div class="col-auto">
+            <a href="/login" class="logo">
+                <img src="@($"{api}images/logo.png")" width="40" height="40" alt="Hobbynet Logo" />
+            </a>
+        </div>
+        <div class="col-auto">
+            <h2 class="sign-up-text">Welcome to Hobby Net</h2>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <NavLink class="nav-link" href="register">Register</NavLink>
+
+    <EditForm Model="model" OnValidSubmit="ExecuteLogin" class="card card-body bg-light" >
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
+
+        <div class="form-wraper">
+            <h3 class="signup-text">Login</h3>
         </div>
-    </div>
+        <br />
+        <div class="form-group row">
+            @*<label for="username" class="col-md-2 col-form-label">Username:</label>*@
+            <div class="col-md-12">
+                <InputText placeholder="Enter Username" id="username" class="form-controll" @bind-Value="model.Username" />
+                <ValidationMessage For="@(() => model.Username)" />
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            @*<label for="password" class="col-md-2 col-form-label">Password:</label>*@
+            <div class="col-md-12">
+                <InputText type="password" placeholder="Enter Password" id="password" class="form-controll" @bind-Value="model.Password" />
+                <ValidationMessage For="@(() => model.Password)" />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success">Login</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <NavLink class="nav-link" href="register">Register</NavLink>
+            </div>
+        </div>
     
-</EditForm>
+    </EditForm>
+</div>
 
 @if (showAuthenticationError)
 {
@@ -52,6 +68,12 @@
 }
 
 @code {
+    private string api = string.Empty;
+    protected override async Task OnInitializedAsync()
+    {
+        api = _config.GetValue<string>("api");
+    }
+
     private AuthenticationUserModel model = new();
 
     private bool showAuthenticationError = false;
