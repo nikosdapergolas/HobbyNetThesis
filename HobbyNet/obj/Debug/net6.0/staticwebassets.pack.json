@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\images\\default.jpg",
+      "PackagePath": "staticwebassets\\images\\default.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.HobbyNet.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.HobbyNet.props",
+      "PackagePath": "build\\HobbyNet.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.HobbyNet.props",
+      "PackagePath": "buildMultiTargeting\\HobbyNet.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.HobbyNet.props",
+      "PackagePath": "buildTransitive\\HobbyNet.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

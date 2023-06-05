@@ -24,4 +24,8 @@
     <ProjectReference Include="..\EFDataAccessLibrary\EFDataAccessLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\images\default.jpg" />
+  </ItemGroup>
+
 </Project>
