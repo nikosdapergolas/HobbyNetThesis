@@ -1,26 +1,61 @@
 ﻿@page "/posts"
 @inject IPostsService postsService
+@inject IConfiguration config
 @attribute [Authorize]
 
 <div class="container">
     <h2>Today's Posts!</h2>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="PostModal">
+        New Post
+    </button>
     <br />
+    <br />
+    
     @foreach(var item in posts)
     {
-        <h3>@item.Username</h3>
-        <p>@item.body</p>
-        <br />
+        @*<div class="card">
+            <div class="card-body">
+                <h3>@item.Username</h3>
+                <hr/>
+                <p>@item.body</p>
+            </div>
+        </div>
+        <br />*@
+
+        @*<div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@item.Username</h5>
+                <p class="card-text">@item.body</p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+        <br />*@
+
+        <div class="card">
+            <div class="card-header">
+                <img src="@image" width="50px" height="50px" />
+                <b>@item.Username</b>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@item.body</h5>
+            </div>
+        </div>
         <br />
     }
 </div>
 
 @code {
     List<Post> posts = new();
+    string image = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
+            image = config.GetValue<string>("api") + "/images/default.jpg";
+
             // See all users in console
             posts = await postsService.GetPosts();
         }

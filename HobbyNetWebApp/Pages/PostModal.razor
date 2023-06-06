@@ -1,0 +1,28 @@
+﻿<!-- Modal -->
+<div class="blazor-modal">
+    <div class="blazor-modal-Content">
+        <div class="blazor-Modal-header">
+            <h5 class="blazor-modal-title">@Title</h5>
+            <span class="blazor-modal-close-button">X</span>
+        </div>
+        <div class="blazor-modal-body">
+            @ModalBody
+        </div>
+        <div class="blazor-modal-footer">
+            @ModalFooter
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public RenderFragment ModalBody { get; set; }
+
+    [Parameter]
+    public RenderFragment ModalFooter { get; set; }
+
+    public bool IsOpened { get; set; }
+}
