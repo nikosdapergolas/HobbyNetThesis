@@ -3,24 +3,24 @@ using System.Net.Http.Json;
 
 namespace HobbyNetWebApp.Services;
 
-public class UserService : IUserService
+public class PostsService : IPostsService
 {
     private readonly IConfiguration _config;
     private readonly HttpClient _client;
 
-    public UserService(IConfiguration config,
-                       HttpClient client)
+    public PostsService(IConfiguration config, HttpClient client)
     {
         _config = config;
         _client = client;
     }
-    public async Task<List<User>> GetUsers()
+
+    public async Task<List<Post>> GetPosts()
     {
-        string usersEndpoint = _config["getAllUsersEndpoint"];
+        string postsEndpoint = _config["getAllPostsEndpoint"];
 
         try
         {
-            var result = await _client.GetFromJsonAsync<List<User>>(usersEndpoint);
+            var result = await _client.GetFromJsonAsync<List<Post>>(postsEndpoint);
 
             return result;
         }

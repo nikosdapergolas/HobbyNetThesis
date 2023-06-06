@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bUm/BpvJcKHgfyfFPpMDLHHR2FlfWcnlrW6/KbzUvlQ=",
+  "Hash": "mL86Z2r9JqidLH1t/dsjraD+zA+W6ymZkvcGEWBzol8=",
   "Source": "HobbyNet",
   "BasePath": "_content/HobbyNet",
   "Mode": "Default",
@@ -32,6 +32,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\default.jpg"
+    },
+    {
+      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\images\\logo.png",
+      "SourceId": "HobbyNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\",
+      "BasePath": "_content/HobbyNet",
+      "RelativePath": "images/logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\logo.png"
     }
   ]
 }

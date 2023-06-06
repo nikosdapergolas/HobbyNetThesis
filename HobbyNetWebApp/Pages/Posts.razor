@@ -1,0 +1,32 @@
+﻿@page "/posts"
+@inject IPostsService postsService
+@attribute [Authorize]
+
+<div class="container">
+    <h2>Today's Posts!</h2>
+    <br />
+    @foreach(var item in posts)
+    {
+        <h3>@item.Username</h3>
+        <p>@item.body</p>
+        <br />
+        <br />
+    }
+</div>
+
+@code {
+    List<Post> posts = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // See all users in console
+            posts = await postsService.GetPosts();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+}

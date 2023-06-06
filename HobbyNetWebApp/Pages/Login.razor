@@ -31,7 +31,6 @@
         </div>
         <br />
         <div class="form-group row">
-            @*<label for="username" class="col-md-2 col-form-label">Username:</label>*@
             <div class="col-md-12">
                 <InputText placeholder="Enter Username" id="username" class="form-controll" @bind-Value="model.Username" />
                 <ValidationMessage For="@(() => model.Username)" />
@@ -39,7 +38,6 @@
         </div>
         <br />
         <div class="form-group row">
-            @*<label for="password" class="col-md-2 col-form-label">Password:</label>*@
             <div class="col-md-12">
                 <InputText type="password" placeholder="Enter Password" id="password" class="form-controll" @bind-Value="model.Password" />
                 <ValidationMessage For="@(() => model.Password)" />
@@ -81,6 +79,7 @@
 
     private async Task ExecuteLogin()
     {
+
         showAuthenticationError = false;
 
         string result = await AuthService.Login(model);
