@@ -1,9 +1,9 @@
 ﻿<!-- Modal -->
-<div class="blazor-modal">
-    <div class="blazor-modal-Content">
-        <div class="blazor-Modal-header">
+@*﻿<div class="blazor-modal @cssClass">
+    <div class="blazor-modal-content">
+        <div class="blazor-modal-header">
             <h5 class="blazor-modal-title">@Title</h5>
-            <span class="blazor-modal-close-button">X</span>
+            <span class="blazor-modal-close-button" @onclick="() => IsOpened = false">X</span>
         </div>
         <div class="blazor-modal-body">
             @ModalBody
@@ -12,17 +12,20 @@
             @ModalFooter
         </div>
     </div>
-</div>
+</div>*@
 
 @code {
-    [Parameter]
-    public string Title { get; set; }
+    //[Parameter]
+    //public string Title { get; set; }
 
-    [Parameter]
-    public RenderFragment ModalBody { get; set; }
+    //[Parameter]
+    //public RenderFragment ModalBody { get; set; }
 
-    [Parameter]
-    public RenderFragment ModalFooter { get; set; }
+    //[Parameter]
+    //public RenderFragment ModalFooter { get; set; }
 
-    public bool IsOpened { get; set; }
+    //[Parameter]
+    //public bool IsOpened { get; set; }
+
+    //string cssClass => IsOpened ? "show" : "hide";
 }
