@@ -43,7 +43,7 @@
         else
         {
             _postService.CreatePost(postCreateDTO);
-            navManager.NavigateTo("/posts");
+            navManager.NavigateTo("/posts", true);
         }        
     }
 }
