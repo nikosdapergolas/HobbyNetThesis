@@ -62,3 +62,8 @@ a, .btn-link {
 .blazor-error-boundary::after {
     content: "An error has occurred."
 }
+
+/*My own css*/
+img {
+    border-radius: 50%;
+}
