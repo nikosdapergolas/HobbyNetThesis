@@ -6,6 +6,7 @@ using HobbyNetWebApp.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MudBlazor.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -23,6 +24,9 @@ builder.Services.AddScoped<IPostsService, PostsService>();
 
 // Trying to use modal
 builder.Services.AddBlazoredModal();
+
+// Trying to use MudBlazor
+builder.Services.AddMudServices();
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7213/") });
 

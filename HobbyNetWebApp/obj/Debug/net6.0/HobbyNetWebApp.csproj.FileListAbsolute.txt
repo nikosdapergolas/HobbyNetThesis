@@ -612,8 +612,6 @@ S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\bu
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\PTGe1+wP.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\nGi969Fg.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\Js3rYmtn.gz
-S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\Gs85wDP7.gz
-S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\nlSSNZSm.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\ArU+DFfU.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\NXftMw27.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\vBtV4Jne.gz
@@ -630,7 +628,6 @@ S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\bu
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\I5VDOpsr.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\z67F7Ag6.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\4o2sWSP1.gz
-S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\V+IImGxH.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\lDDu1KPK.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\o6mdcNmy.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\K0zEQzSt.gz
@@ -830,3 +827,10 @@ S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\bin\Debug\net6.0\ww
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\bin\Debug\net6.0\wwwroot\_framework\Blazored.Modal.dll.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\bin\Debug\net6.0\Blazored.Modal.dll
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\Tf5u7Wpf.gz
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\bin\Debug\net6.0\wwwroot\_framework\MudBlazor.dll
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\bin\Debug\net6.0\wwwroot\_framework\MudBlazor.dll.gz
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\bin\Debug\net6.0\MudBlazor.dll
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\NrYE0YSV.gz
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\3Jppvizi.gz
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\jSJlSeSM.gz
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\sIJjjMN3.gz

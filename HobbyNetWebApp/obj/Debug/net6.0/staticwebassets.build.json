@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "O3r9tq8lAf4Bbozu4VfqKSaPC9TV4MQcUrsLK3WL8fk=",
+  "Hash": "+jvp2YNBfFSLa3HH1md04b0rh34hzCRiHg+T1Sdm49o=",
   "Source": "HobbyNetWebApp",
   "BasePath": "/",
   "Mode": "Root",
@@ -49,6 +49,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\nikos\\.nuget\\packages\\blazored.modal\\7.1.0\\staticwebassets\\BlazoredModal.razor.js"
+    },
+    {
+      "Identity": "C:\\Users\\nikos\\.nuget\\packages\\mudblazor\\6.3.1\\staticwebassets\\MudBlazor.min.css",
+      "SourceId": "MudBlazor",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\nikos\\.nuget\\packages\\mudblazor\\6.3.1\\staticwebassets\\",
+      "BasePath": "_content/MudBlazor",
+      "RelativePath": "MudBlazor.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\nikos\\.nuget\\packages\\mudblazor\\6.3.1\\staticwebassets\\MudBlazor.min.css"
+    },
+    {
+      "Identity": "C:\\Users\\nikos\\.nuget\\packages\\mudblazor\\6.3.1\\staticwebassets\\MudBlazor.min.js",
+      "SourceId": "MudBlazor",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\nikos\\.nuget\\packages\\mudblazor\\6.3.1\\staticwebassets\\",
+      "BasePath": "_content/MudBlazor",
+      "RelativePath": "MudBlazor.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\nikos\\.nuget\\packages\\mudblazor\\6.3.1\\staticwebassets\\MudBlazor.min.js"
     },
     {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\blazor.boot.json",
@@ -337,7 +371,7 @@
       "AssetTraitValue": "runtime",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\nikos\\.nuget\\packages\\microsoft.aspnetcore.components.forms\\6.0.15\\lib\\net6.0\\Microsoft.AspNetCore.Components.Forms.dll"
+      "OriginalItemSpec": "C:\\Users\\nikos\\.nuget\\packages\\microsoft.aspnetcore.components.forms\\6.0.16\\lib\\net6.0\\Microsoft.AspNetCore.Components.Forms.dll"
     },
     {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Components.Web.dll",
@@ -354,7 +388,7 @@
       "AssetTraitValue": "runtime",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\nikos\\.nuget\\packages\\microsoft.aspnetcore.components.web\\6.0.15\\lib\\net6.0\\Microsoft.AspNetCore.Components.Web.dll"
+      "OriginalItemSpec": "C:\\Users\\nikos\\.nuget\\packages\\microsoft.aspnetcore.components.web\\6.0.16\\lib\\net6.0\\Microsoft.AspNetCore.Components.Web.dll"
     },
     {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Components.WebAssembly.dll",
@@ -660,7 +694,7 @@
       "AssetTraitValue": "runtime",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\nikos\\.nuget\\packages\\microsoft.jsinterop\\6.0.15\\lib\\net6.0\\Microsoft.JSInterop.dll"
+      "OriginalItemSpec": "C:\\Users\\nikos\\.nuget\\packages\\microsoft.jsinterop\\6.0.16\\lib\\net6.0\\Microsoft.JSInterop.dll"
     },
     {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.JSInterop.WebAssembly.dll",
@@ -763,6 +797,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\nikos\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.16\\runtimes\\browser-wasm\\lib\\net6.0\\mscorlib.dll"
+    },
+    {
+      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\MudBlazor.dll",
+      "SourceId": "HobbyNetWebApp",
+      "SourceType": "Computed",
+      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/MudBlazor.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\nikos\\.nuget\\packages\\mudblazor\\6.3.1\\lib\\net6.0\\MudBlazor.dll"
     },
     {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\netstandard.dll",
@@ -3791,6 +3842,23 @@
       "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.Security.Principal.dll"
     },
     {
+      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\obj\\Debug\\net6.0\\build-gz\\3Jppvizi.gz",
+      "SourceId": "HobbyNetWebApp",
+      "SourceType": "Computed",
+      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.AspNetCore.Components.Web.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Components.Web.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Components.Web.dll"
+    },
+    {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\obj\\Debug\\net6.0\\build-gz\\4ETrn3Ej.gz",
       "SourceId": "HobbyNetWebApp",
       "SourceType": "Computed",
@@ -4879,23 +4947,6 @@
       "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.Security.dll"
     },
     {
-      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\obj\\Debug\\net6.0\\build-gz\\Gs85wDP7.gz",
-      "SourceId": "HobbyNetWebApp",
-      "SourceType": "Computed",
-      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/Microsoft.AspNetCore.Components.Forms.dll.gz",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Alternative",
-      "RelatedAsset": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Components.Forms.dll",
-      "AssetTraitName": "Content-Encoding",
-      "AssetTraitValue": "gzip",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Components.Forms.dll"
-    },
-    {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\obj\\Debug\\net6.0\\build-gz\\GvKsCh82.gz",
       "SourceId": "HobbyNetWebApp",
       "SourceType": "Computed",
@@ -5304,6 +5355,23 @@
       "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Components.Authorization.dll"
     },
     {
+      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\obj\\Debug\\net6.0\\build-gz\\jSJlSeSM.gz",
+      "SourceId": "HobbyNetWebApp",
+      "SourceType": "Computed",
+      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.JSInterop.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.JSInterop.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.JSInterop.dll"
+    },
+    {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\obj\\Debug\\net6.0\\build-gz\\JXloT5Th.gz",
       "SourceId": "HobbyNetWebApp",
       "SourceType": "Computed",
@@ -5661,23 +5729,6 @@
       "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Components.dll"
     },
     {
-      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\obj\\Debug\\net6.0\\build-gz\\nlSSNZSm.gz",
-      "SourceId": "HobbyNetWebApp",
-      "SourceType": "Computed",
-      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/Microsoft.AspNetCore.Components.Web.dll.gz",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Alternative",
-      "RelatedAsset": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Components.Web.dll",
-      "AssetTraitName": "Content-Encoding",
-      "AssetTraitValue": "gzip",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Components.Web.dll"
-    },
-    {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\obj\\Debug\\net6.0\\build-gz\\nOtvX99m.gz",
       "SourceId": "HobbyNetWebApp",
       "SourceType": "Computed",
@@ -5710,6 +5761,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.IO.FileSystem.AccessControl.dll"
+    },
+    {
+      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\obj\\Debug\\net6.0\\build-gz\\NrYE0YSV.gz",
+      "SourceId": "HobbyNetWebApp",
+      "SourceType": "Computed",
+      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.AspNetCore.Components.Forms.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Components.Forms.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Components.Forms.dll"
     },
     {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\obj\\Debug\\net6.0\\build-gz\\NXftMw27.gz",
@@ -6358,6 +6426,23 @@
       "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.Runtime.Loader.dll"
     },
     {
+      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\obj\\Debug\\net6.0\\build-gz\\sIJjjMN3.gz",
+      "SourceId": "HobbyNetWebApp",
+      "SourceType": "Computed",
+      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/MudBlazor.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\MudBlazor.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\MudBlazor.dll"
+    },
+    {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\obj\\Debug\\net6.0\\build-gz\\SL02CIRF.gz",
       "SourceId": "HobbyNetWebApp",
       "SourceType": "Computed",
@@ -6492,23 +6577,6 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.Xml.XDocument.dll"
-    },
-    {
-      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\obj\\Debug\\net6.0\\build-gz\\V+IImGxH.gz",
-      "SourceId": "HobbyNetWebApp",
-      "SourceType": "Computed",
-      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/Microsoft.JSInterop.dll.gz",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Alternative",
-      "RelatedAsset": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.JSInterop.dll",
-      "AssetTraitName": "Content-Encoding",
-      "AssetTraitValue": "gzip",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.JSInterop.dll"
     },
     {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\obj\\Debug\\net6.0\\build-gz\\vBtV4Jne.gz",
