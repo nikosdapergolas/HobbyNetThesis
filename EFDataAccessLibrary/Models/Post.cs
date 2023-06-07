@@ -21,6 +21,9 @@ public class Post
     [MaxLength(250)]
     public string body { get; set; }
 
+    [Required]
+    public DateTime timestamp { get; set; }
+
     public List<Comment>? comments { get; set; }
 
     public List<Like>? postLikes { get; set; }

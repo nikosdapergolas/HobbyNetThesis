@@ -1,6 +1,49 @@
-﻿<!-- Modal -->
-<h2>Hello From Modal!</h2>
+﻿@inject IPostsService _postService
+@inject NavigationManager navManager
+
+<!-- Modal -->
+<div class="card card-body bg-secondary">
+    <label class="bg-secondary text-light" for="content"><h5>Post made by: <b>@userName</b></h5></label>
+    <br />
+    <textarea id="content" class="form-control" rows="5" maxlength="250" @bind="postBody"></textarea>
+</div>
+<div class="card-footer bg-secondary ">
+    <button class="btn btn-primary" @onclick="MakePost">Post</button>
+</div>
 
 @code {
-    
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; }
+
+    private string userName = string.Empty;
+    private string postBody = string.Empty;
+
+    // Edw prepei na bei h lista twn hobby pou akoloutha
+    // o xrhsths kai na epilegei o idios me dropDownList
+    private string hobbyName = "Sports";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthState;
+
+        userName = authState.User.FindFirst(ClaimTypes.GivenName).Value;
+    }
+
+    private void MakePost()
+    {
+        PostCreateDTO postCreateDTO = new();
+        postCreateDTO.Username = userName;
+        postCreateDTO.HobbyName = hobbyName;
+        postCreateDTO.body = postBody;
+
+        if (string.IsNullOrEmpty(postBody))
+        {
+            navManager.NavigateTo("/posts");
+        }
+        else
+        {
+            _postService.CreatePost(postCreateDTO);
+            navManager.NavigateTo("/posts");
+        }        
+    }
 }

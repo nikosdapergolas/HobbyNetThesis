@@ -30,6 +30,7 @@ public class PostsService : IPostsService
             var posts = await _context.Posts
                 .Include(c => c.comments)
                 .Include(l => l.postLikes)
+                .OrderByDescending(t => t.timestamp)
                 .ToListAsync();
             return posts;
         }
@@ -102,6 +103,7 @@ public class PostsService : IPostsService
                 post.Username = postCreateDTO.Username;
                 post.HobbyName = postCreateDTO.HobbyName;
                 post.body = postCreateDTO.body;
+                post.timestamp = DateTime.Now;
 
                 await _context.AddAsync(post);
                 await _context.SaveChangesAsync();
