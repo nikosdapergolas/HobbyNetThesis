@@ -1,17 +1,12 @@
 ﻿@page "/posts"
 @inject IPostsService postsService
 @inject IConfiguration config
+@inject IModalService modalService
 @attribute [Authorize]
 
 <div class="container">
     <h2>Today's Posts!</h2>
-    @*<!-- Button trigger modal -->
-    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="PostModal">
-        New Post
-    </button>
-    <br />
-    <br />*@
-    <button class="btn btn-secondary">Add new</button>
+    <button class="btn btn-secondary" @onclick="@(() => modalService.Show<PostModal>("Write your Post here:"))">Add new</button>
     <br />
     <br />
     
@@ -29,16 +24,6 @@
         <br />
     }
 </div>
-
-@*<PostModal Title="Hello from Blazor">
-    <ModalBody>
-        <h4>is it nice?</h4>
-        <p>aaaaaaaaaaaaaaaaaaaaa</p>
-    </ModalBody>
-    <ModalFooter>
-        <button class="btn btn-primary">Close Modal</button>
-    </ModalFooter>
-</PostModal>*@
 
 @code {
     List<Post> posts = new();

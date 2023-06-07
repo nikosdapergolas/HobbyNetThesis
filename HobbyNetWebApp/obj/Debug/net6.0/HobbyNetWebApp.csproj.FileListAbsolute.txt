@@ -826,3 +826,7 @@ S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\Ho
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\refint\HobbyNetWebApp.dll
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\HobbyNetWebApp.pdb
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\ref\HobbyNetWebApp.dll
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\bin\Debug\net6.0\wwwroot\_framework\Blazored.Modal.dll
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\bin\Debug\net6.0\wwwroot\_framework\Blazored.Modal.dll.gz
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\bin\Debug\net6.0\Blazored.Modal.dll
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\Tf5u7Wpf.gz

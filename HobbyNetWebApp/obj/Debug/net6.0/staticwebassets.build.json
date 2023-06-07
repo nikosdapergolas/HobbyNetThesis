@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "lemetdnoRKd9oUc5NiFm5XRDwiav4KCrh7Jp1nbqMCI=",
+  "Hash": "O3r9tq8lAf4Bbozu4VfqKSaPC9TV4MQcUrsLK3WL8fk=",
   "Source": "HobbyNetWebApp",
   "BasePath": "/",
   "Mode": "Root",
@@ -16,6 +16,40 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\nikos\\.nuget\\packages\\blazored.modal\\7.1.0\\staticwebassets\\Blazored.Modal.bundle.scp.css",
+      "SourceId": "Blazored.Modal",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\nikos\\.nuget\\packages\\blazored.modal\\7.1.0\\staticwebassets\\",
+      "BasePath": "_content/Blazored.Modal",
+      "RelativePath": "Blazored.Modal.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\nikos\\.nuget\\packages\\blazored.modal\\7.1.0\\staticwebassets\\Blazored.Modal.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\nikos\\.nuget\\packages\\blazored.modal\\7.1.0\\staticwebassets\\BlazoredModal.razor.js",
+      "SourceId": "Blazored.Modal",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\nikos\\.nuget\\packages\\blazored.modal\\7.1.0\\staticwebassets\\",
+      "BasePath": "_content/Blazored.Modal",
+      "RelativePath": "BlazoredModal.razor.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\nikos\\.nuget\\packages\\blazored.modal\\7.1.0\\staticwebassets\\BlazoredModal.razor.js"
+    },
     {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\blazor.boot.json",
       "SourceId": "HobbyNetWebApp",
@@ -66,6 +100,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\nikos\\.nuget\\packages\\blazored.localstorage\\4.3.0\\lib\\net6.0\\Blazored.LocalStorage.dll"
+    },
+    {
+      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Blazored.Modal.dll",
+      "SourceId": "HobbyNetWebApp",
+      "SourceType": "Computed",
+      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Blazored.Modal.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\nikos\\.nuget\\packages\\blazored.modal\\7.1.0\\lib\\net6.0\\Blazored.Modal.dll"
     },
     {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\dotnet.6.0.16.b840udmqjh.js",
@@ -6356,6 +6407,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.Net.NameResolution.dll"
+    },
+    {
+      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\obj\\Debug\\net6.0\\build-gz\\Tf5u7Wpf.gz",
+      "SourceId": "HobbyNetWebApp",
+      "SourceType": "Computed",
+      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Blazored.Modal.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Blazored.Modal.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Blazored.Modal.dll"
     },
     {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebApp\\obj\\Debug\\net6.0\\build-gz\\toHICLmZ.gz",
