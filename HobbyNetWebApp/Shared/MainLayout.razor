@@ -17,11 +17,35 @@
             </AuthorizeView>
         </div>
 
-        <article class="content px-4">
+        @*<article class="content px-4">
             @Body
-        </article>
+        </article>*@
+
+        @*MudBlazor stuff*@
+
+        <MudLayout>
+            <MudMainContent>
+                @Body
+            </MudMainContent>
+        </MudLayout>
+
+        @*<MudLayout>
+            <MudAppBar>
+                My Application
+            </MudAppBar>
+            <MudDrawer Open="true">
+
+            </MudDrawer>
+            <MudMainContent>
+                @Body
+            </MudMainContent>
+        </MudLayout>*@
     </main>
 </div>
 
 <CascadingBlazoredModal />
+
+@*MudBlazor stuff*@
 <MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />

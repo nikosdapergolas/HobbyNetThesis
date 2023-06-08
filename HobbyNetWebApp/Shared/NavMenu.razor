@@ -10,39 +10,47 @@
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <nav class="flex-column">
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+            <MudNavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        @*My Own Nav Links*@        
+            </MudNavLink>
+        </div>     
         <AuthorizeView>
             <Authorized>
                 <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="posts">
+                    <MudNavLink class="nav-link" href="posts">
                         <span class="oi oi-list" aria-hidden="true"></span> Posts
-                    </NavLink>
+                    </MudNavLink>
                 </div>
                 <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="verifyauth">
-                        <span class="oi oi-check" aria-hidden="true"></span> Verify Authentication
-                    </NavLink>
+                    <MudNavLink class="nav-link" href="verifyauth">
+                        <span class="oi oi-check" aria-hidden="true"></span> Verify
+                    </MudNavLink>
                 </div>
                 <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="logout">
+                    <MudNavLink class="nav-link" href="logout">
                         <span class="oi oi-account-logout" aria-hidden="true"></span> Logout
-                    </NavLink>
+                    </MudNavLink>
                 </div>
             </Authorized>
             <NotAuthorized>
                 <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="login">
+                    <MudNavLink class="nav-link" href="login">
                         <span class="oi oi-account-login" aria-hidden="true"></span> Login
-                    </NavLink>
+                    </MudNavLink>
                 </div>
             </NotAuthorized>
         </AuthorizeView>
     </nav>
 </div>
+@*<MudNavMenu>
+    <NavLink Href="/" Match="NavLinkMatch.All">Dashboard</NavLink>
+    <NavLink Href="/servers" Match="NavLinkMatch.Prefix">Servers</NavLink>
+    <NavLink Title="Settings" Expanded="true">
+        <NavLink Href="/users" Match="NavLinkMatch.Prefix">Users</NavLink>
+        <NavLink Href="/security" Match="NavLinkMatch.Prefix">Security</NavLink>
+    </MudNavGroup>
+    <NavLink Href="/about" Match="NavLinkMatch.Prefix">About</NavLink>
+</MudNavMenu>*@
 
 @code {
     private bool collapseNavMenu = true;

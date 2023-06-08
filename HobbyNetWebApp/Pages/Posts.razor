@@ -12,27 +12,57 @@
     
     @foreach(var item in posts)
     {
-        <div class="card">
+        @*<div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-md-1">
-                        <img class="figure-img" src="@image" width="70px" height="70px" />
+                    <div class="col-md-1">                        
+                        <MudAvatar>
+                            <MudImage Src="@image" Alt="An image of the user."></MudImage>
+                        </MudAvatar>
                     </div>
-                    <div class="col-md-11">
+                    <div class="col-md-10">
                         <h4 class="top"><b>@item.Username</b></h4>
-                        <h6>@item.HobbyName</h6>
                         <h7>@item.timestamp</h7>
-                    </div>                    
+                    </div>
+                    <div class="col-md-1">
+                        <h6>@item.HobbyName</h6>
+                    </div>
                 </div>                
             </div>
             <div class="card-body">
                 <h5 class="card-title">@item.body</h5>
             </div>
-        </div>
+        </div>*@
+        <MudCard>
+            <MudCardHeader>
+                <CardHeaderAvatar>
+                    <MudAvatar>
+                        <MudImage Src="@image" Alt="An image of the user."></MudImage>
+                    </MudAvatar>
+                </CardHeaderAvatar>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@item.Username</MudText>
+                    <MudText Typo="Typo.body2">@item.timestamp</MudText>
+                    <MudText Typo="Typo.body2">@item.HobbyName</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
+                </CardHeaderActions>
+            </MudCardHeader>
+            <MudCardMedia Image="https://dummyimage.com/1920x780/000/f0f2ed&text=coming+soon..." Height="250" />
+            <MudCardContent>
+                <MudText Typo="Typo.body2">@item.body</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudIconButton Icon="@Icons.Material.Filled.Favorite" Color="Color.Default" />
+                <MudIconButton Icon="@Icons.Material.Filled.Comment" Color="Color.Default" />
+            </MudCardActions>
+        </MudCard>
         <br />
     }
 </div>
 
+@*<img class="figure-img" src="@image" width="70px" height="70px" />*@
 @code {
     List<Post> posts = new();
     string image = string.Empty;
