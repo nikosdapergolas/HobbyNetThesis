@@ -23,23 +23,28 @@
 
         @*MudBlazor stuff*@
 
+        @*<MudLayout>
+            <MudMainContent>
+                @Body
+            </MudMainContent>
+        </MudLayout>*@
+
         <MudLayout>
+            @*<MudAppBar Elevation="1" Dense="@dense" Color="Color.Dark">
+                <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
+                <MudSpacer />
+                <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/nikosdapergolas" Target="_blank" />
+            </MudAppBar>*@
+            @*<MudDrawer @bind-Open="@open" ClipMode="clipMode" Elevation="1" Variant="@DrawerVariant.Responsive">
+                <MudNavMenu Color="Color.Success" Bordered="true">
+                    <NavMenu/>
+                </MudNavMenu>
+            </MudDrawer>*@
             <MudMainContent>
                 @Body
             </MudMainContent>
         </MudLayout>
 
-        @*<MudLayout>
-            <MudAppBar>
-                My Application
-            </MudAppBar>
-            <MudDrawer Open="true">
-
-            </MudDrawer>
-            <MudMainContent>
-                @Body
-            </MudMainContent>
-        </MudLayout>*@
     </main>
 </div>
 
@@ -49,3 +54,14 @@
 <MudThemeProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
+
+@code {
+    bool open = false;
+    bool dense = true;
+    DrawerClipMode clipMode = DrawerClipMode.Never;
+
+    void ToggleDrawer()
+    {
+        open = !open;
+    }
+}

@@ -32,14 +32,24 @@
         <br />
         <div class="form-group row">
             <div class="col-md-12">
-                <InputText placeholder="Enter Username" id="username" class="form-controll" @bind-Value="model.Username" />
+                @*<InputText placeholder="Enter Username" id="username" class="form-controll" @bind-Value="model.Username" />*@
+                <MudTextField T="string"
+                              Label="Username"
+                              Required="true"
+                              RequiredError="Username is required!"
+                              @bind-Value="model.Username" />
                 <ValidationMessage For="@(() => model.Username)" />
             </div>
         </div>
         <br />
         <div class="form-group row">
             <div class="col-md-12">
-                <InputText type="password" placeholder="Enter Password" id="password" class="form-controll" @bind-Value="model.Password" />
+                @*<InputText type="password" placeholder="Enter Password" id="password" class="form-controll" @bind-Value="model.Password" />*@
+                <MudTextField T="string"
+                              Label="Username"
+                              Required="true"
+                              RequiredError="Username is required!"
+                              @bind-Value="model.Password" />
                 <ValidationMessage For="@(() => model.Password)" />
             </div>
         </div>
@@ -64,6 +74,33 @@
         @authenticationErrorText
     </div>
 }
+
+@*<div class="container">
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudPaper Class="pa-4">
+                <MudForm OnValidSubmit="ExecuteLogin" class="card card-body bg-light">
+                    <MudTextField T="string"
+                                  Label="Username"
+                                  Required="true"
+                                  RequiredError="Username is required!"
+                    @bind-Value="model.Username" />
+                    <MudTextField T="string"
+                                  Label="Password"
+                                  HelperText="Choose a strong password"
+                    @bind-Value="model.Password"
+                                  InputType="InputType.Password"
+                                  Required="true"
+                                  RequiredError="Password is required!" />
+                    <div class="d-flex align-center justify-space-between">
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Login</MudButton>
+                    </div>
+                </MudForm>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</div>*@
+
 
 @code {
     private string api = string.Empty;
