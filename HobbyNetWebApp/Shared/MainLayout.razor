@@ -1,7 +1,8 @@
 ﻿@inherits LayoutComponentBase
+@inject IConfiguration _config
 
 <div class="page">
-    <div class="sidebar">
+    <div style="background-image:none;background-color:dimgrey;" class="sidebar">
         <NavMenu />
     </div>
 
@@ -9,7 +10,29 @@
         <div class="top-row px-4">
             <AuthorizeView>
                 <Authorized>
-                    Welcome @context.User.FindFirst(ClaimTypes.Name).Value
+                    @*Welcome @context.User.FindFirst(ClaimTypes.Name).Value*@
+                    @*<MudMenu Dense>
+                        <ActivatorContent >
+                            <MudAvatar Image="@image" />
+                        </ActivatorContent>
+                        <ChildContent>
+                            <MudMenuItem>Profile</MudMenuItem>
+                            <MudMenuItem Href="logout">Sign Out</MudMenuItem>
+                        </ChildContent>
+                    </MudMenu>*@
+                    <MudAppBar Color="Color.Dark">
+                        <h3>Hobby Net</h3>
+                        <MudSpacer />
+                        <MudMenu Dense>
+                            <ActivatorContent>
+                                <MudAvatar Image="@image" />
+                            </ActivatorContent>
+                            <ChildContent>
+                                <MudMenuItem>Profile</MudMenuItem>
+                                <MudMenuItem Href="logout">Sign Out</MudMenuItem>
+                            </ChildContent>
+                        </MudMenu>
+                    </MudAppBar>
                 </Authorized>
                 <NotAuthorized>
                     <h2>You need to log in.</h2>
@@ -22,28 +45,27 @@
         </article>*@
 
         @*MudBlazor stuff*@
-
-        @*<MudLayout>
-            <MudMainContent>
-                @Body
-            </MudMainContent>
-        </MudLayout>*@
-
         <MudLayout>
-            @*<MudAppBar Elevation="1" Dense="@dense" Color="Color.Dark">
-                <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
-                <MudSpacer />
-                <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/nikosdapergolas" Target="_blank" />
-            </MudAppBar>*@
-            @*<MudDrawer @bind-Open="@open" ClipMode="clipMode" Elevation="1" Variant="@DrawerVariant.Responsive">
-                <MudNavMenu Color="Color.Success" Bordered="true">
-                    <NavMenu/>
-                </MudNavMenu>
-            </MudDrawer>*@
             <MudMainContent>
                 @Body
             </MudMainContent>
         </MudLayout>
+
+        @*<MudLayout>
+            <MudAppBar Elevation="1" Dense="@dense" Color="Color.Dark">
+                <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
+                <MudSpacer />
+                <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/nikosdapergolas" Target="_blank" />
+            </MudAppBar>
+            <MudDrawer @bind-Open="@open" ClipMode="clipMode" Elevation="1" Variant="@DrawerVariant.Responsive">
+                <MudNavMenu Color="Color.Success" Bordered="true">
+                    <NavMenu/>
+                </MudNavMenu>
+            </MudDrawer>
+            <MudMainContent>
+                @Body
+            </MudMainContent>
+        </MudLayout>*@
 
     </main>
 </div>
@@ -56,6 +78,14 @@
 <MudSnackbarProvider />
 
 @code {
+    string api = string.Empty;
+    string image = string.Empty;
+    protected override async Task OnInitializedAsync()
+    {
+        api = _config.GetValue<string>("api");
+        image = api + "images/default.jpg";
+    }
+
     bool open = false;
     bool dense = true;
     DrawerClipMode clipMode = DrawerClipMode.Never;

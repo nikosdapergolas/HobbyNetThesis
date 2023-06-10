@@ -46,10 +46,12 @@
             <div class="col-md-12">
                 @*<InputText type="password" placeholder="Enter Password" id="password" class="form-controll" @bind-Value="model.Password" />*@
                 <MudTextField T="string"
-                              Label="Username"
+                              Label="Password"
+                              HelperText="Choose a strong password"
+                              @bind-Value="model.Password"
+                              InputType="InputType.Password"
                               Required="true"
-                              RequiredError="Username is required!"
-                              @bind-Value="model.Password" />
+                              RequiredError="Password is required!" />
                 <ValidationMessage For="@(() => model.Password)" />
             </div>
         </div>
@@ -61,11 +63,17 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <NavLink class="nav-link" href="register">Register</NavLink>
+                @*<NavLink class="nav-link" href="register">Register</NavLink>*@
+                <MudLink Href="register">Register</MudLink>
             </div>
         </div>
     
     </EditForm>
+    @if (hasPressedLogin)
+    {
+        <br />
+        <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+    }
 </div>
 
 @if (showAuthenticationError)
@@ -103,6 +111,7 @@
 
 
 @code {
+    private bool hasPressedLogin = false;
     private string api = string.Empty;
     protected override async Task OnInitializedAsync()
     {
@@ -116,6 +125,7 @@
 
     private async Task ExecuteLogin()
     {
+        hasPressedLogin = !hasPressedLogin;
 
         showAuthenticationError = false;
 
