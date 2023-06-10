@@ -16,7 +16,7 @@
     public Task<AuthenticationState> AuthState { get; set; }
 
     private string userName = string.Empty;
-    private string postBody = string.Empty;
+    private string postBody { get; set; } = string.Empty;
 
     // Edw prepei na bei h lista twn hobby pou akoloutha
     // o xrhsths kai na epilegei o idios me dropDownList
