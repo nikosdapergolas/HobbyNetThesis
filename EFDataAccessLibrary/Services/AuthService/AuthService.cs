@@ -66,11 +66,12 @@ public class AuthService : IAuthService
     public string Login(UserLoginDTO request)
     {
         // Searching the DB to find a user with this username
-        var user = _context.Users
-            .Where( u => u.username.Equals(request.Username)).ToList();
+        User? user = _context.Users
+            .Where( u => u.username.Equals(request.Username))
+            .FirstOrDefault();
 
         // Checking to see if user Exists
-        if (user.Count().Equals(0)) 
+        if (user is null) 
         {
             return "Not found";
         }
@@ -78,13 +79,13 @@ public class AuthService : IAuthService
         {
 
             //Checking to see if password exists
-            if (!BCrypt.Net.BCrypt.Verify(request.Password, user[0].passwordHash))
+            if (!BCrypt.Net.BCrypt.Verify(request.Password, user.passwordHash))
             {
                 return "Not found";
             }
 
             // Creating the Jason Web Token For this user
-            string token = createToken((User)user[0]);
+            string token = createToken(user);
 
             return token;
         }
