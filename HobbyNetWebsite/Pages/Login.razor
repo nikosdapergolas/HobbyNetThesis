@@ -1,0 +1,141 @@
+﻿@page "/login"
+@inject IAuthenticationService AuthService
+@inject NavigationManager NavManager
+@inject IConfiguration _config
+
+@*<AuthorizeView>
+    <Authorized>
+        <h3>Hello User!</h3>
+    </Authorized>
+    <NotAuthorized>
+        <h3>You are not Logged in</h3>
+    </NotAuthorized>
+</AuthorizeView>
+
+<EditForm Model="model" OnValidSubmit="ExecuteLogin" class="card card-body bg-light mt-5">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group row">
+        <label for="Username" class="col-md-2 col-form-label">Username:</label>
+        <div class="col-md-10">
+            <InputText id="Username" class="form-control" @bind-Value="model.Username" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="Password" class="col-md-2 col-form-label">Password:</label>
+        <div class="col-md-10">
+            <InputText id="Password" type="password" class="form-control" @bind-Value="model.Password" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="md-col-12 text-right">
+            <button type="submit" class="btn btn-success">Log in</button>
+        </div>
+    </div>
+</EditForm>*@
+
+<section class="vh-100">
+  <br />
+  <br />
+
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-4">
+        <img src="https://www.iamtimcorey.com/assets/images/homepage/Teacher_SVG.svg"
+          class="img-fluid" alt="Sample image">
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <EditForm Model="model" OnValidSubmit="ExecuteLogin">
+          <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+            <h2>Sign in</h2>
+          </div>
+
+          <!-- Username input -->
+          <div class="form-outline mb-4">
+            <input type="text" id="form3Example3" class="form-control form-control-lg"
+              placeholder="Enter a valid Username" @bind="model.Username" />
+            <label class="form-label" for="form3Example3">Username</label>
+            <ValidationMessage For="@(() => model.Username)" />
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-3">
+            <input type="password" id="form3Example4" class="form-control form-control-lg"
+              placeholder="Enter password" @bind="model.Password"/>
+            <label class="form-label" for="form3Example4">Password</label>
+            <ValidationMessage For="@(() => model.Password)" />
+          </div>
+
+          @if (showAuthenticationError)
+          {
+            <div class="text-danger">
+                @authenticationErrorText
+            </div>
+          }
+
+          <div class="text-center text-lg-start  mt-4 pt-2">
+            <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: #39bad8;">
+                Login
+            </button>
+            <br />
+            <br />
+            <h5>Don't have an account? <a class="link-danger" href="register">Register</a></h5>
+          </div>
+
+        </EditForm>
+        @if (hasPressedLogin)
+        {
+            <br />
+            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+        }
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5" style="background-color: #39bad8">
+    <!-- Copyright -->
+    <footer>
+        <div class="text-white mb-3 mb-md-0">
+            Copyright © 2023. All rights reserved.
+        </div>
+    </footer>
+    <!-- Copyright -->
+  </div>
+</section>
+
+@code {
+
+    private AuthenticationUserModel model = new();
+
+    private bool hasPressedLogin = false;
+    private bool showAuthenticationError = false;
+    private string authenticationErrorText = string.Empty;
+
+    private async Task ExecuteLogin()
+    {
+        showAuthenticationError = false;
+
+        var result = AuthService.Login(model);
+
+        if (result is null)
+        {
+            hasPressedLogin = !hasPressedLogin;
+            authenticationErrorText = "There was an error when trying to log in";
+            showAuthenticationError = true;
+        }
+        else
+        {
+            NavManager.NavigateTo("/");
+        }
+    }
+
+}
