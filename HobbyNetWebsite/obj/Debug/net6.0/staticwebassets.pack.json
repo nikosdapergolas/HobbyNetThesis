@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\css\\app.css"
     },
     {
+      "Id": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebsite\\wwwroot\\css\\bootstrap\\bootstrap.min(5).css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min(5).css"
+    },
+    {
       "Id": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebsite\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },

@@ -1,3 +1,4 @@
+/* /Pages/Login.razor.rz.scp.css */
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-749328ixgj] {
     position: relative;
@@ -12,6 +13,18 @@ main[b-749328ixgj] {
 .sidebar[b-749328ixgj] {
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
 }
+/* Assuming your sidebar has a fixed width */
+/*.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;*/ /* Adjust this width as needed */
+    /*height: 100vh;
+    background-color: #333;*/ /* Sidebar background color */
+    /*color: #fff;*/ /* Text color */
+    /*padding: 20px;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);*/ /* Optional: Add a shadow */
+/*}*/
 
 .top-row[b-749328ixgj] {
     background-color: #f7f7f7;

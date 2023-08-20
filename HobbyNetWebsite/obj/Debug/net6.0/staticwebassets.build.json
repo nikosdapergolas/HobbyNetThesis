@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "IR4KruOT5Ji2+Yu4QhTgbB/UP5UCZa/Jujw+vlRikWU=",
+  "Hash": "k9c7trytpmZIOAA/1W1VUfjcNFJnINEGSKzv0fy3WEI=",
   "Source": "HobbyNetWebsite",
   "BasePath": "/",
   "Mode": "Root",
@@ -6934,6 +6934,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\app.css"
+    },
+    {
+      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebsite\\wwwroot\\css\\bootstrap\\bootstrap.min(5).css",
+      "SourceId": "HobbyNetWebsite",
+      "SourceType": "Discovered",
+      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebsite\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "css/bootstrap/bootstrap.min(5).css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min(5).css"
     },
     {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebsite\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
