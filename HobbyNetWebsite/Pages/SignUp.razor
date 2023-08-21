@@ -3,6 +3,186 @@
 @inject NavigationManager NavManager
 @inject IConfiguration _config
 
+@*<section class="vh-100" style="background-color: #3c005a;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <!-- Similar structure as the login page -->
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                            <!-- Add your signup image or content here -->
+                        </div>
+                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">
+                                <EditForm Model="model" OnValidSubmit="ExecuteLogin">
+                                    <!-- Form fields for signup -->
+                                    <div class="d-flex align-items-center mb-3 pb-1">
+                                        <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                                        <span class="h1 fw-bold">Hobby Network</span>
+                                    </div>
+                                    <!-- Show signup errors if any -->
+                                    @if (showAuthenticationError)
+                                    {
+                                        <div class="text-danger">
+                                            @authenticationErrorText
+                                        </div>
+                                    }
+
+                                    <div class="pt-1 mb-4">
+                                        <button class="btn btn-dark btn-lg btn-block" type="submit">Sign Up</button>
+                                    </div>
+
+                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">
+                                        Already have an account? <a href="/login" style="color: #393f81;">Log in here</a>
+                                    </p>
+                                    <br />
+
+                                </EditForm>
+                                @if (hasPressedLogin)
+                                {
+                                    <br />
+                                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>*@
+
+<section class="vh-100" style="background-color: #3c005a;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <!-- Similar structure as the login page -->
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                            <!-- Add your signup image or content here -->
+                        </div>
+                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">
+                                <EditForm Model="model" OnValidSubmit="ExecuteSignUp">
+                                    <!-- Form fields for signup -->
+                                    <div class="d-flex align-items-center mb-3 pb-1">
+                                        <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                                        <span class="h1 fw-bold">Hobby Network</span>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <InputText id="Username" class="form-control" @bind-Value="model.Username" />
+                                        <label class="form-label" for="Username">Username</label>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <InputText id="Password" type="password" class="form-control" @bind-Value="model.Password" />
+                                        <label class="form-label" for="Password">Password</label>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <InputText id="Email" class="form-control" @bind-Value="model.Email" />
+                                        <label class="form-label" for="Email">Email address</label>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <InputText id="Firstname" class="form-control" @bind-Value="model.Firstname" />
+                                        <label class="form-label" for="Firstname">First Name</label>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <InputText id="Lastname" class="form-control" @bind-Value="model.Lastname" />
+                                        <label class="form-label" for="Lastname">Last Name</label>
+                                    </div>
+
+                                    <!-- Show signup errors if any -->
+                                    @if (showAuthenticationError)
+                                    {
+                                        <div class="text-danger">
+                                            @authenticationErrorText
+                                        </div>
+                                    }
+
+                                    <div class="pt-1 mb-4">
+                                        <button class="btn btn-dark btn-lg btn-block" type="submit">Sign Up</button>
+                                    </div>
+
+                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">
+                                        Already have an account? <a href="/login" style="color: #393f81;">Log in here</a>
+                                    </p>
+                                    <br />
+                                </EditForm>
+                                @if (hasPressedLogin)
+                                {
+                                    <br />
+                                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 @code {
 
+    private RegisterUserModel model = new();
+    SignInModel authenticationUserModel = new();
+
+    private bool hasPressedLogin = false;
+    private bool showAuthenticationError = false;
+    private string authenticationErrorText = string.Empty;
+
+    private async Task ExecuteSignUp()
+    {
+        showAuthenticationError = false;
+        hasPressedLogin = true;
+        try
+        {
+            string result = await AuthService.Register(model);
+
+
+            if (string.IsNullOrWhiteSpace(result))
+            {
+                hasPressedLogin = false;
+                authenticationErrorText = "There was an error when trying to Sign up a new Account. Please Try again";
+                showAuthenticationError = true;
+            }
+            else
+            {
+                hasPressedLogin = false;
+
+                authenticationUserModel.Username = model.Username;
+                authenticationUserModel.Password = model.Password;
+
+                string result2 = await AuthService.Login(authenticationUserModel);
+
+                if (string.IsNullOrWhiteSpace(result2))
+                {
+                    authenticationErrorText = "The registration worked, but there was an Error when trying to login!";
+                }
+                else
+                {
+                    NavManager.NavigateTo("/");
+                }
+                //hasPressedLogin = false;
+                //NavManager.NavigateTo("/");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
+        }
+    }
 }
+

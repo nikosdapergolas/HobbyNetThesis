@@ -27,7 +27,7 @@ public class AuthenticationService : IAuthenticationService
         authTokenStoragekey = _config["authTokenStoragekey"];
     }
 
-    public async Task<string> Login(AuthenticationUserModel userForAuthentication)
+    public async Task<string> Login(SignInModel userForAuthentication)
     {
         //string api = _config["api"] + _config["tokenEndpoint"];
         string api = _config["tokenEndpoint"];

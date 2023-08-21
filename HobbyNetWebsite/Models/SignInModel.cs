@@ -2,7 +2,7 @@
 
 namespace HobbyNetWebsite.Models;
 
-public class AuthenticationUserModel
+public class SignInModel
 {
     [Required(ErrorMessage = "Username is required.")]
     public string Username { get; set; }

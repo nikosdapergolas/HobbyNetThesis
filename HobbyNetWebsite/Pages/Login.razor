@@ -82,11 +82,18 @@
                                     </div>
 
                                     <p class="mb-5 pb-lg-2" style="color: #393f81;">
-                                        Don't have an account? <a href="#!" style="color: #393f81;">Register here</a>
+                                        Don't have an account? <a href="signup" style="color: #393f81;">Register here</a>
                                     </p>
                                     <a href="#!" class="small text-muted">Terms of use.</a>
                                     <a href="#!" class="small text-muted">Privacy policy</a>
                                 </EditForm>
+                                @if (hasPressedLogin)
+                                {
+                                    <br />
+                                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                }
 
                             </div>
                         </div>
@@ -99,7 +106,7 @@
 
 @code {
 
-    private AuthenticationUserModel model = new();
+    private SignInModel model = new();
 
     private bool hasPressedLogin = false;
     private bool showAuthenticationError = false;
@@ -108,17 +115,20 @@
     private async Task ExecuteLogin()
     {
         showAuthenticationError = false;
+        hasPressedLogin = true;
 
         string result = await AuthService.Login(model);
 
         if (string.IsNullOrWhiteSpace(result))
         {
-            hasPressedLogin = !hasPressedLogin;
+            //hasPressedLogin = !hasPressedLogin;
+            hasPressedLogin = false;
             authenticationErrorText = "There was an error when trying to log in. Please Try again";
             showAuthenticationError = true;
         }
         else
         {
+            hasPressedLogin = false;
             NavManager.NavigateTo("/");
         }
     }
