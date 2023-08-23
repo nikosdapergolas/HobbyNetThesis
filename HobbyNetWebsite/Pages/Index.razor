@@ -1,9 +1,38 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+<section class="vh-100" style="background-image: url('https://images.unsplash.com/photo-1610552050890-fe99536c2615?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1507&q=80'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card shadow-lg shadow-dark" style="border-radius: 1rem;">
+                    <div class="card-body p-4 p-lg-5 text-black">
+                        <div class="d-flex align-items-center justify-content-center mb-3 pb-1">
+                            <i class="fas fa-home fa-2x me-3" style="color: #3c005a;"></i>
+                            <span class="h1 fw-bold text-center">Welcome to Hobby Network</span>
+                        </div>
 
-<h1>Hello, world!</h1>
+                        <p class="mb-4">
+                            Thank you for joining Hobby Network! This is a platform where you can connect with others who share your interests and hobbies.
+                        </p>
 
-Welcome to your new app.
+                        <p class="mb-4">
+                            Whether you're into gardening, painting, coding, or any other hobby, you'll find like-minded individuals to connect and collaborate with.
+                        </p>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+                        <p class="mb-4">
+                            Start exploring and connecting with fellow hobbyists today!
+                        </p>
+                        <AuthorizeView>
+                            <NotAuthorized>
+                                <div class="pt-1">
+                                    <a href="/login" class="btn btn-dark btn-lg me-3">Login</a>
+                                    <a href="/signup" class="btn btn-outline-dark btn-lg">Sign Up</a>
+                                </div>
+                            </NotAuthorized>
+                        </AuthorizeView>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
