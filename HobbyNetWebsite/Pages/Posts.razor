@@ -1,0 +1,88 @@
+﻿@page "/posts"
+@inject IPostsService _postsService
+@inject IConfiguration _config
+@inject NavigationManager navManager
+
+
+<section class="container mt-5">
+    <!-- Create a new post -->
+    <EditForm Model="postCreateDTO" OnValidSubmit="CreatePost">
+        <div class="mb-4">
+            <h4>Post Your Thoughts</h4>
+            <div class="card">
+                <div class="card-body">
+                    <InputTextArea @bind-Value="postCreateDTO.body" placeholder="What's on your mind?" class="form-control mb-2" />
+                    <button class="btn btn-primary" type="submit">Post</button>
+                </div>
+            </div>
+        </div>
+    </EditForm>
+
+    <!-- Display existing posts -->
+    <div>
+        <h4>Recent Posts</h4>
+        @foreach (var post in posts)
+        {
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">@post.Username</h5>
+                    <p class="card-text">@post.body</p>
+                    <small class="text-muted">@post.timestamp.ToString("MMMM dd, yyyy")</small>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+@code {
+    PostCreateDTO postCreateDTO = new();
+
+    List<Post> posts = new();
+    string image = string.Empty;
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; }
+
+    private string userName = string.Empty;
+    private string postBody { get; set; } = string.Empty;
+
+    // Edw prepei na bei h lista twn hobby pou akoloutha
+    // o xrhsths kai na epilegei o idios me dropDownList
+    private string hobbyName = "Sports";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthState;
+
+        userName = authState.User.FindFirst(ClaimTypes.GivenName).Value;
+
+        try
+        {
+            image = _config.GetValue<string>("api") + "/images/default.jpg";
+
+            // See all users in console
+            posts = await _postsService.GetPosts();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    private void CreatePost()
+    {
+        postCreateDTO.Username = userName;
+        postCreateDTO.HobbyName = hobbyName;
+        //postCreateDTO.body = postBody;
+
+        if (string.IsNullOrEmpty(postBody))
+        {
+            navManager.NavigateTo("/posts");
+        }
+        else
+        {
+            _postsService.CreatePost(postCreateDTO);
+            navManager.NavigateTo("/posts", true);
+        }
+    }
+}
