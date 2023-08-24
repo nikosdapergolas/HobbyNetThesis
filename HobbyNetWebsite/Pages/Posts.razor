@@ -2,122 +2,70 @@
 @inject IPostsService _postsService
 @inject IConfiguration _config
 @inject NavigationManager navManager
-
-@using Microsoft.JSInterop
-@inject IJSRuntime JSRuntime
-
+@attribute [Authorize]
 
 <section class="container mt-5">
-    <!-- Create a new post -->
-    @*<EditForm Model="postCreateDTO" OnValidSubmit="CreatePost">
-        <div class="mb-4">
-            <h4>Post Your Thoughts</h4>
-            <div class="card">
-                <div class="card-body">
-                    <InputTextArea @bind-Value="postCreateDTO.body" placeholder="What's on your mind?" class="form-control mb-2" />
-                    <button class="btn btn-primary" type="submit">Post</button>
-                </div>
-            </div>
-        </div>
-    </EditForm>*@
-
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        Post your Thoughts
+    <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#postModal">
+        <i class="fas fa-pencil-alt me-2"></i> Post Your Thoughts
     </button>
     <br />
     <br />
 
-    <!-- Display existing posts -->
-    <div>
-        <h4>Recent Posts</h4>
-        @foreach (var post in posts)
-        {
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">@post.Username</h5>
-                    <p class="card-text">@post.body</p>
-                    <small class="text-muted">@post.timestamp.ToString("MMMM dd, yyyy")</small>
+    <div class="mt-5">
+        <h2 class="mb-4">Recent Posts</h2>
+        <div class="card-deck">
+            @foreach (var post in posts)
+            {
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title">@post.Username</h5>
+                        <small class="text-white">@post.timestamp.ToString("MMMM dd, yyyy")</small>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text fs-5 lh-lg">@post.body</p>
+                    </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 </section>
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+<!--Modal-->
+<div class="modal fade" id="postModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Post your Thoughts</h1>
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="postModalLabel">Post your Thoughts @name</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Create a new post -->
-                <EditForm Model="postCreateDTO" OnValidSubmit="CreatePost">                    
-                    <div class="card">
-                        <div class="card-body">
-                            <InputTextArea @bind-Value="postCreateDTO.body" placeholder="What's on your mind?" class="form-control mb-2" />
-                            <button class="btn btn-primary" type="submit">Post</button>
+                <EditForm Model="postCreateDTO" OnValidSubmit="CreatePost">
+                    <div class="form-group">
+                        <InputTextArea @bind-Value="postCreateDTO.body"
+                                        id="postBody"
+                                        placeholder="What's on your mind?"
+                                        class="form-control"
+                                        rows="8"
+                                        style="resize: none;"
+                                        MaxLength="250" />
+                    </div>
+                    <br />
+                    @*<div class="text-center">
+                    <button class="btn btn-primary btn-lg" type="submit">Post</button>
+                    </div>*@
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <button class="btn btn-primary btn-block btn-lg" type="submit">Post</button>
                         </div>
-                    </div>                    
+                    </div>
                 </EditForm>
-            </div>
-            <div class="modal-footer">
-                @*<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                &nbsp;
-                &nbsp;
-                <button type="button" class="btn btn-success">Post</button>*@
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal -->
-@*<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Post your Thoughts</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                . . .
-                <section class="intro">
-                    <div class="bg-image h-100" style="background-color: #f5f7fa;">
-                        <div class="mask d-flex align-items-center h-100">
-                            <div class="container">
-                                <div class="row justify-content-center">
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-body p-0">
-                                                <!-- Create a new post -->
-                                                <EditForm Model="postCreateDTO" OnValidSubmit="CreatePost">
-                                                    <div class="mb-4">
-                                                        <h4>Post Your Thoughts</h4>
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <InputTextArea @bind-Value="postCreateDTO.body" placeholder="What's on your mind?" class="form-control mb-2" />
-                                                                <button class="btn btn-primary" type="submit">Post</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </EditForm>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Post</button>
-            </div>
-        </div>
-    </div>
-</div>*@
+
 
 @code {
     PostCreateDTO postCreateDTO = new();
@@ -129,6 +77,7 @@
     public Task<AuthenticationState> AuthState { get; set; }
 
     private string userName = string.Empty;
+    private string name = string.Empty;
     private string postBody { get; set; } = string.Empty;
 
     // Edw prepei na bei h lista twn hobby pou akoloutha
@@ -139,7 +88,10 @@
     {
         var authState = await AuthState;
 
+        image = _config.GetValue<string>("api") + "/images/default.jpg";
+
         userName = authState.User.FindFirst(ClaimTypes.GivenName).Value;
+        name = authState.User.FindFirst(ClaimTypes.Name).Value;
 
         try
         {
@@ -172,57 +124,3 @@
     }
 }
 
-@*@code {
-    PostCreateDTO postCreateDTO = new();
-
-    List<Post> posts = new();
-    string image = string.Empty;
-
-    [CascadingParameter]
-    public Task<AuthenticationState> AuthState { get; set; }
-
-    private string userName = string.Empty;
-    private string postBody { get; set; } = string.Empty;
-
-    // Edw prepei na bei h lista twn hobby pou akoloutha
-    // o xrhsths kai na epilegei o idios me dropDownList
-    private string hobbyName = "Sports";
-
-    protected override async Task OnInitializedAsync()
-    {
-        var authState = await AuthState;
-
-        userName = authState.User.FindFirst(ClaimTypes.GivenName).Value;
-
-        try
-        {
-            image = _config.GetValue<string>("api") + "/images/default.jpg";
-
-            // See all users in console
-            await LoadPosts();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
-    }
-
-    private async Task LoadPosts()
-    {
-        posts = await _postsService.GetPosts();
-    }
-
-    private async Task CreatePost()
-    {
-        postCreateDTO.Username = userName;
-        postCreateDTO.HobbyName = hobbyName;
-
-        if (!string.IsNullOrEmpty(postBody))
-        {
-            _postsService.CreatePost(postCreateDTO);
-            postBody = string.Empty; // Clear the input field
-            await LoadPosts(); // Load posts again
-            await InvokeAsync(StateHasChanged); // Force the component to re-render
-        }
-    }
-}*@

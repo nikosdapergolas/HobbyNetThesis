@@ -39,7 +39,7 @@
 *@
 
 
-<section class="vh-100" style="background-color: #3c005a;">
+<section class="vh-100" >
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-xl-10">
@@ -60,7 +60,7 @@
 
                                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
-                                    <div class="form-outline mb-4">
+                                    @*<div class="form-outline mb-4">
                                         <input id="text" class="form-control form-control-lg" @bind="model.Username" />
                                         <label class="form-label" for="email">Username</label>
                                     </div>
@@ -68,7 +68,22 @@
                                     <div class="form-outline mb-4">
                                         <input id="password" type="password" class="form-control form-control-lg" @bind="model.Password" />
                                         <label class="form-label" for="password">Password</label>
+                                    </div>*@
+
+                                    <!--Start of the new Login look-->
+
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput" placeholder="Username" data-np-autofill-field-type="username" data-np-uid="a68a8255-4045-4309-b251-0ec34fb3ab7a" @bind="model.Username">
+                                        <label for="floatingInput">Username</label>
                                     </div>
+                                    <div class="form-floating">
+                                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" autocomplete="off" @bind="model.Password">
+                                        <label for="floatingPassword">Password</label>
+                                    </div>
+
+                                    <br />
+
+                                    <!--End of the new Login look-->
 
                                     @if (showAuthenticationError)
                                     {

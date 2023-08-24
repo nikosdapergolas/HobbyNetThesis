@@ -24,10 +24,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nb3V0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebsite/Pages/Posts.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9zdHMucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
 [S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebsite/Pages/SignUp.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2lnblVwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -47,6 +43,10 @@ build_metadata.AdditionalFiles.CssScope = b-cpysgq4lpe
 [S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebsite/Pages/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-8yx5hkjqu8
+
+[S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebsite/Pages/Posts.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9zdHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-jzl7sd1hfj
 
 [S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebsite/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
