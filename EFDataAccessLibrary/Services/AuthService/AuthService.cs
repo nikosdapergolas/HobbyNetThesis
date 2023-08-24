@@ -102,6 +102,7 @@ public class AuthService : IAuthService
             new Claim(ClaimTypes.GivenName, user.username),
             new Claim(ClaimTypes.Name, user.firstname),
             new Claim(ClaimTypes.Surname, user.lastname),
+            new Claim(ClaimTypes.Uri, user.profileImage),
             new Claim(ClaimTypes.Email, user.email)
         };
         // Adding all the roles of this user in his claim

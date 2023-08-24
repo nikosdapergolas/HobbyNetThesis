@@ -4,15 +4,17 @@
 }
 /* /Pages/Login.razor.rz.scp.css */
 /* /Pages/Posts.razor.rz.scp.css */
-.background-image[b-jzl7sd1hfj] {
-    background-image: url('https://images.unsplash.com/photo-1500964757637-c85e8a162699?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1503&q=80');
-    background-size: cover;
-    background-position: center;
+.profile-picture[b-jzl7sd1hfj] {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
 }
 
-.page-background[b-jzl7sd1hfj] {
-    background-color: lightgray;
-}
+    .profile-picture img[b-jzl7sd1hfj] {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-749328ixgj] {
     position: relative;
