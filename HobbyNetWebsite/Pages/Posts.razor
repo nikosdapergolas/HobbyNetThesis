@@ -25,30 +25,54 @@
             @foreach (var post in posts)
             {
                 <div class="card mb-4">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center">
                             <div class="rounded-circle profile-picture">
-                                <!--
-                                Προς το παρον δείχνει μια Deafault φωτογραφία προφίλ.
-                                Θέλω στην συνέχεια να το φτάξω να δείχνει την 
-                                φωτογραφία προφίλ του εκάστοτε χρήστη
-                                -->
+                                <!-- Profile Picture Image -->
                                 <img src="@image" alt="Profile Picture" />
                             </div>
                             <div class="ms-3">
                                 <h5 class="card-title">@post.Username</h5>
                                 <small class="text-white">@hobbyName</small>
-                                <br/>
+                                <br />
                                 <small class="text-white">@post.timestamp.ToString("MMMM dd, yyyy")</small>
                             </div>
                         </div>
+                        <li class="nav-item dropdown">
+                            <!-- Post Options Button (e.g., Like, Comment, Share) -->
+                            <button type="button" class="btn btn-link text-white" data-bs-toggle="dropdown" id="dropdownToggle">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownToggle">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Separated link</a>
+                            </div>
+                        </li>
                     </div>
                     <div class="card-body">
                         <p class="card-text fs-5 lh-lg">@post.body</p>
                     </div>
+                    <div class="card-footer bg-white">
+                        <!-- Like, Comment, Share Buttons -->
+                        <button type="button" class="btn btn-primary rounded-pill">
+                            <i class="far fa-thumbs-up"></i> Like
+                        </button>
+                        <button type="button" class="btn btn-success rounded-pill">
+                            <i class="far fa-comment-alt"></i> Comment
+                        </button>
+                        <button type="button" class="btn btn-dark rounded-pill">
+                            <i class="fas fa-share"></i> Share
+                        </button>
+                    </div>
                 </div>
             }
         </div>
+
+
     </div>
 </section>
 
