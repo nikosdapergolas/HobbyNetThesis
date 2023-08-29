@@ -30,6 +30,21 @@ public class PostsService : IPostsService
             return null;
         }
     }
+    public async Task<List<Post>> GetSomePosts(int currentPage)
+    {
+        string postsEndpoint = _config["getSomePostsEndpoint"];
+
+        try
+        {
+            var result = await _client.GetFromJsonAsync<List<Post>>(postsEndpoint + "/" + currentPage);
+            return result;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null;
+        }
+    }
 
     public async Task<string> CreatePost(PostCreateDTO postCreateDTO)
     {

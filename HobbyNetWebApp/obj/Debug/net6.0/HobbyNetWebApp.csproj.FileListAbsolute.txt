@@ -834,3 +834,4 @@ S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\bu
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\3Jppvizi.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\jSJlSeSM.gz
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\build-gz\sIJjjMN3.gz
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebApp\obj\Debug\net6.0\scopedcss\Pages\Posts.razor.rz.scp.css

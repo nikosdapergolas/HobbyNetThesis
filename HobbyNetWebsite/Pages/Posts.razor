@@ -4,7 +4,7 @@
 @inject NavigationManager navManager
 @attribute [Authorize]
 
-<section class="container mt-5">
+<section class="container mt-5" id="postContainer">
     <button type="button" class="btn btn-primary btn-lg rounded-pill" data-bs-toggle="modal" data-bs-target="#postModal">
         <i class="fas fa-pencil-alt me-2"></i> Post Your Thoughts
     </button>
@@ -21,7 +21,7 @@
         <br />
         <br />
 
-        <div class="card-deck">
+        <div class="card-deck" id="postCardDeck">
             @foreach (var post in posts)
             {
                 <div class="card mb-4">
@@ -74,6 +74,17 @@
 
 
     </div>
+
+    <!-- Loading spinner -->
+    <div class="text-center" id="loadingSpinner" style="display:none;">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <button @onclick="LoadMorePosts" class="btn btn-light btn-lg btn-block load-more-button">
+        Load more posts
+    </button>
+    @*<button class="btn btn-primary" @onclick="LoadMorePosts">Load more posts</button>*@
 </section>
 
 
@@ -130,12 +141,41 @@
     // o xrhsths kai na epilegei o idios me dropDownList
     private string hobbyName = "Sports";
 
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    var authState = await AuthState;
+
+    //    //image = _config.GetValue<string>("api") + "/images/default.jpg";
+
+    //    userName = authState.User.FindFirst(ClaimTypes.GivenName).Value;
+    //    name = authState.User.FindFirst(ClaimTypes.Name).Value;
+    //    image = authState.User.FindFirst(ClaimTypes.Uri).Value;
+
+
+
+    //    try
+    //    {
+    //        image = _config.GetValue<string>("api") + "/images/default.jpg";
+
+    //        // See all users in console
+
+    //        posts = await _postsService.GetPosts();
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Console.WriteLine(ex.Message);
+    //    }
+    //}
+
+    //====================================================================================
+    // Bard AI implementation
+
+    private bool isLoading = false;
+    private int currentPage = 1;
+
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthState;
-
-        //image = _config.GetValue<string>("api") + "/images/default.jpg";
-
         userName = authState.User.FindFirst(ClaimTypes.GivenName).Value;
         name = authState.User.FindFirst(ClaimTypes.Name).Value;
         image = authState.User.FindFirst(ClaimTypes.Uri).Value;
@@ -144,14 +184,122 @@
         {
             image = _config.GetValue<string>("api") + "/images/default.jpg";
 
-            // See all users in console
-            posts = await _postsService.GetPosts();
+            // Load initial set of posts using the new endpoint
+            posts = await _postsService.GetSomePosts(currentPage);
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
         }
     }
+
+    private async Task LoadMorePosts()
+    {
+        if (isLoading) return;
+
+        isLoading = true;
+        try
+        {
+            currentPage++;
+            var newPosts = await _postsService.GetSomePosts(currentPage);
+            if (newPosts != null && newPosts.Any())
+            {
+                posts.AddRange(newPosts);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error loading more posts: " + ex.Message);
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    //@functions {
+    //    // Add event handler for scroll
+    //    private async Task OnScroll(WindowScrollEventArgs e)
+    //    {
+    //        var scrollPosition = e.ScrollTop + e.ClientHeight;
+    //        var contentHeight = e.ScrollHeight;
+
+    //        if (scrollPosition >= contentHeight - 100)
+    //        {
+    //            await LoadMorePosts();
+    //            StateHasChanged(); // Update the UI after loading more posts
+    //        }
+    //    }
+    //}
+
+    //====================================================================================
+    // Trying to implement the new endpoint to only bring some posts per scroll
+
+    //private bool isLoading = false;
+    //private int currentPage = 1;
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    var authState = await AuthState;
+    //    userName = authState.User.FindFirst(ClaimTypes.GivenName).Value;
+    //    name = authState.User.FindFirst(ClaimTypes.Name).Value;
+    //    image = authState.User.FindFirst(ClaimTypes.Uri).Value;
+
+    //    try
+    //    {
+    //        image = _config.GetValue<string>("api") + "/images/default.jpg";
+
+    //        // Load initial set of posts using the new endpoint
+    //        posts = await _postsService.GetSomePosts(currentPage);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Console.WriteLine(ex.Message);
+    //    }
+    //}
+
+    //private async Task LoadMorePosts()
+    //{
+    //    if (isLoading) return;
+
+    //    isLoading = true;
+    //    try
+    //    {
+    //        currentPage++;
+    //        var newPosts = await _postsService.GetSomePosts(currentPage);
+    //        if (newPosts != null && newPosts.Any())
+    //        {
+    //            posts.AddRange(newPosts);
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Console.WriteLine("Error loading more posts: " + ex.Message);
+    //    }
+    //    finally
+    //    {
+    //        isLoading = false;
+    //    }
+    //}
+
+    //@functions {
+    //    // Add event handler for scroll
+    //    private async Task OnScroll(ScrollEventArgs e)
+    //    {
+    //        var scrollPosition = e.TargetElement.ScrollTop + e.TargetElement.ClientHeight;
+    //        var contentHeight = e.TargetElement.ScrollHeight;
+
+    //        if (scrollPosition >= contentHeight - 100)
+    //        {
+    //            await LoadMorePosts();
+    //            StateHasChanged(); // Update the UI after loading more posts
+    //        }
+    //    }
+    //}
+
+    //====================================================================================
+
+    
 
     private void CreatePost()
     {

@@ -41,6 +41,30 @@ public class PostsService : IPostsService
         }
     }
 
+    // ------------------------------------------------------------------------
+    // Trying pagination
+    public async Task<IEnumerable<Post>> GetPaginatedPosts(int page, int pageSize)
+    {
+        try
+        {
+            var posts = await _context.Posts
+                .Include(c => c.comments)
+                .Include(l => l.postLikes)
+                .OrderByDescending(t => t.timestamp)
+                .Skip((page - 1) * pageSize) // Skip the previous pages
+                .Take(pageSize) // Take the desired number of posts
+                .ToListAsync();
+
+            return posts;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null;
+        }
+    }
+    // ------------------------------------------------------------------------
+
     public async Task<IEnumerable<Post>> SearchPost(string searchTerm)
     {
         try

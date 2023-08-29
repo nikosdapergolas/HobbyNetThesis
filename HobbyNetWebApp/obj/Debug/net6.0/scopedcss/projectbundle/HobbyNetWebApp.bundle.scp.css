@@ -1,3 +1,9 @@
+/* /Pages/Posts.razor.rz.scp.css */
+.background-image[b-lcnkdx857c] {
+    background-image: url('path-to-your-image.jpg');
+    background-size: cover;
+    background-position: center;
+}
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-od5ga2qqq2] {
     position: relative;

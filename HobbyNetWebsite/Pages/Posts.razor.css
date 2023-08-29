@@ -4,8 +4,23 @@
     overflow: hidden;
 }
 
-    .profile-picture img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.load-more-button {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1.25rem;
+    transition: background-color 0.3s ease-in-out;
+}
+
+    .load-more-button:hover {
+        background-color: rgba(0, 0, 0, 0.8);
     }

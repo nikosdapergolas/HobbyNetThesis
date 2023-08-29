@@ -34,6 +34,29 @@ public class PostsController : ControllerBase
         }
     }
 
+    // ------------------------------------------------------------------------
+    // Trying pagination
+
+    // GET: api/Posts/Some
+    [HttpGet("Some/{page}")]
+    [Authorize]
+    public async Task<ActionResult<IEnumerable<Post>>> GetSomePosts(int page = 1)
+    {
+        const int pageSize = 10; // Number of posts per page
+
+        var posts = await _postsService.GetPaginatedPosts(page, pageSize);
+
+        if (posts is not null)
+        {
+            return Ok(posts);
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
+    // ------------------------------------------------------------------------
+
     // GET: api/Posts/Search/?searchTerm=abc
     [HttpGet("Search")]
     [Authorize]

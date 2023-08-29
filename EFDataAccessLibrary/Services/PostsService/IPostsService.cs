@@ -11,6 +11,10 @@ namespace EFDataAccessLibrary.Services.PostsService;
 public interface IPostsService
 {
     public Task<IEnumerable<Post>> GetAllPosts();
+    // ------------------------------------------------------------------------
+    // Trying pagination
+    public Task<IEnumerable<Post>> GetPaginatedPosts(int page, int pageSize);
+    // ------------------------------------------------------------------------
     public Task<IEnumerable<Post>> SearchPost(string searchTerm);
     public Task<Post> GetOnePost(int id);
     //public Task<Post> CreatePostByAdmin(PostCreateDTO post);

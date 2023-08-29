@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "k9c7trytpmZIOAA/1W1VUfjcNFJnINEGSKzv0fy3WEI=",
+  "Hash": "IOax3FwRW5T7GPLI310KkjnjyFIjnyr4auUdS+z0aE4=",
   "Source": "HobbyNetWebsite",
   "BasePath": "/",
   "Mode": "Root",
@@ -6900,6 +6900,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebsite\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\HobbyNetWebsite.bundle.scp.css"
+    },
+    {
+      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebsite\\Pages\\Posts.razor.js",
+      "SourceId": "HobbyNetWebsite",
+      "SourceType": "Discovered",
+      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebsite\\",
+      "BasePath": "/",
+      "RelativePath": "Pages/Posts.razor.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "Pages\\Posts.razor.js"
     },
     {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNetWebsite\\wwwroot\\appsettings.json",
