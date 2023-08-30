@@ -22,14 +22,16 @@
     border: none;
     border-radius: 15px;
     margin: 20px auto;
-    padding: 10px 20px;
-    font-size: 1.25rem;
+    padding: 20px 40px; /* Increase padding to make the button bigger */
+    font-size: 1.5rem; /* Increase font size for a larger button text */
     transition: background-color 0.3s ease-in-out;
 }
 
-    .load-more-button:hover[b-jzl7sd1hfj] {
-        background-color: rgba(0, 0, 0, 0.8);
-    }
+.load-more-button:hover[b-jzl7sd1hfj] {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-749328ixgj] {
     position: relative;

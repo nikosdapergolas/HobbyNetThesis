@@ -12,7 +12,7 @@
     <br />
 
     <div class="mt-5">
-        <div class="card bg-primary">
+        <div class="card bg-secondary rounded-pill">
             <div class="card-body text-center">
                 <h1 class="mb-0 text-white">Recent Posts</h1>
             </div>
@@ -24,8 +24,8 @@
         <div class="card-deck" id="postCardDeck">
             @foreach (var post in posts)
             {
-                <div class="card mb-4">
-                    <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between">
+                <div class="card mb-4 rounded-pill">
+                    <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between rounded-pill">
                         <div class="d-flex align-items-center">
                             <div class="rounded-circle profile-picture">
                                 <!-- Profile Picture Image -->
@@ -56,14 +56,22 @@
                     <div class="card-body">
                         <p class="card-text fs-5 lh-lg">@post.body</p>
                     </div>
-                    <div class="card-footer bg-white">
+                    <div class="card-footer bg-secondary rounded-pill">
                         <!-- Like, Comment, Share Buttons -->
                         <button type="button" class="btn btn-primary rounded-pill">
                             <i class="far fa-thumbs-up"></i> Like
                         </button>
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
                         <button type="button" class="btn btn-success rounded-pill">
                             <i class="far fa-comment-alt"></i> Comment
                         </button>
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
                         <button type="button" class="btn btn-dark rounded-pill">
                             <i class="fas fa-share"></i> Share
                         </button>
@@ -81,8 +89,8 @@
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
-    <button @onclick="LoadMorePosts" class="btn btn-light btn-lg btn-block load-more-button">
-        Load more posts
+    <button @onclick="LoadMorePosts" class="btn btn-outline-light btn-lg d-flex justify-content-center align-items-center load-more-button" role="button">
+        <h4>Load more posts</h4>
     </button>
     @*<button class="btn btn-primary" @onclick="LoadMorePosts">Load more posts</button>*@
 </section>
