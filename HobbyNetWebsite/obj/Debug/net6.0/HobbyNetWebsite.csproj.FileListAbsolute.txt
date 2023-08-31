@@ -829,3 +829,4 @@ S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebsite\obj\Debug\net6.0\r
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebsite\obj\Debug\net6.0\scopedcss\Pages\Login.razor.rz.scp.css
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebsite\obj\Debug\net6.0\scopedcss\Pages\Index.razor.rz.scp.css
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebsite\obj\Debug\net6.0\scopedcss\Pages\Posts.razor.rz.scp.css
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebsite\obj\Debug\net6.0\scopedcss\Pages\Profile.razor.rz.scp.css

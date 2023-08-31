@@ -11,6 +11,7 @@ namespace EFDataAccessLibrary.Services.PostsService;
 public interface IPostsService
 {
     public Task<IEnumerable<Post>> GetAllPosts();
+    public Task<IEnumerable<Post>> GetPostsFromOneUser(string username);
     // ------------------------------------------------------------------------
     // Trying pagination
     public Task<IEnumerable<Post>> GetPaginatedPosts(int page, int pageSize);

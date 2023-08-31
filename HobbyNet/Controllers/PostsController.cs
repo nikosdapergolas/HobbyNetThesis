@@ -34,12 +34,12 @@ public class PostsController : ControllerBase
         }
     }
 
-    // GET: api/Posts/User/user1
+    // GET: api/Posts/User
     [HttpGet("User/{username}")]
     [Authorize]
     public async Task<ActionResult<IEnumerable<Post>>> GetPostsFromOneUser(string username)
     {
-        var posts = await _postsService.GetAllPosts();
+        var posts = await _postsService.GetPostsFromOneUser(username);
 
         if (posts is not null)
         {

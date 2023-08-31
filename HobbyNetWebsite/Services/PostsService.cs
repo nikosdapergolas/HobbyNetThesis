@@ -31,13 +31,13 @@ public class PostsService : IPostsService
         }
     }
 
-    public async Task<List<Post>> GetPostsFromOneUser()
+    public async Task<List<Post>> GetPostsFromOneUser(string username)
     {
-        string postsEndpoint = _config["getAllPostsEndpoint"];
+        string postsEndpoint = _config["getPostsFromOneUser"];
 
         try
         {
-            var result = await _client.GetFromJsonAsync<List<Post>>(postsEndpoint);
+            var result = await _client.GetFromJsonAsync<List<Post>>(postsEndpoint + "/" + username);
             return result;
         }
         catch (Exception ex)

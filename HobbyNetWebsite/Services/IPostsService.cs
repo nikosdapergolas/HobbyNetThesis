@@ -7,7 +7,7 @@ public interface IPostsService
 {
     Task<List<Post>> GetPosts();
 
-    public Task<List<Post>> GetPostsFromOneUser();
+    public Task<List<Post>> GetPostsFromOneUser(string username);
 
     public Task<List<Post>> GetSomePosts(int currentPage);
 
