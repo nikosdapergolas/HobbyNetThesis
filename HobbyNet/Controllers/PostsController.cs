@@ -34,6 +34,23 @@ public class PostsController : ControllerBase
         }
     }
 
+    // GET: api/Posts/User/user1
+    [HttpGet("User/{username}")]
+    [Authorize]
+    public async Task<ActionResult<IEnumerable<Post>>> GetPostsFromOneUser(string username)
+    {
+        var posts = await _postsService.GetAllPosts();
+
+        if (posts is not null)
+        {
+            return Ok(posts);
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
+
     // ------------------------------------------------------------------------
     // Trying pagination
 
