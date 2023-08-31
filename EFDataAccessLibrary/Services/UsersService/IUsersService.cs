@@ -13,6 +13,7 @@ public interface IUsersService
 {
     public Task<IEnumerable<User>> GetAllUsers();
     public Task<IEnumerable<UserSearchResultDTO>> SearchUsers(string searchTerm);
+    public Task<User> GetOneUserByUsername(string username);
     public Task<User> GetOneUser(int id);
     public Task<string> CreateAdminUser(int id);
     public Task<string> EditUser(UserEditDTO userEditDTO);

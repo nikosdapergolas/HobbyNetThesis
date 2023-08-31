@@ -51,6 +51,23 @@ namespace HobbyNet.Controllers
             }            
         }
 
+        // GET api/Users/Username
+        [HttpGet("Username/{username}")]
+        [Authorize]
+        public async Task<ActionResult<User>> GetOneUserByUsername(string username)
+        {
+            var user = await _usersService.GetOneUserByUsername(username);
+
+            if (user is not null)
+            {
+                return Ok(user);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         // GET api/Users/5
         [HttpGet("{id}")]
         [Authorize(Roles = "Admin")]

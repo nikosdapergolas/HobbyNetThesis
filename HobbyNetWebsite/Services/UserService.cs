@@ -30,4 +30,21 @@ public class UserService : IUserService
             return null;
         }
     }
+
+    public async Task<User> GetOneUserByUsername(string userName)
+    {
+        string usersEndpoint = _config["getOneUserByUsername"];
+
+        try
+        {
+            var result = await _client.GetFromJsonAsync<User>(usersEndpoint + "/" + userName);
+
+            return result;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null;
+        }
+    }
 }

@@ -59,6 +59,24 @@ public class UsersService : IUsersService
         }
     }
 
+    public async Task<User> GetOneUserByUsername(string username)
+    {
+        try
+        {
+            var user = await _context.Users
+                .Where(i => i.username.Equals(username))
+                .Include(h => h.Hobbies)
+                .Include(r => r.Roles)
+                .FirstOrDefaultAsync();
+            return user;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null;
+        }
+    }
+
     public async Task<User> GetOneUser(int id)
     {
         try
