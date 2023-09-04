@@ -83,12 +83,37 @@
 
     </div>
 
-    <!-- Loading spinner -->
-    <div class="text-center" id="loadingSpinner" style="display:none;">
-        <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
+    @if (isLoading)
+    {
+        <br />
+        <div class="text-center">
+            <div class="spinner-grow text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-secondary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-danger" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-warning" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-info" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-light" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-dark" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
         </div>
-    </div>
+    }
+
     <button @onclick="LoadMorePosts" class="btn btn-outline-light btn-lg d-flex justify-content-center align-items-center load-more-button" role="button">
         <h4>Load more posts</h4>
     </button>
@@ -183,6 +208,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        isLoading = true;
         var authState = await AuthState;
         userName = authState.User.FindFirst(ClaimTypes.GivenName).Value;
         name = authState.User.FindFirst(ClaimTypes.Name).Value;
@@ -194,6 +220,8 @@
 
             // Load initial set of posts using the new endpoint
             posts = await _postsService.GetSomePosts(currentPage);
+
+            isLoading = false;
         }
         catch (Exception ex)
         {

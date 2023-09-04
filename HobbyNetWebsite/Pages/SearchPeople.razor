@@ -1,0 +1,76 @@
+﻿@page "/SearchPeople"
+@inject IPostsService _postsService
+@inject IUserService _userService
+@inject IConfiguration _config
+@inject NavigationManager navManager
+@attribute [Authorize]
+
+<div class="container mt-5">
+    <div class="search-container">
+        <h2>Find People to Follow</h2>
+        <div class="mb-3">
+            <input type="text" class="form-control search-input" placeholder="Search for people..." @bind-value="@searchTerm" @oninput="ChangeSearchTermText">
+        </div>
+        <button class="btn search-button" @onclick="SearchUsers">Search</button>
+        <div class="search-results">
+            @if (searchTerm.Length > 0)
+            {
+                @foreach (var user in filteredUsers)
+                {
+                    <div class="user-card">
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="@user.profileImage" alt="User">
+                            </div>
+                            <div class="col-9">
+                                <h5>@user.username</h5>
+                                @*<p>Followers: @user.FollowersCount</p>*@
+                                <button class="btn btn-primary">Follow</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    List<User> users = new();
+    List<User> filteredUsers = new();
+
+    string searchTerm = string.Empty;
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; }
+
+    private string userName = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        List<User> filteredUsers = new();
+        var authState = await AuthState;
+
+        userName = authState.User.FindFirst(ClaimTypes.GivenName).Value;
+
+        try
+        {
+            users = await _userService.GetUsers();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    void ChangeSearchTermText(ChangeEventArgs e)
+    {
+        searchTerm = e.Value.ToString();
+        SearchUsers();
+    }
+
+    void SearchUsers()
+    {
+        filteredUsers = users.Where(u => u.username.StartsWith(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+}

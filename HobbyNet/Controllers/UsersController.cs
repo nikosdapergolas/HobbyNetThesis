@@ -19,7 +19,7 @@ namespace HobbyNet.Controllers
 
         // GET: api/Users
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,User")]
         public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
             var users = await _usersService.GetAllUsers();

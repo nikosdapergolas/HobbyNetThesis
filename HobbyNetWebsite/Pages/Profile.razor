@@ -28,8 +28,8 @@
                     <div class="p-4 text-black" style="background-color: #f8f9fa;">
                         <div class="d-flex justify-content-end text-center py-1">
                             <div>
-                                <p class="mb-1 h5">253</p>
-                                <p class="small text-muted mb-0">Photos</p>
+                                <p class="mb-1 h5">@numberOfPosts</p>
+                                <p class="small text-muted mb-0">Posts</p>
                             </div>
                             <div class="px-3">
                                 <p class="mb-1 h5">1026</p>
@@ -66,7 +66,7 @@
                                         <div class="d-flex align-items-center">
                                             <div class="rounded-circle profile-picture">
                                                 <!-- Profile Picture Image -->
-                                                <img src="@image" alt="Profile Picture" />
+                                                <img src="@user.profileImage" alt="Profile Picture" />
                                             </div>
                                             <div class="ms-3">
                                                 <h5 class="card-title">@post.Username</h5>
@@ -131,6 +131,7 @@
     [CascadingParameter]
     public Task<AuthenticationState> AuthState { get; set; }
 
+    private int numberOfPosts = 0;
     private string userName = string.Empty;
     private string name = string.Empty;
     private string postBody { get; set; } = string.Empty;
@@ -149,11 +150,10 @@
 
         try
         {
-            image = _config.GetValue<string>("api") + "/images/default.jpg";
-
-            // See all users in console
+            //image = _config.GetValue<string>("api") + user.profileImage;
 
             posts = await _postsService.GetPostsFromOneUser(userName);
+            numberOfPosts = posts.Count();
         }
         catch (Exception ex)
         {

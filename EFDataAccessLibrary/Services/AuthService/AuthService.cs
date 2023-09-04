@@ -40,7 +40,7 @@ public class AuthService : IAuthService
         user.email = request.Email;
         user.firstname = request.Firstname;
         user.lastname = request.Lastname;
-        user.profileImage = "/images/default.jpg";
+        user.profileImage = "https://localhost:7213" + "/images/default.jpg";
         user.Roles.Add(role);
 
         _logger.LogInformation("User tries to register using the following info: {username},{passwordHash},{email},{firstname},{lastname}"
