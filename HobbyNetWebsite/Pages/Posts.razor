@@ -1,5 +1,6 @@
 ﻿@page "/posts"
 @inject IPostsService _postsService
+@inject IUserService _userService
 @inject IConfiguration _config
 @inject NavigationManager navManager
 @attribute [Authorize]
@@ -29,7 +30,7 @@
                         <div class="d-flex align-items-center">
                             <div class="rounded-circle profile-picture">
                                 <!-- Profile Picture Image -->
-                                <img src="@image" alt="Profile Picture" />
+                                <img src="@post.image" alt="Profile Picture" />
                             </div>
                             <div class="ms-3">
                                 <h5 class="card-title">@post.Username</h5>
@@ -159,6 +160,7 @@
 
 @code {
     PostCreateDTO postCreateDTO = new();
+    User user = new();
 
     List<Post> posts = new();
     string image = string.Empty;
@@ -216,7 +218,7 @@
 
         try
         {
-            image = _config.GetValue<string>("api") + "/images/default.jpg";
+            //image = _config.GetValue<string>("api") + "/images/default.jpg";
 
             // Load initial set of posts using the new endpoint
             posts = await _postsService.GetSomePosts(currentPage);
@@ -335,12 +337,13 @@
 
     //====================================================================================
 
-    
+
 
     private void CreatePost()
     {
         postCreateDTO.Username = userName;
         postCreateDTO.HobbyName = hobbyName;
+        postCreateDTO.image = image;
         //postCreateDTO.body = postBody;
 
         if (string.IsNullOrEmpty(postCreateDTO.body))

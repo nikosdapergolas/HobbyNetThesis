@@ -13,4 +13,7 @@ public class PostCreateDTO
     [Required]
     [MaxLength(250)]
     public string body { get; set; }
+
+    [Required]
+    public string image { get; set; }
 }

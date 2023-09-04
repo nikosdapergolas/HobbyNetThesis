@@ -268,6 +268,9 @@ namespace EFDataAccessLibrary.Migrations
                     b.Property<DateTime>("timestamp")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("image")
+                        .HasColumnType("nvarchar(2000)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Posts");

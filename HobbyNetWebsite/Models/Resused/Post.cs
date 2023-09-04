@@ -22,6 +22,10 @@ public class Post
     public string body { get; set; }
 
     [Required]
+    [MaxLength(2000)]
+    public string image { get; set; }
+
+    [Required]
     public DateTime timestamp { get; set; }
 
     public List<Comment>? comments { get; set; }

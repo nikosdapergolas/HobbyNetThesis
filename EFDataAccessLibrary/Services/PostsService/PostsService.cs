@@ -147,6 +147,7 @@ public class PostsService : IPostsService
                 post.HobbyName = postCreateDTO.HobbyName;
                 post.body = postCreateDTO.body;
                 post.timestamp = DateTime.Now;
+                post.image = postCreateDTO.image;
 
                 await _context.AddAsync(post);
                 await _context.SaveChangesAsync();
