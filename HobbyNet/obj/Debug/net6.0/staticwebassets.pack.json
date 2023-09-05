@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\images\\logo.png"
     },
     {
+      "Id": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\images\\random_girl.png",
+      "PackagePath": "staticwebassets\\images\\random_girl.png"
+    },
+    {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.HobbyNet.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

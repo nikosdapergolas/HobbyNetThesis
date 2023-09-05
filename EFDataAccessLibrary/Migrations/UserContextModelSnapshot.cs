@@ -345,6 +345,29 @@ namespace EFDataAccessLibrary.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("EFDataAccessLibrary.Models.Followers", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
+
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                b.Property<string>("FollowerUsername")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
+
+                b.Property<string>("FolloweeUsername")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
+
+                b.HasKey("Id");
+
+                b.ToTable("Followers");
+            });
+
             modelBuilder.Entity("EFDataAccessLibrary.Models.Chat", b =>
                 {
                     b.HasOne("EFDataAccessLibrary.Models.User", "lastMessageSender")

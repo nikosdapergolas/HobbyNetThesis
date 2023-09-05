@@ -4,136 +4,135 @@ using EFDataAccessLibrary.Services.UsersService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HobbyNet.Controllers
+namespace HobbyNet.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class UsersController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UsersController : ControllerBase
+    private readonly IUsersService _usersService;
+
+    public UsersController(IUsersService usersService)
     {
-        private readonly IUsersService _usersService;
+        _usersService = usersService;
+    }
 
-        public UsersController(IUsersService usersService)
+    // GET: api/Users
+    [HttpGet]
+    [Authorize(Roles = "Admin,User")]
+    public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
+    {
+        var users = await _usersService.GetAllUsers();
+
+        if (users is not null)
         {
-            _usersService = usersService;
+            return Ok(users);
         }
-
-        // GET: api/Users
-        [HttpGet]
-        [Authorize(Roles = "Admin,User")]
-        public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
+        else
         {
-            var users = await _usersService.GetAllUsers();
-
-            if (users is not null)
-            {
-                return Ok(users);
-            }
-            else
-            {
-                return BadRequest();
-            }
+            return BadRequest();
         }
+    }
 
-        // GET: api/Users/Search/?searchTerm=abc
-        [HttpGet("Search")]
-        [Authorize]
-        public async Task<ActionResult<IEnumerable<User>>> SearchUsers(string searchTerm)
+    // GET: api/Users/Search/?searchTerm=abc
+    [HttpGet("Search")]
+    [Authorize]
+    public async Task<ActionResult<IEnumerable<User>>> SearchUsers(string searchTerm)
+    {
+        var users = await _usersService.SearchUsers(searchTerm);
+
+        if (users.Count().Equals(0))
         {
-            var users = await _usersService.SearchUsers(searchTerm);
-
-            if (users.Count().Equals(0))
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(users);
-            }            
+            return NotFound();
         }
-
-        // GET api/Users/Username
-        [HttpGet("Username/{username}")]
-        [Authorize]
-        public async Task<ActionResult<User>> GetOneUserByUsername(string username)
+        else
         {
-            var user = await _usersService.GetOneUserByUsername(username);
+            return Ok(users);
+        }            
+    }
 
-            if (user is not null)
-            {
-                return Ok(user);
-            }
-            else
-            {
-                return NotFound();
-            }
+    // GET api/Users/Username
+    [HttpGet("Username/{username}")]
+    [Authorize]
+    public async Task<ActionResult<User>> GetOneUserByUsername(string username)
+    {
+        var user = await _usersService.GetOneUserByUsername(username);
+
+        if (user is not null)
+        {
+            return Ok(user);
         }
-
-        // GET api/Users/5
-        [HttpGet("{id}")]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<User>> GetOneUser(int id)
+        else
         {
-            var user = await _usersService.GetOneUser(id);
-
-            if (user is not null)
-            {
-                return Ok(user);
-            }
-            else
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
+    }
 
-        // POST api/Users/RegisterAdmin/5
-        [HttpPost("RegisterAdmin")]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> CreateAdminUser(int id)
+    // GET api/Users/5
+    [HttpGet("{id}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<ActionResult<User>> GetOneUser(int id)
+    {
+        var user = await _usersService.GetOneUser(id);
+
+        if (user is not null)
         {
-            var response = await _usersService.CreateAdminUser(id);
-
-            if(response is not null)
-            {
-                return Ok(response);
-            }
-            else
-            {
-                return BadRequest();
-            }
+            return Ok(user);
         }
-
-        // PUT api/Users
-        [HttpPut]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> EditUser(UserEditDTO userEditDTO)
+        else
         {
-            var response = await _usersService.EditUser(userEditDTO);
-
-            if (response is not null)
-            {
-                return Ok(response);
-            }
-            else
-            {
-                return BadRequest();
-            }
+            return NotFound();
         }
+    }
 
-        // DELETE api/Users/5
-        [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> DeleteUser(int id)
+    // POST api/Users/RegisterAdmin/5
+    [HttpPost("RegisterAdmin")]
+    [Authorize(Roles = "Admin")]
+    public async Task<ActionResult> CreateAdminUser(int id)
+    {
+        var response = await _usersService.CreateAdminUser(id);
+
+        if(response is not null)
         {
-            var response = await _usersService.DeleteUser(id);
+            return Ok(response);
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
 
-            if (response is not null)
-            {
-                return Ok(response);
-            }
-            else
-            {
-                return BadRequest();
-            }
+    // PUT api/Users
+    [HttpPut]
+    [Authorize(Roles = "Admin")]
+    public async Task<ActionResult> EditUser(UserEditDTO userEditDTO)
+    {
+        var response = await _usersService.EditUser(userEditDTO);
+
+        if (response is not null)
+        {
+            return Ok(response);
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
+
+    // DELETE api/Users/5
+    [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<ActionResult> DeleteUser(int id)
+    {
+        var response = await _usersService.DeleteUser(id);
+
+        if (response is not null)
+        {
+            return Ok(response);
+        }
+        else
+        {
+            return BadRequest();
         }
     }
 }

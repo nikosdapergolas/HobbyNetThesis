@@ -12,6 +12,7 @@ using Serilog;
 using EFDataAccessLibrary.Services.UsersService;
 using EFDataAccessLibrary.Services.PostsService;
 using EFDataAccessLibrary.Services.HobbiesService;
+using EFDataAccessLibrary.Services.Followers2Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -89,6 +90,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IPostsService, PostsService>();
 builder.Services.AddScoped<IHobbiesService, HobbiesService>();
+builder.Services.AddScoped<IFollowersService, FollowersService>();
 //=============================================================================================
 
 var app = builder.Build();

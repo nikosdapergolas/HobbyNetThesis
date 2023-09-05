@@ -10,7 +10,8 @@ namespace EFDataAccessLibrary.DataAccess;
 
 public class DatabaseContext : DbContext
 {
-    public DatabaseContext(DbContextOptions options) : base(options) { }
+    public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -31,4 +32,5 @@ public class DatabaseContext : DbContext
     public DbSet<Chat> Chats { get; set; }
     public DbSet<Message> Messages { get; set; }
     public DbSet<ChatMember> ChatMembers { get; set; }
+    public DbSet<Followers> Followers { get; set; }
 }
