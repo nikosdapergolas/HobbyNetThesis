@@ -1,6 +1,7 @@
 ﻿@page "/profile"
 @inject IPostsService _postsService
 @inject IUserService _userSerice
+@inject IFollowersService _followersService
 @inject IConfiguration _config
 @inject NavigationManager navManager
 @attribute [Authorize]
@@ -32,11 +33,11 @@
                                 <p class="small text-muted mb-0">Posts</p>
                             </div>
                             <div class="px-3">
-                                <p class="mb-1 h5">1026</p>
+                                <p class="mb-1 h5">@followers.Count()</p>
                                 <p class="small text-muted mb-0">Followers</p>
                             </div>
                             <div>
-                                <p class="mb-1 h5">478</p>
+                                <p class="mb-1 h5">@following.Count()</p>
                                 <p class="small text-muted mb-0">Following</p>
                             </div>
                         </div>
@@ -126,6 +127,8 @@
 @code {
     User user = new();
     List<Post> posts = new();
+    IEnumerable<string> followers = new List<string>();
+    IEnumerable<string> following = new List<string>();
     string image = string.Empty;
 
     [CascadingParameter]
@@ -148,9 +151,16 @@
 
         user = await _userSerice.GetOneUserByUsername(userName);
 
+
         try
         {
             //image = _config.GetValue<string>("api") + user.profileImage;
+
+            // To see who follows this user
+            followers = await _followersService.GetFollowersOfOnePerson(userName);
+
+            // To see how many people this person follows
+            following = await _followersService.GetAllPeopleOneUserFollows(userName);
 
             posts = await _postsService.GetPostsFromOneUser(userName);
             numberOfPosts = posts.Count();

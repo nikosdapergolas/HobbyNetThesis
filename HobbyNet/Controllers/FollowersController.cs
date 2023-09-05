@@ -9,7 +9,7 @@ namespace HobbyNet.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-//[Authorize]
+[Authorize]
 public class FollowersController : ControllerBase
 {
     private readonly IFollowersService _followersService;
@@ -40,6 +40,22 @@ public class FollowersController : ControllerBase
     public async Task<ActionResult<IEnumerable<string>>> GetFollowersOfOnePerson(string username)
     {
         var followers = await _followersService.GetFollowersOfOnePerson(username);
+
+        if (followers is not null)
+        {
+            return Ok(followers);
+        }
+        else
+        {
+            return NotFound();
+        }
+    }
+
+    // GET: api/Followers/UserFollows/
+    [HttpGet("UserFollows")]
+    public async Task<ActionResult<IEnumerable<string>>> GetAllPeopleOneUserFollows(string username)
+    {
+        var followers = await _followersService.GetAllPeopleOneUserFollows(username);
 
         if (followers is not null)
         {
