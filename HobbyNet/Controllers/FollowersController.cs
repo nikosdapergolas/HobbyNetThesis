@@ -69,7 +69,7 @@ public class FollowersController : ControllerBase
 
     // POST: api/Followers/follow
     [HttpPost("follow")]
-    public async Task<ActionResult<IEnumerable<Followers>>> FollowAPerson(FollowersDTO followersDTO)
+    public async Task<ActionResult<Followers>> FollowAPerson(FollowersDTO followersDTO)
     {
         var followRequest = await _followersService.FollowAPerson(followersDTO);
 
@@ -84,8 +84,8 @@ public class FollowersController : ControllerBase
     }
 
     // DELETE: api/Followers/unfollow
-    [HttpDelete("unfollow")]
-    public async Task<ActionResult<IEnumerable<Followers>>> UnfollowAPerson(FollowersDTO followersDTO)
+    [HttpPost("unfollow")]
+    public async Task<ActionResult<Followers>> UnfollowAPerson(FollowersDTO followersDTO)
     {
         var followRequest = await _followersService.UnfollowAPerson(followersDTO);
 

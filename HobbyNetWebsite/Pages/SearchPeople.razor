@@ -46,6 +46,12 @@
                                     <button id="follow_button" class="btn btn-primary" @onclick="@(e => ActionToDo("follow", user.username))">Follow</button>
                                 }
                             </div>
+                            @if (actionInProgress)
+                            {
+                                <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            }
                         </div>
                     </div>
                 }
@@ -57,6 +63,8 @@
 @code {
     List<User> users = new();
     List<User> filteredUsers = new();
+    FollowersDTO followersDTO;
+    bool actionInProgress;
 
 
     IEnumerable<string> followers = new List<string>();
@@ -71,6 +79,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        actionInProgress = false;
         List<User> filteredUsers = new();
         var authState = await AuthState;
 
@@ -108,10 +117,62 @@
         if (action.Equals("follow") || action.Equals("follow_back"))
         {
             // Here we call the service to follow the chosen user
+            actionInProgress = true;
+
+            followersDTO = new();
+            followersDTO.FollowerUsername = username; // Username of the chosen user to follow
+            followersDTO.FolloweeUsername = userName; // Bad naming, but this is the username of the logged in user
+
+            string result = string.Empty;
+            try
+            {
+                result = _followersService.FollowAPerson(followersDTO).ToString();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            finally
+            {
+                actionInProgress = false;
+            }
+
+            // Reload the page if everything went down smoothly
+            if (!string.IsNullOrEmpty(result))
+            {
+                navManager.NavigateTo(navManager.Uri, forceLoad: true);
+            }
         }
         else
         {
             // Here we call the service to unfollow the chosen user
+            actionInProgress = true;
+
+            followersDTO = new();
+            followersDTO.FollowerUsername = username; // Username of the chosen user to unfollow
+            followersDTO.FolloweeUsername = userName; // Bad naming, but this is the username of the logged in user
+
+            try
+            {
+                var result = _followersService.UnfollowAPerson(followersDTO);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            finally
+            {
+                actionInProgress = false;
+
+                // Reload the page if everything went down smoothly
+                navManager.NavigateTo(navManager.Uri, forceLoad: true);
+            }
+
+            //if (!string.IsNullOrEmpty(result))
+            //{
+            //}
         }
     }
 }
