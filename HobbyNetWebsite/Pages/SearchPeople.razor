@@ -35,15 +35,15 @@
                                 @*<p>Followers: @user.FollowersCount</p>*@
                                 @if (following.Contains(user.username.Trim()))
                                 {
-                                    <button class="btn btn-danger">Unfollow</button>
+                                    <button id="unfollow_button" class="btn btn-danger" @onclick="@(e => ActionToDo("unfollow", user.username))">Unfollow</button>
                                 }
                                 else if (!following.Contains(user.username) && followers.Contains(user.username))
                                 {
-                                    <button class="btn btn-primary">Follow Back</button>
+                                    <button id="follow_back_button" class="btn btn-primary" @onclick="@(e => ActionToDo("follow_back", user.username))">Follow Back</button>
                                 }
                                 else
                                 {
-                                    <button class="btn btn-primary">Follow</button>
+                                    <button id="follow_button" class="btn btn-primary" @onclick="@(e => ActionToDo("follow", user.username))">Follow</button>
                                 }
                             </div>
                         </div>
@@ -103,8 +103,15 @@
         filteredUsers = users.Where(u => u.username.StartsWith(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
     }
 
-    void Action()
+    void ActionToDo(string action, string username)
     {
-        
+        if (action.Equals("follow") || action.Equals("follow_back"))
+        {
+            // Here we call the service to follow the chosen user
+        }
+        else
+        {
+            // Here we call the service to unfollow the chosen user
+        }
     }
 }
