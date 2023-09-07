@@ -1,6 +1,7 @@
 ﻿@page "/SearchPeople"
 @inject IPostsService _postsService
 @inject IUserService _userService
+@inject IFollowersService _followersService
 @inject IConfiguration _config
 @inject NavigationManager navManager
 @attribute [Authorize]
@@ -11,21 +12,39 @@
         <div class="mb-3">
             <input type="text" class="form-control search-input" placeholder="Search for people..." @bind-value="@searchTerm" @oninput="ChangeSearchTermText">
         </div>
-        <button class="btn search-button" @onclick="SearchUsers">Search</button>
+        @*<button class="btn search-button" @onclick="SearchUsers(searchTerm)">Search</button>*@
         <div class="search-results">
             @if (searchTerm.Length > 0)
             {
                 @foreach (var user in filteredUsers)
                 {
+                    if (user.username.Equals(userName))
+                    {
+                        // Do not show the user himself
+                        continue;
+                    }
                     <div class="user-card">
                         <div class="row">
                             <div class="col-3">
-                                <img src="@user.profileImage" alt="User">
+                                <img src="@user.profileImage" 
+                                     alt="User" 
+                                     style="width: 100px; height:100px; z-index: 1;">
                             </div>
                             <div class="col-9">
                                 <h5>@user.username</h5>
                                 @*<p>Followers: @user.FollowersCount</p>*@
-                                <button class="btn btn-primary">Follow</button>
+                                @if (following.Contains(user.username.Trim()))
+                                {
+                                    <button class="btn btn-danger">Unfollow</button>
+                                }
+                                else if (!following.Contains(user.username) && followers.Contains(user.username))
+                                {
+                                    <button class="btn btn-primary">Follow Back</button>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-primary">Follow</button>
+                                }
                             </div>
                         </div>
                     </div>
@@ -38,6 +57,10 @@
 @code {
     List<User> users = new();
     List<User> filteredUsers = new();
+
+
+    IEnumerable<string> followers = new List<string>();
+    IEnumerable<string> following = new List<string>();
 
     string searchTerm = string.Empty;
 
@@ -55,6 +78,12 @@
 
         try
         {
+            // To see who follows this user
+            followers = await _followersService.GetFollowersOfOnePerson(userName);
+
+            // To see how many people this user follows
+            following = await _followersService.GetAllPeopleOneUserFollows(userName);
+
             users = await _userService.GetUsers();
         }
         catch (Exception ex)

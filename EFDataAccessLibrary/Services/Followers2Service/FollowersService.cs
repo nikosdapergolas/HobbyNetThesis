@@ -58,6 +58,12 @@ public class FollowersService : IFollowersService
                 .Select(f => f.FolloweeUsername)
                 .ToListAsync();
 
+            // Removing all white spaces
+            for (int i = 0; i < followers.Count(); i++)
+            {
+                followers[i] = followers[i].Trim();
+            }
+
             // Returning the list of followers if he has any
             if(followers.Count > 0)
             {
@@ -94,6 +100,12 @@ public class FollowersService : IFollowersService
                 .Where(f => f.FolloweeUsername.Trim() == username)
                 .Select(f => f.FollowerUsername)
                 .ToListAsync();
+
+            // Removing all white spaces
+            for (int i = 0; i < followers.Count(); i++)
+            {
+                followers[i] = followers[i].Trim();
+            }
 
             // Returning the list of followers if he has any
             if (followers.Count > 0)
