@@ -1,4 +1,5 @@
-﻿using HobbyNetWebsite.Models.Resused;
+﻿using HobbyNetWebsite.Models;
+using HobbyNetWebsite.Models.Resused;
 using System.Net.Http.Json;
 
 namespace HobbyNetWebsite.Services;
@@ -27,7 +28,7 @@ public class UserService : IUserService
         catch (Exception ex)
         {
             await Console.Out.WriteLineAsync(ex.Message);
-            return null;
+            return null!;
         }
     }
 
@@ -44,7 +45,24 @@ public class UserService : IUserService
         catch (Exception ex)
         {
             await Console.Out.WriteLineAsync(ex.Message);
-            return null;
+            return null!;
+        }
+    }
+
+    public async Task<string> EditUserProfile(UserEditDTO userEditDTO)
+    {
+        string userEditEndpoint = _config["editUserProfile"];
+
+        try
+        {
+            var result = await _client.PutAsJsonAsync(userEditEndpoint,userEditDTO);
+
+            return result.ToString();
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null!;
         }
     }
 }
