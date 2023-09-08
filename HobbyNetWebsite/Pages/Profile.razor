@@ -116,6 +116,16 @@
                                     </div>
                                 </div>
                             }
+
+                            @if (posts.Count.Equals(0))
+                            {
+                                <div class="container d-flex justify-content-center align-items-center vh-10">
+                                    <div class="text-center">
+                                        <h1>No posts were found from this user</h1>
+                                    </div>
+                                </div>
+
+                            }
                         </div>
                     </div>
                 </div>

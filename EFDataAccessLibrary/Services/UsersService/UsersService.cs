@@ -127,7 +127,10 @@ public class UsersService : IUsersService
 
     public async Task<string> EditUser(UserEditDTO userEditDTO)
     {
-        var user = await _context.Users.FindAsync(userEditDTO.Id);
+        //var user = await _context.Users.FindAsync(userEditDTO.Id);
+        var user = await _context.Users
+            .Where(u => u.username.Equals(userEditDTO.username))
+            .FirstOrDefaultAsync();
 
         if (user == null)
         {
@@ -138,7 +141,7 @@ public class UsersService : IUsersService
             try
             {
                 await _context.Users
-                    .Where(i => i.Id.Equals(userEditDTO.Id))
+                    .Where(u => u.username.Equals(userEditDTO.username))
                     .ExecuteUpdateAsync(s => s
                         .SetProperty(f => f.firstname, f => userEditDTO.firstname)
                         .SetProperty(l => l.lastname, f => userEditDTO.lastname)
@@ -146,7 +149,7 @@ public class UsersService : IUsersService
                         .SetProperty(u => u.username, u => userEditDTO.username)
                     );
 
-                return $"User with id {userEditDTO.Id} has been edited Successfully";
+                return $"User with username {userEditDTO.username} has been edited Successfully";
             }
             catch (Exception ex)
             {

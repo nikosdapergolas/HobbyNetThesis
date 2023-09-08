@@ -9,7 +9,7 @@ namespace EFDataAccessLibrary.Models.DataTransferObjects;
 
 public class UserEditDTO
 {
-    public int Id { get; set; }
+    //public int Id { get; set; }
 
     [MaxLength(100)]
     public string username { get; set; }

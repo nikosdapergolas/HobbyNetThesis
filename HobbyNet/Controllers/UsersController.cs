@@ -104,7 +104,7 @@ public class UsersController : ControllerBase
 
     // PUT api/Users
     [HttpPut]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public async Task<ActionResult> EditUser(UserEditDTO userEditDTO)
     {
         var response = await _usersService.EditUser(userEditDTO);
