@@ -137,8 +137,41 @@
     </div>
 </section>
 
-<!--Modal-->
+<!--Modal for profile Edit-->
 <div class="modal fade" id="postModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="postModalLabel">Post your Thoughts @name</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <EditForm Model="userEditDTO" OnValidSubmit="EditUser">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <InputText class="form-control" @bind-Value="userEditDTO.email" id="email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname">First Name</label>
+                        <InputText class="form-control" @bind-Value="userEditDTO.firstname" id="firstname" />
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Last Name</label>
+                        <InputText class="form-control" @bind-Value="userEditDTO.lastname" id="lastname" />
+                    </div>
+                    <br />
+                    <br />
+                    <div class="text-center">
+                        <button class="btn btn-primary btn-lg" type="submit">Edit</button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal for uploading new profile picture-->
+<div class="modal fade" id="pictureModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="pictureModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">

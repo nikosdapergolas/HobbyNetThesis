@@ -28,4 +28,8 @@
     <None Include="wwwroot\images\default.jpg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\profile_pictures\" />
+  </ItemGroup>
+
 </Project>
