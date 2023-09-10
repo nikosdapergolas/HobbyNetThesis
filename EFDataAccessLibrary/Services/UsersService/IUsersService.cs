@@ -1,5 +1,6 @@
 ﻿using EFDataAccessLibrary.Models;
 using EFDataAccessLibrary.Models.DataTransferObjects;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,6 @@ public interface IUsersService
     public Task<string> CreateAdminUser(int id);
     public Task<string> EditUser(UserEditDTO userEditDTO);
     public Task<string> DeleteUser(int id);
+    public Task<UploadResult> UploadFile(IFormFile file);
 
 }

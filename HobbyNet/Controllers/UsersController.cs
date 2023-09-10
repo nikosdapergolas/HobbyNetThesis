@@ -169,30 +169,41 @@ public class UsersController : ControllerBase
     [Authorize]
     public async Task<ActionResult<UploadResult>> UploadFile(IFormFile file)
     {
-        UploadResult uploadResult = new();
-        string trustedFileNameForFileStorage = string.Empty;
-        string untrustedFileName = file.Name;
-        uploadResult.FileName = untrustedFileName;
-        var trustedFileNameForDisplay = WebUtility.HtmlEncode(untrustedFileName);
+        var response = _usersService.UploadFile(file);
 
-        //trustedFileNameForFileStorage = Path.GetRandomFileName();
-        //----------------------------------------------------------
-        //trustedFileNameForFileStorage = Path.ChangeExtension(
-        //        Path.GetRandomFileName(),
-        //        Path.GetExtension(file.Name));
-        //----------------------------------------------------------
-        var path = Path.Combine(
-            _config.GetValue<string>("FileStorage"),
-            _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.GivenName) + // This is the logged in user's username
-            "_" +
-            //trustedFileNameForFileStorage);
-            file.FileName);
+        if (response is not null)
+        {
+            return Ok(response);
+        }
+        else
+        {
+            return BadRequest(response);
+        }
 
-        await using FileStream fs = new(path, FileMode.Create);
-        await file.CopyToAsync(fs);
+        //UploadResult uploadResult = new();
+        //string trustedFileNameForFileStorage = string.Empty;
+        //string untrustedFileName = file.Name;
+        //uploadResult.FileName = untrustedFileName;
+        //var trustedFileNameForDisplay = WebUtility.HtmlEncode(untrustedFileName);
 
-        uploadResult.StoredFileName = file.FileName;
+        ////trustedFileNameForFileStorage = Path.GetRandomFileName();
+        ////----------------------------------------------------------
+        ////trustedFileNameForFileStorage = Path.ChangeExtension(
+        ////        Path.GetRandomFileName(),
+        ////        Path.GetExtension(file.Name));
+        ////----------------------------------------------------------
+        //var path = Path.Combine(
+        //    _config.GetValue<string>("FileStorage"),
+        //    _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.GivenName) + // This is the logged in user's username
+        //    "_" +
+        //    //trustedFileNameForFileStorage);
+        //    file.FileName);
 
-        return Ok(uploadResult);
+        //await using FileStream fs = new(path, FileMode.Create);
+        //await file.CopyToAsync(fs);
+
+        //uploadResult.StoredFileName = file.FileName;
+
+        //return Ok(uploadResult);
     }
 }

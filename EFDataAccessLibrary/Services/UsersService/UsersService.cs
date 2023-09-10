@@ -1,11 +1,16 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
 using EFDataAccessLibrary.Models.DataTransferObjects;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,10 +19,17 @@ namespace EFDataAccessLibrary.Services.UsersService;
 public class UsersService : IUsersService
 {
     private readonly DatabaseContext _context;
+    private readonly IConfiguration _config;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public UsersService(DatabaseContext context)
+    public UsersService(
+        DatabaseContext context,
+        IConfiguration config,
+        IHttpContextAccessor httpContextAccessor)
     {
         _context = context;
+        _config = config;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     public async Task<IEnumerable<User>> GetAllUsers()
@@ -183,5 +195,28 @@ public class UsersService : IUsersService
                 return null;
             }
         }
+    }
+
+    public async Task<UploadResult> UploadFile(IFormFile file)
+    {
+        UploadResult uploadResult = new();
+        uploadResult.FileName = file.Name;
+
+        string newFileName = Path.ChangeExtension(
+            Path.GetRandomFileName(),
+            Path.GetExtension(file.FileName));
+
+        var path = Path.Combine(
+            _config.GetValue<string>("FileStorage"),
+            _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.GivenName) + // This is the logged in user's username
+            "_" +
+            newFileName);
+
+        await using FileStream fs = new(path, FileMode.Create);
+        await file.CopyToAsync(fs);
+
+        uploadResult.StoredFileName = newFileName;
+
+        return uploadResult;
     }
 }
