@@ -1,0 +1,47 @@
+﻿@page "/FileUpload"
+@using System.Net.Http.Headers;
+@inject HttpClient _http
+
+<PageTitle>File Upload</PageTitle>
+
+<h1>Upload Files</h1>
+
+<InputFile class="form-control" OnChange="@OnInputFileChange" />
+
+<ul>
+    <li>@fileName</li>
+</ul>
+
+@code {
+    private int maxAllowedFiles = 1;
+    private long maxFileSize = 1024 * 1024 * 8; // Represents 8MB
+    private string fileName = string.Empty;
+    private UploadResult uploadResult = new();
+
+    private async Task OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        using var content = new MultipartFormDataContent();
+
+        foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
+        {
+            var fileContent = new StreamContent(file.OpenReadStream(maxFileSize));
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+
+            fileName = file.Name;
+
+            content.Add(
+                content: fileContent,
+                name: "\"file\"",
+                fileName: file.Name
+            );
+        }
+
+        var response = await _http.PostAsync("api/Users/uploadImageFile", content);
+        var newUploadResult = await response.Content.ReadFromJsonAsync<UploadResult>();
+
+        if(newUploadResult is not null)
+        {
+            uploadResult = newUploadResult;
+        }
+    }
+}

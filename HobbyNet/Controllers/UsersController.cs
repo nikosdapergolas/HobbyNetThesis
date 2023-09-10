@@ -3,6 +3,8 @@ using EFDataAccessLibrary.Models.DataTransferObjects;
 using EFDataAccessLibrary.Services.UsersService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Security.Claims;
 
 namespace HobbyNet.Controllers;
 
@@ -11,10 +13,20 @@ namespace HobbyNet.Controllers;
 public class UsersController : ControllerBase
 {
     private readonly IUsersService _usersService;
+    private readonly IWebHostEnvironment _webHostEnvironment;
+    private readonly IConfiguration _config;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public UsersController(IUsersService usersService)
+    public UsersController(
+        IUsersService usersService,
+        IWebHostEnvironment webHostEnvironment,
+        IConfiguration config, 
+        IHttpContextAccessor httpContextAccessor)
     {
         _usersService = usersService;
+        _webHostEnvironment = webHostEnvironment;
+        _config = config;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     // GET: api/Users
@@ -134,5 +146,53 @@ public class UsersController : ControllerBase
         {
             return BadRequest();
         }
+    }
+
+    [HttpPost("TestUploadImageFile")]
+    [Authorize]
+    public async Task<ActionResult<string>> TestUploadFile(IFormFile file)
+    {
+        var path = Path.Combine(
+            //_config.GetValue<string>("FileStorage"),
+            "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\images\\profile_pictures",
+            _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.GivenName) + // This is the logged in user's username
+            "_" +
+            file.Name);
+
+        await using FileStream fs = new(path, FileMode.Create);
+        await file.CopyToAsync(fs);
+
+        return Ok(path);
+    }
+
+        [HttpPost("uploadImageFile")]
+    [Authorize]
+    public async Task<ActionResult<UploadResult>> UploadFile(IFormFile file)
+    {
+        UploadResult uploadResult = new();
+        string trustedFileNameForFileStorage = string.Empty;
+        string untrustedFileName = file.Name;
+        uploadResult.FileName = untrustedFileName;
+        var trustedFileNameForDisplay = WebUtility.HtmlEncode(untrustedFileName);
+
+        //trustedFileNameForFileStorage = Path.GetRandomFileName();
+        //----------------------------------------------------------
+        //trustedFileNameForFileStorage = Path.ChangeExtension(
+        //        Path.GetRandomFileName(),
+        //        Path.GetExtension(file.Name));
+        //----------------------------------------------------------
+        var path = Path.Combine(
+            _config.GetValue<string>("FileStorage"),
+            _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.GivenName) + // This is the logged in user's username
+            "_" +
+            //trustedFileNameForFileStorage);
+            file.FileName);
+
+        await using FileStream fs = new(path, FileMode.Create);
+        await file.CopyToAsync(fs);
+
+        uploadResult.StoredFileName = file.FileName;
+
+        return Ok(uploadResult);
     }
 }

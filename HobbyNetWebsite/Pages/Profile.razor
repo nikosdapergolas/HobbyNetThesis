@@ -11,11 +11,33 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-lg-9 col-xl-7">
                 <div class="card">
-                    <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
-                        <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+                    <div class="rounded-top text-white d-flex flex-row position-relative" style="background-color: #000; height:200px;">
+                        <div class="ms-4 mt-5 d-flex flex-column position-relative" style="width: 150px;">
+                            
+                            <!-- Profile Picture-->
+
                             <img src="@user.profileImage"
-                                 alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
-                                 style="width: 150px; height:200px; z-index: 1;">
+                            alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                            style="width: 150px; height:200px; z-index: 1;">
+
+                            <!-- Change Profile Picture-->
+
+                            @*<button type="button" class="btn btn-outline-dark"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#pictureModal"
+                                    data-mdb-ripple-color="dark"
+                                    style="z-index: 1;">
+                                Change picture
+                            </button>*@
+                            <button type="button" class="btn btn-outline-dark"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#pictureModal"
+                                    data-mdb-ripple-color="dark"
+                                    style="z-index: 1;">
+                                Change Picture
+                            </button>
+
+                            <!-- Edit Profile Button -->
                             <button type="button" class="btn btn-outline-dark" 
                                     data-bs-toggle="modal" 
                                     data-bs-target="#postModal"
@@ -45,6 +67,10 @@
                             </div>
                         </div>
                     </div>
+
+                    <br />
+                    <br />
+
                     <div class="card-body p-4 text-black">
                         <div class="mb-5">
                             <p class="lead fw-normal mb-1">About</p>
@@ -142,7 +168,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="postModalLabel">Post your Thoughts @name</h5>
+                <h5 class="modal-title" id="postModalLabel">Update your profile</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -175,35 +201,43 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="postModalLabel">Post your Thoughts @name</h5>
+                <h5 class="modal-title" id="postModalLabel">Change your profile picture</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <EditForm Model="userEditDTO" OnValidSubmit="EditUser">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <InputText class="form-control" @bind-Value="userEditDTO.email" id="email" />
-                    </div>
-                    <div class="form-group">
-                        <label for="firstname">First Name</label>
-                        <InputText class="form-control" @bind-Value="userEditDTO.firstname" id="firstname" />
-                    </div>
-                    <div class="form-group">
-                        <label for="lastname">Last Name</label>
-                        <InputText class="form-control" @bind-Value="userEditDTO.lastname" id="lastname" />
-                    </div>
-                    <br />
-                    <br />
-                    <div class="text-center">
-                        <button class="btn btn-primary btn-lg" type="submit">Edit</button>
-                    </div>
-                </EditForm>
+
+                <h1>Upload a new picture</h1>
+
+                <InputFile OnChange="@LoadFile" class="form-control" accept=".png,.jpg,.jpeg" />
+
+
+               @if (errors.Count > 0)
+                {
+                    <h2>Errors</h2>
+                    <ul class="text-danger">
+                        @foreach (var error in errors)
+                        {
+                            <li>@error</li>
+                        }
+                    </ul>
+                }
+
             </div>
         </div>
     </div>
 </div>
 
 @code {
+    //----------------------------------------------
+    // Picture upload section
+
+    private long maxFileSize = 1024 * 1024 * 8; // Represents 8MB
+    private int maxAllowedFiles = 1;
+    private List<string> errors = new();
+    private IBrowserFile? file;
+
+    //----------------------------------------------
+
     User user = new();
     List<Post> posts = new();
     UserEditDTO userEditDTO = new();
@@ -271,4 +305,129 @@
             navManager.NavigateTo(navManager.Uri, forceLoad: true);
         }
     }
+
+    private async Task LoadFile(InputFileChangeEventArgs e)
+    {
+        errors.Clear();
+
+        foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
+        {
+            try
+            {
+                // In this Part I will try to protect my Project's code
+                // by renaming the file the user wanted to upload
+                // but still using the same file extension he chose (png,jpg, etc..)
+
+                string newFileName = Path.ChangeExtension(
+                    Path.GetRandomFileName(),
+                    Path.GetExtension(file.Name));
+
+                string path = Path.Combine(
+                    _config.GetValue<string>("FileStorage")!,
+                    userName,
+                    newFileName);
+
+                string relativePath = Path.Combine(userName, newFileName);
+
+                // This part makes sure that in the target Directory, there is
+                // a folder named after the username of the logged in user.
+                // If not, then it creates it.
+                Directory.CreateDirectory(Path.Combine(
+                    _config.GetValue<string>("FileStorage")!,
+                    userName));
+
+                await using FileStream fs = new(path, FileMode.Create);
+                await file.OpenReadStream(maxFileSize).CopyToAsync(fs);
+            }
+            catch (Exception ex)
+            {
+                errors.Add($"File {file.Name} Error: {ex.Message}");
+            }
+        }
+    }
+
+    //bool isUploading = false;
+
+    //private void LoadFiles(InputFileChangeEventArgs e)
+    //{
+    //    file = e.File;
+    //}
+
+    //private async Task SubmitForm()
+    //{
+    //    try
+    //    {
+    //        string relativePath = await CaptureFile();
+    //        newCustomer.FileName = relativePath;
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        errors.Add($"Error: {ex.Message}");
+    //    }
+    //}
+
+    ////private async Task UploadNewPicture(InputFileChangeEventArgs e)
+    ////{
+    ////    isUploading = true;
+    ////    StateHasChanged(); // Trigger a re-render to show the spinner
+
+    ////    foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
+    ////    {
+    ////        try
+    ////        {
+    ////            // ... (Your file handling code)
+    ////        }
+    ////        catch (Exception ex)
+    ////        {
+    ////            errors.Add($"File {file.Name} Error: {ex.Message}");
+    ////        }
+    ////    }
+
+    ////    isUploading = false;
+    ////    StateHasChanged(); // Hide the spinner
+    ////}
+
+    //private async Task<string> CaptureFile()
+    //{
+    //    if (file is null)
+    //    {
+    //        return "";
+    //    }
+
+    //    try
+    //    {
+    //        // Here we rename the files to avoid naming conflicts
+    //        string newFileName = Path.ChangeExtension(
+    //            Path.GetRandomFileName(),
+    //            Path.GetExtension(file.Name));
+
+    //        //======================================================
+    //        var result = await _config.PostAsJsonAsync(unfollowEndpoint, followersDTO);
+    //        //======================================================
+
+    //        // Whenever a logged in user gives me a file, We create a folder for that logged in user,
+    //        // and then put the file n that folder
+    //        // (Here we pretend i am logged in as NikosDap (Normallythere goes the name of the Authenticated logged in user))
+    //        // First Param is the folder in my AppSettings that shows the "empty" folder where i will be saving the images
+    //        //string path = Path.Combine(config.GetValue<string>("FileStorage")!,
+    //        //    "NikosDap",
+    //        //    newFileName);
+
+    //        //string relativePath = Path.Combine("NikosDap", newFileName);
+
+    //        //Directory.CreateDirectory(Path.Combine(
+    //        //    config.GetValue<string>("FileStorage")!,
+    //        //    "NikosDap"));
+
+    //        //await using FileStream fs = new(path, FileMode.Create);
+    //        //await file.OpenReadStream(maxFileSize).CopyToAsync(fs);
+
+    //        //return relativePath;
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        errors.Add($"File: {file.Name} Error: {ex.Message}");
+    //        throw;
+    //    }
+    //}
 }
