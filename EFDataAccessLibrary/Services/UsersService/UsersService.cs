@@ -199,6 +199,7 @@ public class UsersService : IUsersService
 
     public async Task<UploadResult> UploadFile(IFormFile file)
     {
+        string username = _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.GivenName);
         UploadResult uploadResult = new();
         uploadResult.FileName = file.Name;
 
@@ -208,7 +209,8 @@ public class UsersService : IUsersService
 
         var path = Path.Combine(
             _config.GetValue<string>("FileStorage"),
-            _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.GivenName) + // This is the logged in user's username
+            username +
+            //_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.GivenName) + // This is the logged in user's username
             "_" +
             newFileName);
 
@@ -216,6 +218,18 @@ public class UsersService : IUsersService
         await file.CopyToAsync(fs);
 
         uploadResult.StoredFileName = newFileName;
+
+        await _context.Users
+                    .Where(u => u.username.Equals(username))
+                    .ExecuteUpdateAsync(s => s
+                        .SetProperty(
+                            pi => pi.profileImage, 
+                            pi => _config.GetValue<string>(
+                                    "onlineFileStorage") + 
+                                    username + 
+                                    "_" + 
+                                    newFileName)
+                    );
 
         return uploadResult;
     }

@@ -1,9 +1,11 @@
 ﻿@page "/profile"
+@using System.Net.Http.Headers;
 @inject IPostsService _postsService
 @inject IUserService _userSerice
 @inject IFollowersService _followersService
 @inject IConfiguration _config
 @inject NavigationManager navManager
+@inject HttpClient _http
 @attribute [Authorize]
 
 <section class="h-100 gradient-custom-2">
@@ -16,9 +18,13 @@
                             
                             <!-- Profile Picture-->
 
-                            <img src="@user.profileImage"
+                            @*<img src="@user.profileImage"
                             alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
-                            style="width: 150px; height:200px; z-index: 1;">
+                            style="width: 150px; height:200px; z-index: 1;">*@
+
+                            <div class="ratio ratio-1x1">
+                                <img src="@user.profileImage" alt="Generic placeholder image" class="img-fluid img-thumbnail">
+                            </div>
 
                             <!-- Change Profile Picture-->
 
@@ -208,7 +214,7 @@
 
                 <h1>Upload a new picture</h1>
 
-                <InputFile OnChange="@LoadFile" class="form-control" accept=".png,.jpg,.jpeg" />
+                <InputFile OnChange="@OnInputFileChange" class="form-control" accept=".png,.jpg,.jpeg" />
 
 
                @if (errors.Count > 0)
@@ -222,6 +228,11 @@
                     </ul>
                 }
 
+                <br />
+                <br />
+
+                <button @onclick="@refreshPage" class="btn btn-primary">Upload</button>
+
             </div>
         </div>
     </div>
@@ -234,7 +245,9 @@
     private long maxFileSize = 1024 * 1024 * 8; // Represents 8MB
     private int maxAllowedFiles = 1;
     private List<string> errors = new();
-    private IBrowserFile? file;
+    private string fileName = string.Empty;
+    private UploadResult uploadResult = new();
+    //private IBrowserFile? file;
 
     //----------------------------------------------
 
@@ -346,88 +359,35 @@
         }
     }
 
-    //bool isUploading = false;
+    private async Task OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        using var content = new MultipartFormDataContent();
 
-    //private void LoadFiles(InputFileChangeEventArgs e)
-    //{
-    //    file = e.File;
-    //}
+        foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
+        {
+            var fileContent = new StreamContent(file.OpenReadStream(maxFileSize));
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
 
-    //private async Task SubmitForm()
-    //{
-    //    try
-    //    {
-    //        string relativePath = await CaptureFile();
-    //        newCustomer.FileName = relativePath;
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        errors.Add($"Error: {ex.Message}");
-    //    }
-    //}
+            fileName = file.Name;
 
-    ////private async Task UploadNewPicture(InputFileChangeEventArgs e)
-    ////{
-    ////    isUploading = true;
-    ////    StateHasChanged(); // Trigger a re-render to show the spinner
+            content.Add(
+                content: fileContent,
+                name: "\"file\"",
+                fileName: file.Name
+            );
+        }
 
-    ////    foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
-    ////    {
-    ////        try
-    ////        {
-    ////            // ... (Your file handling code)
-    ////        }
-    ////        catch (Exception ex)
-    ////        {
-    ////            errors.Add($"File {file.Name} Error: {ex.Message}");
-    ////        }
-    ////    }
+        var response = await _http.PostAsync(_config.GetValue<string>("uploadImageFile"), content);
+        var newUploadResult = await response.Content.ReadFromJsonAsync<UploadResult>();
 
-    ////    isUploading = false;
-    ////    StateHasChanged(); // Hide the spinner
-    ////}
+        if (newUploadResult is not null)
+        {
+            uploadResult = newUploadResult;
+        }
+    }
 
-    //private async Task<string> CaptureFile()
-    //{
-    //    if (file is null)
-    //    {
-    //        return "";
-    //    }
-
-    //    try
-    //    {
-    //        // Here we rename the files to avoid naming conflicts
-    //        string newFileName = Path.ChangeExtension(
-    //            Path.GetRandomFileName(),
-    //            Path.GetExtension(file.Name));
-
-    //        //======================================================
-    //        var result = await _config.PostAsJsonAsync(unfollowEndpoint, followersDTO);
-    //        //======================================================
-
-    //        // Whenever a logged in user gives me a file, We create a folder for that logged in user,
-    //        // and then put the file n that folder
-    //        // (Here we pretend i am logged in as NikosDap (Normallythere goes the name of the Authenticated logged in user))
-    //        // First Param is the folder in my AppSettings that shows the "empty" folder where i will be saving the images
-    //        //string path = Path.Combine(config.GetValue<string>("FileStorage")!,
-    //        //    "NikosDap",
-    //        //    newFileName);
-
-    //        //string relativePath = Path.Combine("NikosDap", newFileName);
-
-    //        //Directory.CreateDirectory(Path.Combine(
-    //        //    config.GetValue<string>("FileStorage")!,
-    //        //    "NikosDap"));
-
-    //        //await using FileStream fs = new(path, FileMode.Create);
-    //        //await file.OpenReadStream(maxFileSize).CopyToAsync(fs);
-
-    //        //return relativePath;
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        errors.Add($"File: {file.Name} Error: {ex.Message}");
-    //        throw;
-    //    }
-    //}
+    private async Task refreshPage()
+    {
+        navManager.NavigateTo(navManager.Uri, forceLoad: true);
+    }
 }
