@@ -83,8 +83,31 @@ public class PostsService : IPostsService
     {
         string deletePostEndpoint = _config["deletePostEndpoint"];
 
-        var result = await _client.DeleteAsync(deletePostEndpoint + "/" + postId);
+        try
+        {
+            var result = await _client.DeleteAsync(deletePostEndpoint + "/" + postId);
 
-        return result.ToString();
+            return result.ToString();
+        }
+        catch (Exception ex)
+        {
+            return ex.Message;
+        }
+    }
+
+    public async Task<string> EditPost(PostEditDTO postEditDTO)
+    {
+        string editPostEndpoint = _config["deletePostEndpoint"];
+
+        try
+        {
+            var result = await _client.PutAsJsonAsync(editPostEndpoint, postEditDTO);
+
+            return result.ToString();
+        }
+        catch (Exception ex)
+        {
+            return ex.Message;
+        }
     }
 }

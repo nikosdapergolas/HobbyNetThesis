@@ -118,7 +118,7 @@
                                             </button>
 
                                             <div class="dropdown-menu" aria-labelledby="dropdownToggle">
-                                                <a style="cursor: pointer" class="dropdown-item" href="#">Edit Post</a>
+                                                <a style="cursor: pointer" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#EditPostModal" @onclick="() => assingTheRightPostIdForEdit(post.Id,post.body)">Edit Post</a>
                                                 <a style="cursor: pointer" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deletePostModal" @onclick="() => assingTheRightPostId(post.Id)">Delete Post</a>
                                             </div>
                                         </div>
@@ -255,6 +255,45 @@
     </div>
 </div>
 
+<!--Modal for Editing a post-->
+<div class="modal fade" id="EditPostModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="EditPostModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="postModalLabel">Post your Thoughts @name</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <EditForm Model="postEditDTO" OnValidSubmit="EditPost">
+                    <div class="form-group">
+                        <InputTextArea @bind-Value="postEditDTO.body"
+                                       id="editBody"
+                                       placeholder="What's on your mind?"
+                                       class="form-control"
+                                       rows="8"
+                                       style="resize: none;"
+                                       MaxLength="250">
+
+                            @postEditDTO.body;
+
+                        </InputTextArea>
+                    </div>
+                    <br />
+                    @*<div class="text-center">
+                    <button class="btn btn-primary btn-lg" type="submit">Post</button>
+                    </div>*@
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <button class="btn btn-primary btn-block btn-lg" type="submit">Submit Edit</button>
+                        </div>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @code {
     //----------------------------------------------
     // Picture upload section
@@ -268,6 +307,7 @@
 
     //----------------------------------------------
 
+    PostEditDTO postEditDTO = new();
     User user = new();
     List<Post> posts = new();
     UserEditDTO userEditDTO = new();
@@ -422,5 +462,18 @@
     private async Task assingTheRightPostId(int postId)
     {
         PostIdToDelete = postId;
+    }
+
+    private async Task EditPost()
+    {
+        var response = _postsService.EditPost(postEditDTO);
+        // Refresh After deletion
+        navManager.NavigateTo(navManager.Uri, forceLoad: true);
+    }
+
+    private async Task assingTheRightPostIdForEdit(int postId, string body)
+    {
+        postEditDTO.Id = postId;
+        postEditDTO.body = body;
     }
 }

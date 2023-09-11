@@ -14,4 +14,6 @@ public interface IPostsService
     Task<string> CreatePost(PostCreateDTO postCreateDTO);
 
     Task<string> DeletePost(int postId);
+
+    Task<string> EditPost(PostEditDTO postEditDTO);
 }
