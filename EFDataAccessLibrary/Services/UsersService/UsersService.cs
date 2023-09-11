@@ -199,6 +199,7 @@ public class UsersService : IUsersService
 
     public async Task<UploadResult> UploadFile(IFormFile file)
     {
+        // The logged in user's Username
         string username = _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.GivenName);
         UploadResult uploadResult = new();
         uploadResult.FileName = file.Name;
@@ -219,6 +220,7 @@ public class UsersService : IUsersService
 
         uploadResult.StoredFileName = newFileName;
 
+        // I Update the database with the link to his new profile picture
         await _context.Users
                     .Where(u => u.username.Equals(username))
                     .ExecuteUpdateAsync(s => s

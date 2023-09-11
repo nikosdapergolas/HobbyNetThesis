@@ -213,12 +213,15 @@
         isLoading = true;
         var authState = await AuthState;
         userName = authState.User.FindFirst(ClaimTypes.GivenName).Value;
-        name = authState.User.FindFirst(ClaimTypes.Name).Value;
-        image = authState.User.FindFirst(ClaimTypes.Uri).Value;
+        //name = authState.User.FindFirst(ClaimTypes.Name).Value;
+        //image = authState.User.FindFirst(ClaimTypes.Uri).Value;
 
         try
         {
             //image = _config.GetValue<string>("api") + "/images/default.jpg";
+
+            // Get Logged in user
+            user = await _userService.GetOneUserByUsername(userName);
 
             // Load initial set of posts using the new endpoint
             posts = await _postsService.GetSomePosts(currentPage);
@@ -228,6 +231,11 @@
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            name = user.firstname;
+            image = user.profileImage!;
         }
     }
 
