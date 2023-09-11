@@ -12,4 +12,6 @@ public interface IPostsService
     public Task<List<Post>> GetSomePosts(int currentPage);
 
     Task<string> CreatePost(PostCreateDTO postCreateDTO);
+
+    Task<string> DeletePost(int postId);
 }

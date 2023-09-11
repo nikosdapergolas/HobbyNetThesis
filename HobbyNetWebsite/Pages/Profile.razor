@@ -111,20 +111,17 @@
                                                 <small class="text-white">@post.timestamp.ToString("MMMM dd, yyyy")</small>
                                             </div>
                                         </div>
-                                        <li class="nav-item dropdown">
+                                        <div class="nav-item dropdown">
                                             <!-- Post Options Button (e.g., Like, Comment, Share) -->
                                             <button type="button" class="btn btn-link text-white" data-bs-toggle="dropdown" id="dropdownToggle">
                                                 <i class="fas fa-ellipsis-h"></i>
                                             </button>
 
                                             <div class="dropdown-menu" aria-labelledby="dropdownToggle">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Separated link</a>
+                                                <a style="cursor: pointer" class="dropdown-item" href="#">Edit Post</a>
+                                                <a style="cursor: pointer" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deletePostModal" @onclick="() => assingTheRightPostId(post.Id)">Delete Post</a>
                                             </div>
-                                        </li>
+                                        </div>
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text fs-5 lh-lg">@post.body</p>
@@ -238,6 +235,26 @@
     </div>
 </div>
 
+<!--Modal for Deleting a Post-->
+<div class="modal fade" id="deletePostModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deletePostModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="postModalLabel">Post your Thoughts @name</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h2> Are you sure you want to delete this post?</h2>
+                <br />
+                <br />
+                <button class="btn btn-primary rounded-pill" @onclick="@deletePost">
+                    Yes. Delete it
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @code {
     //----------------------------------------------
     // Picture upload section
@@ -258,6 +275,8 @@
     IEnumerable<string> following = new List<string>();
     string image = string.Empty;
 
+    int PostIdToDelete;
+
     [CascadingParameter]
     public Task<AuthenticationState> AuthState { get; set; }
 
@@ -268,6 +287,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        PostIdToDelete = -1;
+
         var authState = await AuthState;
 
         // Initialising the EditUser DTO in case he edits his profile
@@ -389,5 +410,17 @@
     private async Task refreshPage()
     {
         navManager.NavigateTo(navManager.Uri, forceLoad: true);
+    }
+
+    private async Task deletePost()
+    {
+        var response = _postsService.DeletePost(PostIdToDelete);
+        // Refresh After deletion
+        navManager.NavigateTo(navManager.Uri, forceLoad: true);
+    }
+
+    private async Task assingTheRightPostId(int postId)
+    {
+        PostIdToDelete = postId;
     }
 }

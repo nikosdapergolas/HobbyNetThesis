@@ -78,4 +78,13 @@ public class PostsService : IPostsService
             return null;
         }
     }
+
+    public async Task<string> DeletePost(int postId)
+    {
+        string deletePostEndpoint = _config["deletePostEndpoint"];
+
+        var result = await _client.DeleteAsync(deletePostEndpoint + "/" + postId);
+
+        return result.ToString();
+    }
 }
