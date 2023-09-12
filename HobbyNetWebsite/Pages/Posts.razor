@@ -30,10 +30,17 @@
                         <div class="d-flex align-items-center">
                             <div class="rounded-circle profile-picture">
                                 <!-- Profile Picture Image -->
-                                <img src="@post.image" alt="Profile Picture" />
+                                <img style="cursor: pointer"
+                                     src="@post.image" 
+                                     alt="Profile Picture" 
+                                     @onclick="() => navigateToProfile(post.Username)"/>
                             </div>
                             <div class="ms-3">
-                                <h5 class="card-title">@post.Username</h5>
+                                @*<h5 class="card-title">@post.Username</h5>*@
+                                <a style="text-decoration: none; color: white;  cursor: pointer;"
+                                   href="profileOfUser/@post.Username">
+                                    <h5 class="card-title">@post.Username</h5>
+                                </a>
                                 <small class="text-white">@post.HobbyName</small>
                                 <br />
                                 <small class="text-white">@post.timestamp.ToString("MMMM dd, yyyy")</small>
@@ -349,6 +356,11 @@
     {
         postEditDTO.Id = postId;
         postEditDTO.body = body;
+    }
+
+    private async Task navigateToProfile(string username)
+    {
+        navManager.NavigateTo("profileOfUser/" + username);
     }
 }
 

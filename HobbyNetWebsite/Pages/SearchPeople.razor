@@ -26,12 +26,16 @@
                     <div class="user-card">
                         <div class="row">
                             <div class="col-3">
-                                <img src="@user.profileImage" 
+                                <img src="@user.profileImage"
+                                     @onclick="() => navigateToProfile(user.username)"
                                      alt="User" 
-                                     style="width: 100px; height:100px; z-index: 1;">
+                                     style="width: 100px; height:100px; z-index: 1; cursor: pointer;">
                             </div>
                             <div class="col-9">
-                                <a href="profileOfUser/@user.username"><h5>@user.username</h5></a>
+                                <a style="text-decoration: none; color: black;  cursor: pointer;" 
+                                   href="profileOfUser/@user.username">
+                                        <h5>@user.username</h5>
+                                </a>
                                 @*<p>Followers: @user.FollowersCount</p>*@
                                 @if (following.Contains(user.username.Trim()))
                                 {
@@ -175,5 +179,10 @@
             //{
             //}
         }
+    }
+
+    private async Task navigateToProfile(string username)
+    {
+        navManager.NavigateTo("profileOfUser/" + username);
     }
 }
