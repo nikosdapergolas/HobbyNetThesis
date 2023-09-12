@@ -31,7 +31,7 @@
                                      style="width: 100px; height:100px; z-index: 1;">
                             </div>
                             <div class="col-9">
-                                <h5>@user.username</h5>
+                                <a href="profileOfUser/@user.username"><h5>@user.username</h5></a>
                                 @*<p>Followers: @user.FollowersCount</p>*@
                                 @if (following.Contains(user.username.Trim()))
                                 {

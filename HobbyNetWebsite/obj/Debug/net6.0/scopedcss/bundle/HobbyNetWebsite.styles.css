@@ -44,6 +44,18 @@
     height: 100%;
     object-fit: cover;
 }
+/* /Pages/ProfileOfUser.razor.rz.scp.css */
+.profile-picture[b-zslo60fzp8] {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+}
+
+.profile-picture img[b-zslo60fzp8] {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 /* /Pages/SearchPeople.razor.rz.scp.css */
 body[b-83mewzucbk] {
     background-color: #f8f9fa;
