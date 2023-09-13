@@ -160,4 +160,21 @@ public class PostsController : ControllerBase
             return NotFound($"The post with id: {id} was not found");
         }
     }
+
+    // POST api/Posts/like
+    [HttpPost("like")]
+    [Authorize]
+    public async Task<ActionResult<Post>> LikePost(LikePostDTO likePostDTO)
+    {
+        var response = await _postsService.LikePost(likePostDTO);
+
+        if(response is not null)
+        {
+            return Ok(response);
+        }
+        else 
+        { 
+            return BadRequest(); 
+        }
+    }
 }

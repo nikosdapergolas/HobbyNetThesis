@@ -225,4 +225,35 @@ public class PostsService : IPostsService
             }
         }
     }
+
+    public async Task<Post> LikePost(LikePostDTO likePostDTO)
+    {
+        try
+        {
+            var post = await _context.Posts
+            .Where(i => i.Id.Equals(likePostDTO.postId))
+            .Include(pl => pl.postLikes)
+            .FirstOrDefaultAsync();
+
+            var user = await _context.Users
+                .FindAsync(likePostDTO.userId);
+
+            Like like = new();
+            like.user =  user;
+
+            await _context.AddAsync(like);
+
+            post.postLikes.Add(like);
+            //await _context.AddAsync(post.postLikes);
+
+            await _context.SaveChangesAsync();
+
+            return post;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null!;
+        }
+    }
 }

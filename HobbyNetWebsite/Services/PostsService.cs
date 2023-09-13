@@ -31,6 +31,22 @@ public class PostsService : IPostsService
         }
     }
 
+    public async Task<Post> GetOnePost(int postId)
+    {
+        string postEndpoint = _config["getOnePostEndpoint"];
+
+        try
+        {
+            var result = await _client.GetFromJsonAsync<Post>(postEndpoint + "/" + postId);
+            return result;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null;
+        }
+    }
+
     public async Task<List<Post>> GetPostsFromOneUser(string username)
     {
         string postsEndpoint = _config["getPostsFromOneUser"];
@@ -102,6 +118,22 @@ public class PostsService : IPostsService
         try
         {
             var result = await _client.PutAsJsonAsync(editPostEndpoint, postEditDTO);
+
+            return result.ToString();
+        }
+        catch (Exception ex)
+        {
+            return ex.Message;
+        }
+    }
+
+    public async Task<string> LikePost(LikePostDTO likePostDTO)
+    {
+        string likePostEndpoint = _config["likePostEndpoint"];
+
+        try
+        {
+            var result = await _client.PostAsJsonAsync(likePostEndpoint, likePostDTO);
 
             return result.ToString();
         }

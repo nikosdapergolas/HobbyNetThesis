@@ -22,4 +22,5 @@ public interface IPostsService
     public Task<Post> CreatePostByUser(PostCreateDTO post);
     public Task<string> EditPost(PostEditDTO postEditDTO);
     public Task<string> DeletePost(int id);
+    public Task<Post> LikePost(LikePostDTO likePostDTO);
 }
