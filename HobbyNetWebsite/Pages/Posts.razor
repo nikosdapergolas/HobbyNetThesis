@@ -78,21 +78,21 @@
                     <div class="card-footer bg-secondary rounded-pill">
                         <!-- Like, Comment, Share Buttons -->
                         <button type="button" class="btn btn-primary rounded-pill">
-                            <i class="far fa-thumbs-up"></i> Like
+                            <i class="far fa-thumbs-up"></i> Likes | @post.postLikes?.Count
                         </button>
                         &nbsp;
                         &nbsp;
                         &nbsp;
                         &nbsp;
                         <button type="button" class="btn btn-success rounded-pill">
-                            <i class="far fa-comment-alt"></i> Comment
+                            <i class="far fa-comment-alt"></i> Comments | @post.comments?.Count
                         </button>
                         &nbsp;
                         &nbsp;
                         &nbsp;
                         &nbsp;
                         <button type="button" class="btn btn-dark rounded-pill">
-                            <i class="fas fa-share"></i> Share
+                            <i class="fas fa-share"></i> Share 
                         </button>
                     </div>
                 </div>
@@ -265,8 +265,7 @@
         isLoading = true;
         var authState = await AuthState;
         userName = authState.User.FindFirst(ClaimTypes.GivenName).Value;
-        //name = authState.User.FindFirst(ClaimTypes.Name).Value;
-        //image = authState.User.FindFirst(ClaimTypes.Uri).Value;
+
 
         try
         {

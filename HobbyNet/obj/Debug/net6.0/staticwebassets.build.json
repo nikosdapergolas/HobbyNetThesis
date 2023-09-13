@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tZoS8CwYUBZs23neg/CFombBFpKC8eM/HEmlLyGJHag=",
+  "Hash": "Xt/MEXAaS7j4wv0vIKev614WwuIThRt011v/oqfsXBM=",
   "Source": "HobbyNet",
   "BasePath": "_content/HobbyNet",
   "Mode": "Default",
@@ -51,12 +51,12 @@
       "OriginalItemSpec": "wwwroot\\images\\logo.png"
     },
     {
-      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\images\\profile_pictures\\user2_y4lt02pv.png",
+      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\images\\profile_pictures\\string_ulssqq5r.png",
       "SourceId": "HobbyNet",
       "SourceType": "Discovered",
       "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\",
       "BasePath": "_content/HobbyNet",
-      "RelativePath": "images/profile_pictures/user2_y4lt02pv.png",
+      "RelativePath": "images/profile_pictures/string_ulssqq5r.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -65,15 +65,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\profile_pictures\\user2_y4lt02pv.png"
+      "OriginalItemSpec": "wwwroot\\images\\profile_pictures\\string_ulssqq5r.png"
     },
     {
-      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\images\\profile_pictures\\user2_yiqe1uky.png",
+      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\images\\profile_pictures\\user2_c5ojcgcn.png",
       "SourceId": "HobbyNet",
       "SourceType": "Discovered",
       "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\",
       "BasePath": "_content/HobbyNet",
-      "RelativePath": "images/profile_pictures/user2_yiqe1uky.png",
+      "RelativePath": "images/profile_pictures/user2_c5ojcgcn.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -82,7 +82,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\profile_pictures\\user2_yiqe1uky.png"
+      "OriginalItemSpec": "wwwroot\\images\\profile_pictures\\user2_c5ojcgcn.png"
     },
     {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\images\\random_girl.png",
