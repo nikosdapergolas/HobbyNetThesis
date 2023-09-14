@@ -86,7 +86,7 @@
                         &nbsp;
                         &nbsp;
                         &nbsp;
-                        <button type="button" class="btn btn-success rounded-pill">
+                        <button type="button" class="btn btn-success rounded-pill" data-bs-toggle="modal" data-bs-target="#CommentsModal" @onclick="() => fillListWithComments(post.comments)">
                             <i class="far fa-comment-alt"></i> Comments | @post.comments?.Count
                         </button>
                         &nbsp;
@@ -235,9 +235,39 @@
     </div>
 </div>
 
-
+<!--Modal for Comments on a Post-->
+<div class="modal fade" id="CommentsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="CommentsModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="postModalLabel">Comments of this post</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <br />
+                <ul style="list-style-type: none;">
+                    @foreach(var comment in listOfComments)
+                    {
+                        <li>
+                            <h3> User: @*@comment.user.username*@</h3>
+                            <br />
+                            <h2>@comment.body</h2>
+                        </li>
+                        <hr />
+                        <br />
+                        <br />
+                    }
+                </ul>
+                <button class="btn btn-primary rounded-pill" @onclick="@CommentOnPost">
+                    Send Comment
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
+    List<Comment> listOfComments = new();
     PostEditDTO postEditDTO = new();
     PostCreateDTO postCreateDTO = new();
     User user = new();
@@ -366,7 +396,6 @@
         navManager.NavigateTo("profileOfUser/" + username);
     }
 
-    private int likeButtonCount = -1;
     private async Task LikeAPost(int postId)
     {
         likePostDTO = new();
@@ -375,6 +404,20 @@
         var result = await _postsService.LikePost(likePostDTO);
 
         navManager.NavigateTo(navManager.Uri, forceLoad: true);
+    }
+
+    private async Task fillListWithComments(List<Comment> comments)
+    {
+        listOfComments = new();
+        foreach (var comment in comments)
+        {
+            listOfComments.Add(comment);
+        }
+    }
+
+    private async Task CommentOnPost()
+    {
+        
     }
 }
 
