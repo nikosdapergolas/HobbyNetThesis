@@ -20,4 +20,6 @@ public interface IPostsService
     Task<string> EditPost(PostEditDTO postEditDTO);
 
     Task<string> LikePost(LikePostDTO likePostDTO);
+
+    Task<string> CommentPost(CommentDTO commentDTO);
 }

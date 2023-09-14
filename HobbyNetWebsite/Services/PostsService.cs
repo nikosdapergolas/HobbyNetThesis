@@ -142,4 +142,21 @@ public class PostsService : IPostsService
             return ex.Message;
         }
     }
+
+    public async Task<string> CommentPost(CommentDTO commentDTO)
+    {
+        string commentPostEndpoint = _config["commentPostEndpoint"];
+
+        try
+        {
+            var result = await _client.PostAsJsonAsync(commentPostEndpoint, commentDTO);
+
+            return result.ToString();
+        }
+        catch (Exception ex)
+        {
+            return ex.Message;
+        }
+    }
+
 }

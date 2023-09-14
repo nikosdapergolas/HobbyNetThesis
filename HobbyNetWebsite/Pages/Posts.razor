@@ -94,7 +94,7 @@
                         &nbsp;
                         &nbsp;
                         <button type="button" class="btn btn-dark rounded-pill" data-bs-toggle="modal" data-bs-target="#shareModal" @onclick="() => shareThePost(post.body, post.Username)">
-                            <i class="fas fa-share"></i> Share
+                            <i class="fas fa-share"></i> Repost
                         </button>
                     </div>
                 </div>
@@ -472,6 +472,9 @@
     private async Task CommentOnPost()
     {
         commentDTO.username = userName;
+        var result = await _postsService.CommentPost(commentDTO);
+
+        navManager.NavigateTo(navManager.Uri, forceLoad: true);
     }
 
     private string usernameOfUserThatIWillShareHisPost = string.Empty;
@@ -484,7 +487,7 @@
 
     private async Task performTheSharingOfThePost()
     {
-        postCreateDTO.body = "Shared this post by User: " +
+        postCreateDTO.body = "Reposted this post by User: " +
             usernameOfUserThatIWillShareHisPost +
             "\n\n   =>   " +
             postCreateDTO.body;

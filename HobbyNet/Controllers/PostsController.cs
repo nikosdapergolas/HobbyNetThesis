@@ -177,4 +177,21 @@ public class PostsController : ControllerBase
             return BadRequest(); 
         }
     }
+
+    // POST api/Posts/comment
+    [HttpPost("comment")]
+    [Authorize]
+    public async Task<ActionResult<Post>> CommentPost(CommentDTO commentDTO)
+    {
+        var response = await _postsService.CommentPost(commentDTO);
+
+        if (response is not null)
+        {
+            return Ok(response);
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
 }

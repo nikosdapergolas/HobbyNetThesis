@@ -23,4 +23,5 @@ public interface IPostsService
     public Task<string> EditPost(PostEditDTO postEditDTO);
     public Task<string> DeletePost(int id);
     public Task<Post> LikePost(LikePostDTO likePostDTO);
+    public Task<Post> CommentPost(CommentDTO commentDTO);
 }

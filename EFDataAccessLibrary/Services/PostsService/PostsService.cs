@@ -47,7 +47,7 @@ public class PostsService : IPostsService
         {
             var posts = await _context.Posts
                 .Where(u => u.Username.Equals(username))
-                .Include(c => c.comments)
+                .Include(c => c.comments!)
                 .Include(l => l.postLikes)
                 .OrderByDescending(t => t.timestamp)
                 .ToListAsync();
@@ -245,6 +245,48 @@ public class PostsService : IPostsService
 
             post.postLikes.Add(like);
             //await _context.AddAsync(post.postLikes);
+
+            await _context.SaveChangesAsync();
+
+            return post;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null!;
+        }
+    }
+
+    public async Task<Post> CommentPost(CommentDTO commentDTO)
+    {
+        try
+        {
+            var post = await _context.Posts
+            .Where(i => i.Id.Equals(commentDTO.postId))
+            .Include(c => c.comments)
+            .FirstOrDefaultAsync();
+
+            var user = await _context.Users
+                .Where(u => u.username.Equals(commentDTO.username))
+                .FirstOrDefaultAsync();
+
+            if(user is null || post is null)
+            {
+                return null!;
+            }
+
+            Comment comment = new();
+            comment.user = user!;
+            comment.body = commentDTO.body;
+
+            await _context.AddAsync(comment);
+
+            foreach (var item in post.comments)
+            {
+                await Console.Out.WriteLineAsync(item.body);
+            }
+
+            post.comments.Add(comment);
 
             await _context.SaveChangesAsync();
 
