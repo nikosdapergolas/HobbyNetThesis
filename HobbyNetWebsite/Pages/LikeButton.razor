@@ -1,0 +1,16 @@
+﻿@inherits ComponentBase
+
+<button type="button" class="btn btn-primary rounded-pill" @onclick="LikePost">
+    <i class="far fa-thumbs-up"></i> Likes | @likeCount
+</button>
+
+@code {
+    [Parameter] public EventCallback OnLike { get; set; }
+    [Parameter] public int LikeCount { get; set; }
+
+    private int likeCount => LikeCount;
+    private async Task LikePost()
+    {
+        await OnLike.InvokeAsync();
+    }
+}

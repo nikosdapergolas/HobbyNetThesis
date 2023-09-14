@@ -5,6 +5,7 @@
 @inject NavigationManager navManager
 @attribute [Authorize]
 
+
 <section class="container mt-5" id="postContainer">
     <button type="button" class="btn btn-primary btn-lg rounded-pill" data-bs-toggle="modal" data-bs-target="#postModal">
         <i class="fas fa-pencil-alt me-2"></i> Post Your Thoughts
@@ -77,9 +78,10 @@
                     </div>
                     <div class="card-footer bg-secondary rounded-pill">
                         <!-- Like, Comment, Share Buttons -->
-                        <button type="button" class="btn btn-primary rounded-pill" @onclick="() => LikeAPost(post.Id)">
+                        @*<button id="likebutton" type="button" class="btn btn-primary rounded-pill" @onclick="() => LikeAPost(post.Id)">
                             <i class="far fa-thumbs-up"></i> Likes | @post.postLikes?.Count
-                        </button>
+                        </button>*@
+                        <LikeButton OnLike="() => LikeAPost(post.Id)" LikeCount="@post.postLikes.Count" />
                         &nbsp;
                         &nbsp;
                         &nbsp;
@@ -364,6 +366,7 @@
         navManager.NavigateTo("profileOfUser/" + username);
     }
 
+    private int likeButtonCount = -1;
     private async Task LikeAPost(int postId)
     {
         likePostDTO = new();
@@ -372,8 +375,6 @@
         var result = await _postsService.LikePost(likePostDTO);
 
         navManager.NavigateTo(navManager.Uri, forceLoad: true);
-        //var post = await _postsService.GetOnePost(postId);
-        //post.postLikes.Add();
     }
 }
 
