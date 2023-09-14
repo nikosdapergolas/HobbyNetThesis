@@ -7,7 +7,7 @@
 
 
 <section class="container mt-5" id="postContainer">
-    <button type="button" class="btn btn-primary btn-lg rounded-pill" data-bs-toggle="modal" data-bs-target="#postModal">
+    <button type="button" class="btn btn-primary btn-lg rounded-pill" data-bs-toggle="modal" data-bs-target="#postModal" @onclick="refreshDTO">
         <i class="fas fa-pencil-alt me-2"></i> Post Your Thoughts
     </button>
     <br />
@@ -86,15 +86,15 @@
                         &nbsp;
                         &nbsp;
                         &nbsp;
-                        <button type="button" class="btn btn-success rounded-pill" data-bs-toggle="modal" data-bs-target="#CommentsModal" @onclick="() => fillListWithComments(post.comments)">
+                        <button type="button" class="btn btn-success rounded-pill" data-bs-toggle="modal" data-bs-target="#CommentsModal" @onclick="() => fillListWithComments(post.comments, post.Id)">
                             <i class="far fa-comment-alt"></i> Comments | @post.comments?.Count
                         </button>
                         &nbsp;
                         &nbsp;
                         &nbsp;
                         &nbsp;
-                        <button type="button" class="btn btn-dark rounded-pill">
-                            <i class="fas fa-share"></i> Share 
+                        <button type="button" class="btn btn-dark rounded-pill" data-bs-toggle="modal" data-bs-target="#shareModal" @onclick="() => shareThePost(post.body, post.Username)">
+                            <i class="fas fa-share"></i> Share
                         </button>
                     </div>
                 </div>
@@ -245,19 +245,23 @@
             </div>
             <div class="modal-body">
                 <br />
-                <ul style="list-style-type: none;">
-                    @foreach(var comment in listOfComments)
-                    {
-                        <li>
-                            <h3> User: @*@comment.user.username*@</h3>
-                            <br />
-                            <h2>@comment.body</h2>
-                        </li>
-                        <hr />
-                        <br />
-                        <br />
-                    }
-                </ul>
+                @foreach(var comment in listOfComments)
+                {
+                        <h3> User comment: @*@comment.user.username*@</h3>
+                        <h2>@comment.body</h2>
+                    <hr />
+                }
+                <EditForm Model="commentDTO">
+                    <InputTextArea @bind-Value="commentDTO.body"
+                                   id="postBody"
+                                   placeholder="Write a comment for this post."
+                                   class="form-control"
+                                   rows="8"
+                                   style="resize: none;"
+                                   MaxLength="250" />
+                </EditForm>
+                
+                <br>
                 <button class="btn btn-primary rounded-pill" @onclick="@CommentOnPost">
                     Send Comment
                 </button>
@@ -266,7 +270,46 @@
     </div>
 </div>
 
+<!--Modal for sharing a Post-->
+<div class="modal fade" id="shareModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="shareModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="postModalLabel">Post your Thoughts @name</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <EditForm Model="postCreateDTO" OnValidSubmit="performTheSharingOfThePost">
+                    <div class="form-group">
+                        <InputTextArea @bind-Value="postCreateDTO.body"
+                                       id="postBody"
+                                       placeholder="What's on your mind?"
+                                       class="form-control"
+                                       rows="8"
+                                       style="resize: none;"
+                                       MaxLength="250" >
+
+                            
+                            @*<b>Shared this post by user: @usernameOfUserThatIWillShareHisPost</b>*@
+                            hi!
+                            @*@postCreateDTO.body*@
+                        </InputTextArea>
+                    </div>
+                    <br />
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <button class="btn btn-primary btn-block btn-lg" type="submit">Share this post</button>
+                        </div>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @code {
+    CommentDTO commentDTO = new();
     List<Comment> listOfComments = new();
     PostEditDTO postEditDTO = new();
     PostCreateDTO postCreateDTO = new();
@@ -294,7 +337,8 @@
     LikePostDTO likePostDTO = new();
 
     protected override async Task OnInitializedAsync()
-    {        
+    {
+        commentDTO = new();
         PostIdToDelete = -1;
         isLoading = true;
         var authState = await AuthState;
@@ -346,6 +390,11 @@
         {
             isLoading = false;
         }
+    }
+
+    private async Task refreshDTO()
+    {
+        postCreateDTO = new();
     }
 
     private void CreatePost()
@@ -406,8 +455,9 @@
         navManager.NavigateTo(navManager.Uri, forceLoad: true);
     }
 
-    private async Task fillListWithComments(List<Comment> comments)
+    private async Task fillListWithComments(List<Comment> comments, int postId)
     {
+        commentDTO.postId = postId;
         listOfComments = new();
         foreach (var comment in comments)
         {
@@ -415,9 +465,43 @@
         }
     }
 
+    //private async Task enterAPostIdToComment()
+    //{
+    //}
+
     private async Task CommentOnPost()
     {
-        
+        commentDTO.username = userName;
+    }
+
+    private string usernameOfUserThatIWillShareHisPost = string.Empty;
+    private async Task shareThePost(string body, string username)
+    {
+        usernameOfUserThatIWillShareHisPost = username;
+        //postCreateDTO = new();
+        postCreateDTO.body = body;
+    }
+
+    private async Task performTheSharingOfThePost()
+    {
+        postCreateDTO.body = "Shared this post by User: " +
+            usernameOfUserThatIWillShareHisPost +
+            "\n\n   =>   " +
+            postCreateDTO.body;
+        postCreateDTO.Username = userName;
+        postCreateDTO.HobbyName = hobbyName;
+        postCreateDTO.image = image;
+        //postCreateDTO.body = postBody;
+
+        if (string.IsNullOrEmpty(postCreateDTO.body))
+        {
+            navManager.NavigateTo("/posts");
+        }
+        else
+        {
+            await _postsService.CreatePost(postCreateDTO);
+            navManager.NavigateTo(navManager.Uri, forceLoad: true);
+        }
     }
 }
 
