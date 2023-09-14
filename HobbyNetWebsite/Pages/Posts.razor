@@ -247,8 +247,8 @@
                 <br />
                 @foreach(var comment in listOfComments)
                 {
-                        <h3> User comment: @*@comment.user.username*@</h3>
-                        <h2>@comment.body</h2>
+                    <h5> User: @comment.user.username</h5>
+                    <h3><b>@comment.body</b></h3>
                     <hr />
                 }
                 <EditForm Model="commentDTO">
@@ -291,7 +291,7 @@
 
                             
                             @*<b>Shared this post by user: @usernameOfUserThatIWillShareHisPost</b>*@
-                            hi!
+                            
                             @*@postCreateDTO.body*@
                         </InputTextArea>
                     </div>

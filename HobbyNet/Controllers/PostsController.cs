@@ -52,7 +52,8 @@ public class PostsController : ControllerBase
     }
 
     // ------------------------------------------------------------------------
-    // Trying pagination
+    // Trying pagination and also also only posts from users,
+    // that the logged in user follows
 
     // GET: api/Posts/Some
     [HttpGet("Some/{page}")]
