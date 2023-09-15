@@ -13,5 +13,5 @@ public class HobbiesOfUsers
     [Required]
     public int UserId { get; set; }
     [Required]
-    public int HobbyId { get; set; }
+    public Hobby hobby { get; set; }
 }

@@ -78,6 +78,7 @@ public class UsersService : IUsersService
             var user = await _context.Users
                 .Where(i => i.username.Equals(username))
                 .Include(h => h.Hobbies)
+                .ThenInclude(h => h.hobby)
                 .Include(r => r.Roles)
                 .FirstOrDefaultAsync();
             return user;

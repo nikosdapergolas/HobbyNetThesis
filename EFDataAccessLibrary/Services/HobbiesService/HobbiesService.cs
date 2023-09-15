@@ -159,7 +159,7 @@ public class HobbiesService : IHobbiesService
 
         HobbiesOfUsers userHobby = new();
         userHobby.UserId = followHobbyDTO.UserId;
-        userHobby.HobbyId = followHobbyDTO.HobbyId;
+        userHobby.hobby = hobby;
 
         try
         {

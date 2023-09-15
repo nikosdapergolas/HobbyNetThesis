@@ -38,9 +38,13 @@
             </button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="posts">All Hobbies</a></li>
-                <li><a class="dropdown-item" href="Hobby/Politics">Politics</a></li>
+                @foreach (var hobby in user.Hobbies)
+                {
+                    <li><a class="dropdown-item" @onclick='() => NavigateToURL("Politics")'>@hobby.hobby.hobbyName</a></li>
+                }
+                @*<li><a class="dropdown-item" href="Hobby/Politics">Politics</a></li>
                 <li><a class="dropdown-item" href="Hobby/Sports">Sports</a></li>
-                <li><a class="dropdown-item" href="Hobby/Cars">Cars</a></li>
+                <li><a class="dropdown-item" href="Hobby/Cars">Cars</a></li>*@
             </ul>
         </div>
 
@@ -528,6 +532,11 @@
             await _postsService.CreatePost(postCreateDTO);
             navManager.NavigateTo(navManager.Uri, forceLoad: true);
         }
+    }
+
+    private async Task NavigateToURL(string hobby)
+    {
+        navManager.NavigateTo("/Hobby/" + hobby, forceLoad: true);
     }
 }
 
