@@ -37,9 +37,13 @@
             </button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="posts">All Hobbies</a></li>
-                <li><a class="dropdown-item" @onclick='() => NavigateToURL("Politics")'>Politics</a></li>
+                @foreach (var hobby in user.Hobbies)
+                {
+                    <li><a class="dropdown-item" @onclick='() => NavigateToURL("Politics")'>@hobby.HobbyId.ToString()</a></li>
+                }
+                @*<li><a class="dropdown-item" @onclick='() => NavigateToURL("Politics")'>Politics</a></li>
                 <li><a class="dropdown-item" @onclick='() => NavigateToURL("Sports")'>Sports</a></li>
-                <li><a class="dropdown-item" @onclick='() => NavigateToURL("Cars")'>Cars</a></li>
+                <li><a class="dropdown-item" @onclick='() => NavigateToURL("Cars")'>Cars</a></li>*@
             </ul>
         </div>
 
