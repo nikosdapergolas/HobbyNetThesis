@@ -11,6 +11,8 @@ public interface IPostsService
 
     public Task<List<Post>> GetPostsFromOneUser(string username);
 
+    Task<List<Post>> GetPostsFromOneHobby(string hobby);
+
     public Task<List<Post>> GetSomePosts(int currentPage);
 
     Task<string> CreatePost(PostCreateDTO postCreateDTO);

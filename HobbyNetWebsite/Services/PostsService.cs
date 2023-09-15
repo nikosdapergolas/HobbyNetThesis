@@ -63,6 +63,22 @@ public class PostsService : IPostsService
         }
     }
 
+    public async Task<List<Post>> GetPostsFromOneHobby(string hobby)
+    {
+        string postsEndpoint = _config["getPostsFromOneHobby"];
+
+        try
+        {
+            var result = await _client.GetFromJsonAsync<List<Post>>(postsEndpoint + "/" + hobby);
+            return result;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null;
+        }
+    }
+
     public async Task<List<Post>> GetSomePosts(int currentPage)
     {
         string postsEndpoint = _config["getSomePostsEndpoint"];

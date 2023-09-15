@@ -51,6 +51,23 @@ public class PostsController : ControllerBase
         }
     }
 
+    // GET: api/Posts/User
+    [HttpGet("Hobby/{hobby}")]
+    [Authorize]
+    public async Task<ActionResult<IEnumerable<Post>>> GetPostsFromOneHobby(string hobby)
+    {
+        var posts = await _postsService.GetPostsFromOneHobby(hobby);
+
+        if (posts is not null)
+        {
+            return Ok(posts);
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
+
     // ------------------------------------------------------------------------
     // Trying pagination and also also only posts from users,
     // that the logged in user follows

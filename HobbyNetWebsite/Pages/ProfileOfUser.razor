@@ -48,15 +48,19 @@
                     </div>
                     <div class="p-4 text-black" style="background-color: #f8f9fa;">
                         <div class="d-flex justify-content-end text-center py-1">
-                            <div>
+                            <div class="px-3">
                                 <p class="mb-1 h5">@numberOfPosts</p>
                                 <p class="small text-muted mb-0">Posts</p>
+                            </div>
+                            <div class="px-3">
+                                <p class="mb-1 h5">@user.Hobbies.Count</p>
+                                <p class="small text-muted mb-0"> Hobbies</p>
                             </div>
                             <div class="px-3">
                                 <p class="mb-1 h5">@followers.Count()</p>
                                 <p class="small text-muted mb-0">Followers</p>
                             </div>
-                            <div>
+                            <div class="px-3">
                                 <p class="mb-1 h5">@following.Count()</p>
                                 <p class="small text-muted mb-0">Following</p>
                             </div>
@@ -126,15 +130,16 @@
                                     </div>
                                     <div class="card-footer bg-secondary rounded-pill">
                                         <!-- Like, Comment, Share Buttons -->
-                                        <button type="button" class="btn btn-primary rounded-pill">
+                                        @*<button type="button" class="btn btn-primary rounded-pill">
                                             <i class="far fa-thumbs-up"></i> Like
-                                        </button>
+                                        </button>*@
+                                        <LikeButton OnLike="() => LikeAPost(post.Id)" LikeCount="@post.postLikes.Count" />
                                         &nbsp;
                                         &nbsp;
                                         &nbsp;
                                         &nbsp;
-                                        <button type="button" class="btn btn-success rounded-pill">
-                                            <i class="far fa-comment-alt"></i> Comment
+                                        @*<button type="button" class="btn btn-success rounded-pill" data-bs-toggle="modal" data-bs-target="#CommentsModal" @onclick="() => fillListWithComments(post.comments, post.Id)">
+                                            <i class="far fa-comment-alt"></i> Comments | @post.comments?.Count
                                         </button>
                                         &nbsp;
                                         &nbsp;
@@ -142,7 +147,7 @@
                                         &nbsp;
                                         <button type="button" class="btn btn-dark rounded-pill">
                                             <i class="fas fa-share"></i> Share
-                                        </button>
+                                        </button>*@
                                     </div>
                                 </div>
                             }
@@ -164,6 +169,42 @@
     </div>
 </section>
 
+<!--Modal for Comments on a Post-->
+<div class="modal fade" id="CommentsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="CommentsModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="postModalLabel">Comments of this post</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <br />
+                @foreach (var comment in listOfComments)
+                {
+                    <h5> User: @comment.user.username</h5>
+                    <h3><b>@comment.body</b></h3>
+                    <hr />
+                }
+                <EditForm Model="commentDTO">
+                    <InputTextArea @bind-Value="commentDTO.body"
+                                   id="postBody"
+                                   placeholder="Write a comment for this post."
+                                   class="form-control"
+                                   rows="8"
+                                   style="resize: none;"
+                                   MaxLength="250" />
+                </EditForm>
+
+                <br>
+                <button class="btn btn-primary rounded-pill" @onclick="@CommentOnPost">
+                    Send Comment
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @code {
     [Parameter]
     public string username { get; set; } = string.Empty;
@@ -171,6 +212,10 @@
     [CascadingParameter]
     public Task<AuthenticationState> AuthState { get; set; }
 
+    User loggedInUser = new();
+    CommentDTO commentDTO = new();
+    List<Comment> listOfComments = new();
+    LikePostDTO likePostDTO = new();
     User user = new();
     List<Post> posts = new();
     IEnumerable<string> followers = new List<string>();
@@ -182,7 +227,9 @@
         var authState = await AuthState;
 
         user = await _userSerice.GetOneUserByUsername(username);
+        loggedInUser = await _userSerice.GetOneUserByUsername(authState.User.FindFirst(ClaimTypes.GivenName).Value);
 
+        likePostDTO = new();
 
         try
         {
@@ -199,5 +246,33 @@
         {
             Console.WriteLine(ex.Message);
         }
+    }
+
+    private async Task LikeAPost(int postId)
+    {
+        likePostDTO = new();
+        likePostDTO.postId = postId;
+        likePostDTO.userId = user.Id;
+        var result = await _postsService.LikePost(likePostDTO);
+
+        navManager.NavigateTo(navManager.Uri, forceLoad: true);
+    }
+
+    private async Task fillListWithComments(List<Comment> comments, int postId)
+    {
+        commentDTO.postId = postId;
+        listOfComments = new();
+        foreach (var comment in comments)
+        {
+            listOfComments.Add(comment);
+        }
+    }
+
+    private async Task CommentOnPost()
+    {
+        commentDTO.username = loggedInUser.username;
+        var result = await _postsService.CommentPost(commentDTO);
+
+        navManager.NavigateTo(navManager.Uri, forceLoad: true);
     }
 }

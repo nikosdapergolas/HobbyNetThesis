@@ -60,6 +60,25 @@ public class PostsService : IPostsService
         }
     }
 
+    public async Task<IEnumerable<Post>> GetPostsFromOneHobby(string hobby)
+    {
+        try
+        {
+            var posts = await _context.Posts
+                .Where(h => h.HobbyName.Equals(hobby))
+                .Include(c => c.comments!)
+                .Include(l => l.postLikes)
+                .OrderByDescending(t => t.timestamp)
+                .ToListAsync();
+            return posts;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null;
+        }
+    }
+
     // ------------------------------------------------------------------------
     // Trying pagination
     public async Task<IEnumerable<Post>> GetPaginatedPosts(int page, int pageSize)

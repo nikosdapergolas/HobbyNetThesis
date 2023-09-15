@@ -832,3 +832,4 @@ S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebsite\obj\Debug\net6.0\s
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebsite\obj\Debug\net6.0\scopedcss\Pages\Profile.razor.rz.scp.css
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebsite\obj\Debug\net6.0\scopedcss\Pages\SearchPeople.razor.rz.scp.css
 S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebsite\obj\Debug\net6.0\scopedcss\Pages\ProfileOfUser.razor.rz.scp.css
+S:\visual_studio_projects\web_projects\Thesis\HobbyNetWebsite\obj\Debug\net6.0\scopedcss\Pages\Hobby.razor.rz.scp.css

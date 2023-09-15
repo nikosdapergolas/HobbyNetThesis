@@ -164,6 +164,7 @@ public class HobbiesService : IHobbiesService
         try
         {
             await _context.AddAsync(userHobby);
+            user.Hobbies.Add(userHobby);
             await _context.SaveChangesAsync();
 
             //await _context.HobbiesOfUsers.AddAsync(userHobby);

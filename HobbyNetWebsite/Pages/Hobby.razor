@@ -1,10 +1,9 @@
-﻿@page "/posts"
+﻿@page "/Hobby/{hobbyName}"
 @inject IPostsService _postsService
 @inject IUserService _userService
 @inject IConfiguration _config
 @inject NavigationManager navManager
 @attribute [Authorize]
-
 
 <section class="container mt-5" id="postContainer">
     <button type="button" class="btn btn-primary btn-lg rounded-pill" data-bs-toggle="modal" data-bs-target="#postModal" @onclick="refreshDTO">
@@ -26,7 +25,7 @@
     <div class="mt-5">
         <div class="card bg-secondary rounded-pill">
             <div class="card-body text-center">
-                <h1 class="mb-0 text-white">Recent Posts from All Hobbies</h1>
+                <h1 class="mb-0 text-white">Recent Posts from @hobbyName</h1>
             </div>
         </div>
 
@@ -38,9 +37,9 @@
             </button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="posts">All Hobbies</a></li>
-                <li><a class="dropdown-item" href="Hobby/Politics">Politics</a></li>
-                <li><a class="dropdown-item" href="Hobby/Sports">Sports</a></li>
-                <li><a class="dropdown-item" href="Hobby/Cars">Cars</a></li>
+                <li><a class="dropdown-item" @onclick='() => NavigateToURL("Politics")'>Politics</a></li>
+                <li><a class="dropdown-item" @onclick='() => NavigateToURL("Sports")'>Sports</a></li>
+                <li><a class="dropdown-item" @onclick='() => NavigateToURL("Cars")'>Cars</a></li>
             </ul>
         </div>
 
@@ -55,9 +54,9 @@
                             <div class="rounded-circle profile-picture">
                                 <!-- Profile Picture Image -->
                                 <img style="cursor: pointer"
-                                     src="@post.image" 
-                                     alt="Profile Picture" 
-                                     @onclick="() => navigateToProfile(post.Username)"/>
+                                     src="@post.image"
+                                     alt="Profile Picture"
+                                @onclick="() => navigateToProfile(post.Username)" />
                             </div>
                             <div class="ms-3">
                                 @*<h5 class="card-title">@post.Username</h5>*@
@@ -102,8 +101,8 @@
                     <div class="card-footer bg-secondary rounded-pill">
                         <!-- Like, Comment, Share Buttons -->
                         @*<button id="likebutton" type="button" class="btn btn-primary rounded-pill" @onclick="() => LikeAPost(post.Id)">
-                            <i class="far fa-thumbs-up"></i> Likes | @post.postLikes?.Count
-                        </button>*@
+                    <i class="far fa-thumbs-up"></i> Likes | @post.postLikes?.Count
+                    </button>*@
                         <LikeButton OnLike="() => LikeAPost(post.Id)" LikeCount="@post.postLikes.Count" />
                         &nbsp;
                         &nbsp;
@@ -177,12 +176,12 @@
                 <EditForm Model="postCreateDTO" OnValidSubmit="CreatePost">
                     <div class="form-group">
                         <InputTextArea @bind-Value="postCreateDTO.body"
-                                        id="postBody"
-                                        placeholder="What's on your mind?"
-                                        class="form-control"
-                                        rows="8"
-                                        style="resize: none;"
-                                        MaxLength="250" />
+                                       id="postBody"
+                                       placeholder="What's on your mind?"
+                                       class="form-control"
+                                       rows="8"
+                                       style="resize: none;"
+                                       MaxLength="250" />
                     </div>
                     <br />
                     @*<div class="text-center">
@@ -268,7 +267,7 @@
             </div>
             <div class="modal-body">
                 <br />
-                @foreach(var comment in listOfComments)
+                @foreach (var comment in listOfComments)
                 {
                     <h5> User: @comment.user.username</h5>
                     <h3><b>@comment.body</b></h3>
@@ -283,7 +282,7 @@
                                    style="resize: none;"
                                    MaxLength="250" />
                 </EditForm>
-                
+
                 <br>
                 <button class="btn btn-primary rounded-pill" @onclick="@CommentOnPost">
                     Send Comment
@@ -310,11 +309,11 @@
                                        class="form-control"
                                        rows="8"
                                        style="resize: none;"
-                                       MaxLength="250" >
+                                       MaxLength="250">
 
-                            
+
                             @*<b>Shared this post by user: @usernameOfUserThatIWillShareHisPost</b>*@
-                            
+
                             @*@postCreateDTO.body*@
                         </InputTextArea>
                     </div>
@@ -330,8 +329,13 @@
     </div>
 </div>
 
-
 @code {
+    [Parameter]
+    public string hobbyName { get; set; } = string.Empty;
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; }
+
     CommentDTO commentDTO = new();
     List<Comment> listOfComments = new();
     PostEditDTO postEditDTO = new();
@@ -342,16 +346,9 @@
     string image = string.Empty;
     int PostIdToDelete;
 
-    [CascadingParameter]
-    public Task<AuthenticationState> AuthState { get; set; }
-
     private string userName = string.Empty;
     private string name = string.Empty;
     private string postBody { get; set; } = string.Empty;
-
-    // Edw prepei na bei h lista twn hobby pou akoloutha
-    // o xrhsths kai na epilegei o idios me dropDownList
-    private string hobbyName = "General Thoughts";
 
 
     private bool isLoading = false;
@@ -368,15 +365,14 @@
         userName = authState.User.FindFirst(ClaimTypes.GivenName).Value;
 
 
+        posts = new();
         try
         {
-            //image = _config.GetValue<string>("api") + "/images/default.jpg";
-
-            // Get Logged in user
             user = await _userService.GetOneUserByUsername(userName);
 
             // Load initial set of posts using the new endpoint
-            posts = await _postsService.GetSomePosts(currentPage);
+            //posts = await _postsService.GetSomePosts(currentPage);
+            posts = await _postsService.GetPostsFromOneHobby(hobbyName);
 
             isLoading = false;
         }
@@ -389,6 +385,11 @@
             name = user.firstname;
             image = user.profileImage!;
         }
+    }
+
+    private async Task NavigateToURL(string hobby)
+    {
+        navManager.NavigateTo("/Hobby/" + hobby, forceLoad: true);
     }
 
     private async Task LoadMorePosts()
@@ -425,7 +426,6 @@
         postCreateDTO.Username = userName;
         postCreateDTO.HobbyName = hobbyName;
         postCreateDTO.image = image;
-        //postCreateDTO.body = postBody;
 
         if (string.IsNullOrEmpty(postCreateDTO.body))
         {
@@ -488,10 +488,6 @@
         }
     }
 
-    //private async Task enterAPostIdToComment()
-    //{
-    //}
-
     private async Task CommentOnPost()
     {
         commentDTO.username = userName;
@@ -504,7 +500,6 @@
     private async Task shareThePost(string body, string username)
     {
         usernameOfUserThatIWillShareHisPost = username;
-        //postCreateDTO = new();
         postCreateDTO.body = body;
     }
 
@@ -517,7 +512,6 @@
         postCreateDTO.Username = userName;
         postCreateDTO.HobbyName = hobbyName;
         postCreateDTO.image = image;
-        //postCreateDTO.body = postBody;
 
         if (string.IsNullOrEmpty(postCreateDTO.body))
         {
@@ -530,4 +524,3 @@
         }
     }
 }
-
