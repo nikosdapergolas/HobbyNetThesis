@@ -371,8 +371,8 @@
             user = await _userService.GetOneUserByUsername(userName);
 
             // Load initial set of posts using the new endpoint
-            //posts = await _postsService.GetSomePosts(currentPage);
-            posts = await _postsService.GetPostsFromOneHobby(hobbyName);
+            posts = await _postsService.GetSomePostsFromOneHobby(currentPage, hobbyName);
+            //posts = await _postsService.GetPostsFromOneHobby(hobbyName);
 
             isLoading = false;
         }

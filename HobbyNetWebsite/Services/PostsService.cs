@@ -95,6 +95,22 @@ public class PostsService : IPostsService
         }
     }
 
+    public async Task<List<Post>> GetSomePostsFromOneHobby(int currentPage, string hobby)
+    {
+        string postsEndpoint = _config["getPeginatedPostsFromOneHobby"];
+
+        try
+        {
+            var result = await _client.GetFromJsonAsync<List<Post>>(postsEndpoint + "/" + hobby + "/" + currentPage);
+            return result;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null;
+        }
+    }
+
     public async Task<string> CreatePost(PostCreateDTO postCreateDTO)
     {
         string createPostEndpoint = _config["createPostEndpoint"];

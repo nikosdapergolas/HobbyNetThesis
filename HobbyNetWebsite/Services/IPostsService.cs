@@ -15,6 +15,8 @@ public interface IPostsService
 
     public Task<List<Post>> GetSomePosts(int currentPage);
 
+    Task<List<Post>> GetSomePostsFromOneHobby(int currentPage, string hobby);
+
     Task<string> CreatePost(PostCreateDTO postCreateDTO);
 
     Task<string> DeletePost(int postId);

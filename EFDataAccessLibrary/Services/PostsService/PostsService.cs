@@ -66,7 +66,8 @@ public class PostsService : IPostsService
         {
             var posts = await _context.Posts
                 .Where(h => h.HobbyName.Equals(hobby))
-                .Include(c => c.comments!)
+                .Include(c => c.comments)
+                .ThenInclude(u => u.user)
                 .Include(l => l.postLikes)
                 .OrderByDescending(t => t.timestamp)
                 .ToListAsync();
@@ -95,23 +96,29 @@ public class PostsService : IPostsService
                 .Take(pageSize) // Take the desired number of posts
                 .ToListAsync();
 
-            //var posts = await _context.Posts
-            //    .Join(
-            //        _context.Followers,
-            //        post => post.Username, // Assuming the username of the post author is stored in a property named "Username"
-            //        follower => follower.FolloweeUsername,
-            //        (post, follower) => new { Post = post, Follower = follower })
-            //            .Where(joinResult =>
-            //                joinResult.Follower.FollowerUsername == LoggedInUsername)
-            //            .Select(joinResult => joinResult.Post)
-            //            .Include(c => c.comments)
-            //                .ThenInclude(u => u.user)
-            //            .Include(l => l.postLikes)
-            //            .OrderByDescending(t => t.timestamp)
-            //            .Skip((page - 1) * pageSize)
-            //            .Take(pageSize)
-            //            .ToListAsync();
+            return posts;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null;
+        }
+    }
 
+    public async Task<IEnumerable<Post>> GetPaginatedPostsFromOneHobby(int page, int pageSize, string hobby)
+    {
+        string LoggedInUsername = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.GivenName)!;
+        try
+        {
+            var posts = await _context.Posts
+                .Where(h => h.HobbyName.Equals(hobby))
+                .Include(c => c.comments)
+                .ThenInclude(u => u.user)
+                .Include(l => l.postLikes)
+                .OrderByDescending(t => t.timestamp)
+                .Skip((page - 1) * pageSize) // Skip the previous pages
+                .Take(pageSize) // Take the desired number of posts
+                .ToListAsync();
 
             return posts;
         }

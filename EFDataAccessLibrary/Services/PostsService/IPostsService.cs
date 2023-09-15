@@ -25,4 +25,5 @@ public interface IPostsService
     public Task<Post> LikePost(LikePostDTO likePostDTO);
     public Task<Post> CommentPost(CommentDTO commentDTO);
     Task<IEnumerable<Post>> GetPostsFromOneHobby(string hobby);
+    Task<IEnumerable<Post>> GetPaginatedPostsFromOneHobby(int page, int pageSize, string hobby);
 }

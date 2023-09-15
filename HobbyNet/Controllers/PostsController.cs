@@ -90,6 +90,25 @@ public class PostsController : ControllerBase
             return BadRequest();
         }
     }
+
+    // GET: api/Posts/FromHobby/{hobby}/{page}
+    [HttpGet("FromHobby/{hobby}/{page}")]
+    [Authorize]
+    public async Task<ActionResult<IEnumerable<Post>>> GetSomePostsFromOneHobby(string hobby,int page = 1)
+    {
+        const int pageSize = 10; // Number of posts per page
+
+        var posts = await _postsService.GetPaginatedPostsFromOneHobby(page, pageSize, hobby);
+
+        if (posts is not null)
+        {
+            return Ok(posts);
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
     // ------------------------------------------------------------------------
 
     // GET: api/Posts/Search/?searchTerm=abc
