@@ -146,4 +146,36 @@ public class HobbiesService : IHobbiesService
             }
         }
     }
+
+    public async Task<FollowHobbyDTO> FollowAHobby(FollowHobbyDTO followHobbyDTO)
+    {
+        var user = await _context.Users.FindAsync(followHobbyDTO.UserId);
+        var hobby = await _context.Hobbies.FindAsync(followHobbyDTO.HobbyId);
+
+        if (user is null || hobby is null)
+        {
+            return null!;
+        }
+
+        HobbiesOfUsers userHobby = new();
+        userHobby.UserId = followHobbyDTO.UserId;
+        userHobby.HobbyId = followHobbyDTO.HobbyId;
+
+        try
+        {
+            await _context.AddAsync(userHobby);
+            await _context.SaveChangesAsync();
+
+            //await _context.HobbiesOfUsers.AddAsync(userHobby);
+            //user.Hobbies.Add(userHobby);
+            //await _context.SaveChangesAsync();
+
+            return followHobbyDTO;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null!;
+        }
+    }
 }

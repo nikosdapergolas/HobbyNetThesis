@@ -20,5 +20,6 @@ public interface IUsersService
     public Task<string> EditUser(UserEditDTO userEditDTO);
     public Task<string> DeleteUser(int id);
     public Task<UploadResult> UploadFile(IFormFile file);
+    //public Task<HobbiesOfUsers> FollowAHobby(FollowHobbyDTO followHobbyDTO);
 
 }

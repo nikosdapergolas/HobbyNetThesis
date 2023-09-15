@@ -165,7 +165,7 @@ public class UsersController : ControllerBase
         return Ok(path);
     }
 
-        [HttpPost("uploadImageFile")]
+    [HttpPost("uploadImageFile")]
     [Authorize]
     public async Task<ActionResult<UploadResult>> UploadFile(IFormFile file)
     {
@@ -180,30 +180,21 @@ public class UsersController : ControllerBase
             return BadRequest(response);
         }
 
-        //UploadResult uploadResult = new();
-        //string trustedFileNameForFileStorage = string.Empty;
-        //string untrustedFileName = file.Name;
-        //uploadResult.FileName = untrustedFileName;
-        //var trustedFileNameForDisplay = WebUtility.HtmlEncode(untrustedFileName);
-
-        ////trustedFileNameForFileStorage = Path.GetRandomFileName();
-        ////----------------------------------------------------------
-        ////trustedFileNameForFileStorage = Path.ChangeExtension(
-        ////        Path.GetRandomFileName(),
-        ////        Path.GetExtension(file.Name));
-        ////----------------------------------------------------------
-        //var path = Path.Combine(
-        //    _config.GetValue<string>("FileStorage"),
-        //    _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.GivenName) + // This is the logged in user's username
-        //    "_" +
-        //    //trustedFileNameForFileStorage);
-        //    file.FileName);
-
-        //await using FileStream fs = new(path, FileMode.Create);
-        //await file.CopyToAsync(fs);
-
-        //uploadResult.StoredFileName = file.FileName;
-
-        //return Ok(uploadResult);
     }
+
+    //[HttpPost("followHobby")]
+    //[Authorize]
+    //public async Task<ActionResult<HobbiesOfUsers>> FollowAHobby(FollowHobbyDTO followHobbyDTO)
+    //{
+    //    var response = _usersService.FollowAHobby(followHobbyDTO);
+
+    //    if (response is not null)
+    //    {
+    //        return Ok(response);
+    //    }
+    //    else
+    //    {
+    //        return BadRequest(response);
+    //    }
+    //}
 }

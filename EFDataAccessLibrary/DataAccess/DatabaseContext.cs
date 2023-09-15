@@ -33,4 +33,5 @@ public class DatabaseContext : DbContext
     public DbSet<Message> Messages { get; set; }
     public DbSet<ChatMember> ChatMembers { get; set; }
     public DbSet<Followers> Followers { get; set; }
+    public DbSet<HobbiesOfUsers> HobbiesOfUsers { get; set; }
 }

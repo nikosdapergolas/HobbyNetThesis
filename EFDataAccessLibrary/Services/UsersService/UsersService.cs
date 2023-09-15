@@ -235,4 +235,34 @@ public class UsersService : IUsersService
 
         return uploadResult;
     }
+
+    //public async Task<HobbiesOfUsers> FollowAHobby(FollowHobbyDTO followHobbyDTO)
+    //{
+    //    try
+    //    {
+    //        var user = await _context.Users.FindAsync(followHobbyDTO.UserId);
+    //        var hobby = await _context.Hobbies.FindAsync(followHobbyDTO.HobbyId);
+
+    //        if (user is null || hobby is null)
+    //        {
+    //            return null!;
+    //        }
+
+    //        HobbiesOfUsers userHobby = new();
+    //        userHobby.UserId = followHobbyDTO.UserId;
+    //        userHobby.HobbyId = followHobbyDTO.HobbyId;
+
+
+    //        await _context.HobbiesOfUsers.AddAsync(userHobby);
+    //        user.Hobbies.Add(userHobby);
+    //        await _context.SaveChangesAsync();
+
+    //        return userHobby;
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        await Console.Out.WriteLineAsync(ex.Message);
+    //        return null!;
+    //    }
+    //}
 }

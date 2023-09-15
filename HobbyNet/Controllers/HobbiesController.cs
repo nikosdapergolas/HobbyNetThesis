@@ -126,4 +126,20 @@ public class HobbiesController : ControllerBase
             return BadRequest();
         }
     }
+
+    [HttpPost("followHobby")]
+    [Authorize]
+    public async Task<ActionResult> FollowAHobby(FollowHobbyDTO followHobbyDTO)
+    {
+        var response = await _service.FollowAHobby(followHobbyDTO);
+
+        if (response is not null)
+        {
+            return Ok(response);
+        }
+        else
+        {
+            return BadRequest(response);
+        }
+    }
 }
