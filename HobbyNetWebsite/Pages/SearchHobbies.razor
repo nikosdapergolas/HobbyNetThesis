@@ -47,7 +47,7 @@
                             </div>
                             @if (actionInProgress)
                             {
-                                <div class="spinner-border" role="status">
+                                <div class="spinner-border" role="status" >
                                     <span class="visually-hidden">Loading...</span>
                                 </div>
                             }
@@ -61,10 +61,68 @@
             <br />
             <h2>Or..</h2>
             <br />
-            <button class="btn btn-primary btn-lg btn-block rounded-pill mx-auto d-block">
+            <button class="btn btn-primary btn-lg btn-block rounded-pill mx-auto d-block" data-bs-toggle="modal" data-bs-target="#ListOfHobbiesModal">
                 <i class="fas fa-eye"></i> Show All Hobbies
             </button>
         }
+    </div>
+</div>
+
+<!--Modal for Showing all hobbies in a List-->
+<div class="modal fade" id="ListOfHobbiesModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ListOfHobbiesModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="postModalLabel">All hobbies section:</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!--Begining of card with hobbies-->
+
+                <div class="container mt-5">
+                    <div class="search-container">
+
+                        <h3 class="text-center">Here are All the Hobbies</h3>
+
+                        <div class="search-results">
+                            @foreach (var HobbyinFilteredHobbies in allHobbies)
+                            {
+                                @if (HobbyinFilteredHobbies.hobbyName.Equals("General Thoughts"))
+                                {
+                                    // This is the "All Hobbies Section so no need to Show it"
+                                    continue;
+                                }
+                                <div class="user-card">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <a style="text-decoration: none; color: black;  cursor: pointer;"
+                                                href="hobby/@HobbyinFilteredHobbies.hobbyName">
+                                                <h5>@HobbyinFilteredHobbies.hobbyName</h5>
+                                            </a>
+                                            @if (hobbiesOfThisUser.Contains(HobbyinFilteredHobbies.hobbyName.Trim()))
+                                            {
+                                                <button id="unfollow_button" class="btn btn-danger" @onclick="@(e => ActionToDo("unfollow", HobbyinFilteredHobbies.Id))">Unfollow</button>
+                                            }
+                                            else
+                                            {
+                                                <button id="follow_button" class="btn btn-primary" @onclick="@(e => ActionToDo("follow", HobbyinFilteredHobbies.Id))">Follow</button>
+                                            }
+                                        </div>
+                                        @if (actionInProgress)
+                                        {
+                                            <div class="spinner-border" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
