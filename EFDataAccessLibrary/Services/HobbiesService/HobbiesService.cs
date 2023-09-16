@@ -179,4 +179,37 @@ public class HobbiesService : IHobbiesService
             return null!;
         }
     }
+
+    public async Task<FollowHobbyDTO> UnfollowAHobby(FollowHobbyDTO followHobbyDTO)
+    {
+        var user = await _context.Users.FindAsync(followHobbyDTO.UserId);
+        var hobby = await _context.Hobbies.FindAsync(followHobbyDTO.HobbyId);
+
+        if (user is null || hobby is null)
+        {
+            return null!;
+        }
+
+        HobbiesOfUsers userHobby = new();
+        userHobby.UserId = followHobbyDTO.UserId;
+        userHobby.hobby = hobby;
+
+        try
+        {
+            await _context.HobbiesOfUsers
+                    .Where(U => U.UserId.Equals(followHobbyDTO.UserId))
+                    .Where(h => h.hobby.Id.Equals(followHobbyDTO.HobbyId))
+                    .ExecuteDeleteAsync();
+            //await _context.AddAsync(userHobby);
+            user.Hobbies.Remove(userHobby);
+            await _context.SaveChangesAsync();
+
+            return followHobbyDTO;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null!;
+        }
+    }
 }

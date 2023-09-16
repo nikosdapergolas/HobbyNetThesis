@@ -17,4 +17,5 @@ public interface IHobbiesService
     public Task<string> EditHobby(Hobby hobby);
     public Task<string> DeleteHobby(int id);
     Task<FollowHobbyDTO> FollowAHobby(FollowHobbyDTO followHobbyDTO);
+    Task<FollowHobbyDTO> UnfollowAHobby(FollowHobbyDTO followHobbyDTO);
 }

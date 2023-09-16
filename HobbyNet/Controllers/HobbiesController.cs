@@ -142,4 +142,20 @@ public class HobbiesController : ControllerBase
             return BadRequest(response);
         }
     }
+
+    [HttpPost("unfollowHobby")]
+    [Authorize]
+    public async Task<ActionResult> UnfollowAHobby(FollowHobbyDTO followHobbyDTO)
+    {
+        var response = await _service.UnfollowAHobby(followHobbyDTO);
+
+        if (response is not null)
+        {
+            return Ok(response);
+        }
+        else
+        {
+            return BadRequest(response);
+        }
+    }
 }
