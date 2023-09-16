@@ -44,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebsite/Pages/Chats.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2hhdHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-dqg7pkgr8o
+
 [S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebsite/Pages/Hobby.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9iYnkucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-jyymx47isl

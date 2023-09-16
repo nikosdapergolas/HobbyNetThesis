@@ -40,7 +40,7 @@
                 <li><a class="dropdown-item" href="posts">All Hobbies</a></li>
                 @foreach (var hobby in user.Hobbies)
                 {
-                    <li><a class="dropdown-item" @onclick='() => NavigateToURL("Politics")'>@hobby.hobby.hobbyName</a></li>
+                    <li><a style="cursor: pointer;" class="dropdown-item" @onclick='() => NavigateToURL("Politics")'>@hobby.hobby.hobbyName</a></li>
                 }
                 @*<li><a class="dropdown-item" href="Hobby/Politics">Politics</a></li>
                 <li><a class="dropdown-item" href="Hobby/Sports">Sports</a></li>

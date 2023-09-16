@@ -1,0 +1,108 @@
+﻿@page "/chats"
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <!-- User list sidebar -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Chats</h5>
+                </div>
+                <div class="card-body">
+                    <!-- List of users with whom the current user has chats -->
+                    @foreach (var user in users)
+                    {
+                        <div class="user-item" @onclick="()=> SelectUser(user)">
+                            <img src="https://localhost:7213/images/default.jpg" alt="@user.Username" class="profile-picture" />
+                            <span>@user.Username</span>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <!-- Chat window -->
+            @if (selectedUser != null)
+            {
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">@selectedUser.Username</h5>
+                    </div>
+                    <div class="card-body chat-window">
+                        <!-- Messages will be displayed here -->
+                        @foreach (var message in selectedUserMessages)
+                        {
+                            <div class="message">
+                                <img src="https://localhost:7213/images/default.jpg" alt="Profile" class="profile-picture" />
+                                <div class="message-content">
+                                    <span class="sender">@message.SenderUsername</span>
+                                    <p>@message.Content</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="card-footer">
+                        <!-- Message input box -->
+                        <input type="text" class="form-control" @bind="@newMessage" />
+                        <button class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    // Dummy data for demonstration
+    List<User> users = new List<User>
+    {
+        new User { Username = "User1" },
+        new User { Username = "User2" },
+        new User { Username = "User3" }
+    };
+
+    User selectedUser = null;
+    List<Message> selectedUserMessages = new List<Message>();
+    string newMessage = "";
+
+    void SelectUser(User user)
+    {
+        selectedUser = user;
+        // Load messages for the selected user (you will need to implement this)
+        selectedUserMessages = LoadMessages(selectedUser);
+    }
+
+    //void SendMessage()
+    //{
+    //    if (!string.IsNullOrEmpty(newMessage))
+    //    {
+    //        // Send the message to the selected user (you will need to implement this)
+    //        SendMessage(selectedUser, newMessage);
+    //        selectedUserMessages.Add(new Message { SenderUsername = "You", Content = newMessage });
+    //        newMessage = "";
+    //    }
+    //}
+
+    List<Message> LoadMessages(User user)
+    {
+        // You will need to implement this to load messages for the selected user
+        // For demonstration, returning some dummy messages
+        return new List<Message>
+        {
+            new Message { SenderUsername = user.Username, Content = "Hello!" },
+            new Message { SenderUsername = "You", Content = "Hi there!" }
+        };
+    }
+
+    class User
+    {
+        public string Username { get; set; }
+    }
+
+    class Message
+    {
+        public string SenderUsername { get; set; }
+        public string Content { get; set; }
+    }
+}
