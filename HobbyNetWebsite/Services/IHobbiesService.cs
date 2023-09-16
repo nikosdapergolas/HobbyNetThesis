@@ -8,4 +8,6 @@ public interface IHobbiesService
     Task<IEnumerable<Hobby>> GetAllHobbies();
 
     Task<string> FollowAHobby(FollowHobbyDTO followHobbyDTO);
+
+    Task<string> UnfollowAHobby(FollowHobbyDTO followHobbyDTO);
 }

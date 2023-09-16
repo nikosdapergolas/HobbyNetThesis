@@ -38,8 +38,24 @@ public class HobbiesService : IHobbiesService
 
         try
         {
-            //string requestLink = followHobbyEndpoint;
             var result = await _client.PostAsJsonAsync(followHobbyEndpoint, followHobbyDTO);
+            return result.ToString();
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null!;
+        }
+    }
+
+    public async Task<string> UnfollowAHobby(FollowHobbyDTO followHobbyDTO)
+    {
+        string unfollowHobbyEndpoint = _config["unfollowOneHobby"];
+
+        try
+        {
+            //string requestLink = followHobbyEndpoint;
+            var result = await _client.PostAsJsonAsync(unfollowHobbyEndpoint, followHobbyDTO);
             return result.ToString();
         }
         catch (Exception ex)

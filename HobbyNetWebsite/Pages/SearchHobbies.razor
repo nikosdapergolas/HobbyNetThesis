@@ -149,29 +149,34 @@
         }
         else
         {
-            //// Here we call the service to unfollow the chosen user
-            //actionInProgress = true;
+            // Here we call the service to unfollow the chosen hobby
+            actionInProgress = true;
 
-            //followersDTO = new();
-            //followersDTO.FollowerUsername = username; // Username of the chosen user to unfollow
-            //followersDTO.FolloweeUsername = userName; // Bad naming, but this is the username of the logged in user
+            followHobbyDTO = new();
+            followHobbyDTO.UserId = user.Id;
+            followHobbyDTO.HobbyId = hobbyId;
 
-            //try
-            //{
-            //    var result = _followersService.UnfollowAPerson(followersDTO);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //    throw;
-            //}
-            //finally
-            //{
-            //    actionInProgress = false;
+            string result = string.Empty;
+            try
+            {
+                result = await _hobbiesService.UnfollowAHobby(followHobbyDTO);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            finally
+            {
+                actionInProgress = false;
+                StateHasChanged();
+            }
 
-            //    // Reload the page if everything went down smoothly
-            //    navManager.NavigateTo(navManager.Uri, forceLoad: true);
-            //}
+            // Reload the page if everything went down smoothly
+            if (!string.IsNullOrEmpty(result))
+            {
+                navManager.NavigateTo(navManager.Uri, forceLoad: true);
+            }
         }
     }
 }
