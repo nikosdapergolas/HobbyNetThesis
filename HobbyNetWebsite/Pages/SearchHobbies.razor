@@ -17,6 +17,10 @@
         <div class="search-results">
             @if (searchTerm.Length > 0)
             {
+                @if (filteredHobbies.Count().Equals(0))
+                {
+                    <h2 class="text-danger">No Hobbies Found starting with: <h1><b>@searchTerm</b></h1></h2>
+                }
                 @foreach (var HobbyinFilteredHobbies in filteredHobbies)
                 {
                     @if (HobbyinFilteredHobbies.hobbyName.Equals("General Thoughts"))
@@ -26,12 +30,6 @@
                     }
                     <div class="user-card">
                         <div class="row">
-                            @*<div class="col-3">
-                                <img src="@user.profileImage"
-                                @onclick="() => navigateToProfile(user.username)"
-                                     alt="User"
-                                     style="width: 100px; height:100px; z-index: 1; cursor: pointer;">
-                            </div>*@
                             <div class="col-9">
                                 <a style="text-decoration: none; color: black;  cursor: pointer;"
                                    href="hobby/@HobbyinFilteredHobbies.hobbyName">
@@ -58,6 +56,15 @@
                 }
             }
         </div>
+        @if (searchTerm.Length.Equals(0))
+        {
+            <br />
+            <h2>Or..</h2>
+            <br />
+            <button class="btn btn-primary btn-lg btn-block rounded-pill mx-auto d-block">
+                <i class="fas fa-eye"></i> Show All Hobbies
+            </button>
+        }
     </div>
 </div>
 

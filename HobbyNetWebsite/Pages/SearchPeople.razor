@@ -16,6 +16,10 @@
         <div class="search-results">
             @if (searchTerm.Length > 0)
             {
+                @if (filteredUsers.Count().Equals(0))
+                {
+                    <h2 class="text-danger">No Users Found starting with: <h1><b>@searchTerm</b></h1></h2>
+                }
                 @foreach (var user in filteredUsers)
                 {
                     if (user.username.Equals(userName))
