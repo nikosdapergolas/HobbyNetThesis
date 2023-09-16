@@ -13,6 +13,7 @@ using EFDataAccessLibrary.Services.UsersService;
 using EFDataAccessLibrary.Services.PostsService;
 using EFDataAccessLibrary.Services.HobbiesService;
 using EFDataAccessLibrary.Services.Followers2Service;
+using EFDataAccessLibrary.Services.ChatsService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -91,6 +92,7 @@ builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IPostsService, PostsService>();
 builder.Services.AddScoped<IHobbiesService, HobbiesService>();
 builder.Services.AddScoped<IFollowersService, FollowersService>();
+builder.Services.AddScoped<IChatsService, ChatsService>();
 //=============================================================================================
 
 var app = builder.Build();
