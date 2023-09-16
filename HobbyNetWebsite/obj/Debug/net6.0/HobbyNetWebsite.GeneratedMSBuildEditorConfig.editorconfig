@@ -68,6 +68,10 @@ build_metadata.AdditionalFiles.CssScope = b-wxg31uta9w
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmlsZU9mVXNlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-zslo60fzp8
 
+[S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebsite/Pages/SearchHobbies.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VhcmNoSG9iYmllcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-ax47qwroi1
+
 [S:/visual_studio_projects/web_projects/Thesis/HobbyNetWebsite/Pages/SearchPeople.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VhcmNoUGVvcGxlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-83mewzucbk

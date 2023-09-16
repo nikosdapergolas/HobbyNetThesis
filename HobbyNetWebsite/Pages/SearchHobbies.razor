@@ -1,0 +1,177 @@
+﻿@page "/SearchHobbies"
+@inject IPostsService _postsService
+@inject IUserService _userService
+@inject IFollowersService _followersService
+@inject IHobbiesService _hobbiesService
+@inject IConfiguration _config
+@inject NavigationManager navManager
+@attribute [Authorize]
+
+<div class="container mt-5">
+    <div class="search-container">
+        <h2>Find new Hobbies to Follow</h2>
+        <div class="mb-3">
+            <input type="text" class="form-control search-input" placeholder="Search for people..." @bind-value="@searchTerm" @oninput="ChangeSearchTermText">
+        </div>
+        @*<button class="btn search-button" @onclick="SearchUsers(searchTerm)">Search</button>*@
+        <div class="search-results">
+            @if (searchTerm.Length > 0)
+            {
+                @foreach (var HobbyinFilteredHobbies in filteredHobbies)
+                {
+                    @if (HobbyinFilteredHobbies.hobbyName.Equals("General Thoughts"))
+                    {
+                        // This is the "All Hobbies Section so no need to Show it"
+                        continue;
+                    }
+                    <div class="user-card">
+                        <div class="row">
+                            @*<div class="col-3">
+                                <img src="@user.profileImage"
+                                @onclick="() => navigateToProfile(user.username)"
+                                     alt="User"
+                                     style="width: 100px; height:100px; z-index: 1; cursor: pointer;">
+                            </div>*@
+                            <div class="col-9">
+                                <a style="text-decoration: none; color: black;  cursor: pointer;"
+                                   href="hobby/@HobbyinFilteredHobbies.hobbyName">
+                                    <h5>@HobbyinFilteredHobbies.hobbyName</h5>
+                                </a>
+                                @if (hobbiesOfThisUser.Contains(HobbyinFilteredHobbies.hobbyName.Trim()))
+                                {
+                                    <button id="unfollow_button" class="btn btn-danger" @onclick="@(e => ActionToDo("unfollow", HobbyinFilteredHobbies.Id))">Unfollow</button>
+                                }
+                                else
+                                {
+                                    <button id="follow_button" class="btn btn-primary" @onclick="@(e => ActionToDo("follow", HobbyinFilteredHobbies.Id))">Follow</button>
+                                }
+                                @*<button id="follow_button" class="btn btn-primary" @onclick="@(e => ActionToDo("follow", user.username))">Follow</button>*@
+                            </div>
+                            @if (actionInProgress)
+                            {
+                                <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    string searchTerm = string.Empty;
+    bool actionInProgress;
+
+    FollowHobbyDTO followHobbyDTO = new();
+    List<string> hobbiesOfThisUser = new();
+    User user = new();
+    IEnumerable<Models.Resused.Hobby> allHobbies = new List<Models.Resused.Hobby>();
+    IEnumerable<Models.Resused.Hobby> filteredHobbies = new List<Models.Resused.Hobby>();
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; }
+
+    private string userName = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        followHobbyDTO = new();
+        actionInProgress = false;
+        hobbiesOfThisUser = new();
+        allHobbies = new List<Models.Resused.Hobby>();
+
+        var authState = await AuthState;
+        userName = authState.User.FindFirst(ClaimTypes.GivenName).Value;
+
+        try
+        {
+            user = await _userService.GetOneUserByUsername(userName);
+
+            allHobbies = await _hobbiesService.GetAllHobbies();
+
+            @foreach (var hobby in user.Hobbies)
+            {
+                hobbiesOfThisUser.Add(hobby.hobby.hobbyName);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    private async Task ChangeSearchTermText(ChangeEventArgs e)
+    {
+        searchTerm = e.Value.ToString();
+        SearchForHobbies();
+    }
+
+    private async Task SearchForHobbies()
+    {
+        filteredHobbies = allHobbies.Where(h => h.hobbyName.StartsWith(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+
+    private async Task ActionToDo(string action, int hobbyId)
+    {
+        if (action.Equals("follow"))
+        {
+            // Here we call the service to follow the chosen hobby
+            actionInProgress = true;
+
+            followHobbyDTO = new();
+            followHobbyDTO.UserId = user.Id;
+            followHobbyDTO.HobbyId = hobbyId;
+
+            string result = string.Empty;
+            try
+            {
+                result = await _hobbiesService.FollowAHobby(followHobbyDTO);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            finally
+            {
+                actionInProgress = false;
+                StateHasChanged();
+            }
+
+            // Reload the page if everything went down smoothly
+            if (!string.IsNullOrEmpty(result))
+            {
+                navManager.NavigateTo(navManager.Uri, forceLoad: true);
+            }
+        }
+        else
+        {
+            //// Here we call the service to unfollow the chosen user
+            //actionInProgress = true;
+
+            //followersDTO = new();
+            //followersDTO.FollowerUsername = username; // Username of the chosen user to unfollow
+            //followersDTO.FolloweeUsername = userName; // Bad naming, but this is the username of the logged in user
+
+            //try
+            //{
+            //    var result = _followersService.UnfollowAPerson(followersDTO);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //    throw;
+            //}
+            //finally
+            //{
+            //    actionInProgress = false;
+
+            //    // Reload the page if everything went down smoothly
+            //    navManager.NavigateTo(navManager.Uri, forceLoad: true);
+            //}
+        }
+    }
+}

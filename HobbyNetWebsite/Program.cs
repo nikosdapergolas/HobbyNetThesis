@@ -22,6 +22,7 @@ builder.Services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPostsService, PostsService>();
 builder.Services.AddScoped<IFollowersService, FollowersService>();
+builder.Services.AddScoped<IHobbiesService, HobbiesService>();
 //----------------------------------------------------------------------------------------------------------------
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7213/") });
