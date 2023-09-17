@@ -495,7 +495,7 @@
 
     private async Task deletePost()
     {
-        var response = _postsService.DeletePost(PostIdToDelete);
+        var response = await _postsService.DeletePost(PostIdToDelete);
         // Refresh After deletion
         navManager.NavigateTo(navManager.Uri, forceLoad: true);
     }

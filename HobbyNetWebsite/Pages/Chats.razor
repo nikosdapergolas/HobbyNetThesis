@@ -1,4 +1,11 @@
 ﻿@page "/chats"
+@inject IPostsService _postsService
+@inject IUserService _userService
+@inject IChatsService _chatService
+@inject IFollowersService _followerService
+@inject IConfiguration _config
+@inject NavigationManager navManager
+@attribute [Authorize]
 
 <div class="container">
     <div class="row">
@@ -45,7 +52,7 @@
                     <div class="card-footer">
                         <!-- Message input box -->
                         <input type="text" class="form-control" @bind="@newMessage" />
-                        <button class="btn btn-primary">Send</button>
+                        <button class="btn btn-primary" @onclick="SendMessage">Send</button>
                     </div>
                 </div>
             }
@@ -73,16 +80,16 @@
         selectedUserMessages = LoadMessages(selectedUser);
     }
 
-    //void SendMessage()
-    //{
-    //    if (!string.IsNullOrEmpty(newMessage))
-    //    {
-    //        // Send the message to the selected user (you will need to implement this)
-    //        SendMessage(selectedUser, newMessage);
-    //        selectedUserMessages.Add(new Message { SenderUsername = "You", Content = newMessage });
-    //        newMessage = "";
-    //    }
-    //}
+    void SendMessage()
+    {
+        if (!string.IsNullOrEmpty(newMessage))
+        {
+            // Send the message to the selected user (you will need to implement this)
+            //SendMessage(selectedUser, newMessage);
+            selectedUserMessages.Add(new Message { SenderUsername = "You", Content = newMessage });
+            newMessage = "";
+        }
+    }
 
     List<Message> LoadMessages(User user)
     {

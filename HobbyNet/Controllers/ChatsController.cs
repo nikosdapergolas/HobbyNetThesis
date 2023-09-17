@@ -47,7 +47,7 @@ public class ChatsController : ControllerBase
         }
     }
 
-    // GET: api/Chats/addNew
+    // GET: api/Chats/SendNewMessage
     [HttpPost("SendNewMessage")]
     [Authorize]
     public async Task<ActionResult<Chat>> CreateANewChat(CreateNewMessageInChatDTO newMessageInChatDTO)
