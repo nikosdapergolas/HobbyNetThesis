@@ -51,14 +51,27 @@
                             {
                                 @foreach (var message in chatWithOneUser.chatMessages)
                                 {
-                                    <span class="text-muted text-center">@message.timestamp</span>
-                                    <div class="message">
-                                        <img src="https://localhost:7213/images/default.jpg" alt="Profile" class="profile-picture" />
-                                        <div class="message-content">
-                                            <span class="sender">@message.messageSender</span>
-                                            <p>@message.messageBody</p>
+                                    <p class="text-muted text-center">@message.timestamp</p>
+                                    @if (message.messageSender.Equals(loggedInUser.username))
+                                    {
+                                        <div style="flex-direction: row-reverse;" class="message">
+                                            <img src="@loggedInUser.profileImage" alt="Profile" class="profile-picture" />
+                                            <div class="message-content">
+                                                <span class="sender">@message.messageSender</span>
+                                                <p>@message.messageBody</p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="message">
+                                            <img src="@selectedUser.profileImage" alt="Profile" class="profile-picture" />
+                                            <div class="message-content">
+                                                <span class="sender">@message.messageSender</span>
+                                                <p>@message.messageBody</p>
+                                            </div>
+                                        </div>
+                                    }
                                 }
                             }
                         </div>
