@@ -29,6 +29,7 @@ public class PostsService : IPostsService
         {
             var posts = await _context.Posts
                 .Include(c => c.comments)
+                .ThenInclude(u => u.user)
                 .Include(l => l.postLikes)
                 .OrderByDescending(t => t.timestamp)
                 .ToListAsync();

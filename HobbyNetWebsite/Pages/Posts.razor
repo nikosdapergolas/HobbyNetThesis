@@ -18,7 +18,91 @@
             <h1 class="mb-0 text-white">Recomented Post</h1>
         </div>
     </div>
-    <h1>Εδώ θα μπεί το Recomended post του user</h1>
+    @if (recomendedPostWasSelected)
+    {
+        <br />
+        <br />
+        <br />
+        <div class="card mb-4 rounded-pill">
+            <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between rounded-pill">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle profile-picture">
+                        <!-- Profile Picture Image -->
+                        <img style="cursor: pointer"
+                             src="@recomendedPost.image"
+                             alt="Profile Picture"
+                        @onclick="() => navigateToProfile(recomendedPost.Username)" />
+                    </div>
+                    <div class="ms-3">
+                        @*<h5 class="card-title">@post.Username</h5>*@
+                        <a style="text-decoration: none; color: white;  cursor: pointer;"
+                           href="profileOfUser/@recomendedPost.Username">
+                            <h5 class="card-title">@recomendedPost.Username</h5>
+                        </a>
+                        <small class="text-white">@recomendedPost.HobbyName</small>
+                        <br />
+                        <small class="text-white">@recomendedPost.timestamp.ToString("MMMM dd, yyyy")</small>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <!-- Post Options Button (e.g., Like, Comment, Share) -->
+                    <button type="button" class="btn btn-link text-white" data-bs-toggle="dropdown" id="dropdownToggle">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+
+                    @if (user.username.Equals(recomendedPost.Username))
+                    {
+                        <div class="dropdown-menu" aria-labelledby="dropdownToggle">
+                            <a style="cursor: pointer" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#EditPostModal" @onclick="() => assingTheRightPostIdForEdit(recomendedPost.Id,recomendedPost.body)">Edit Post</a>
+                            <a style="cursor: pointer" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deletePostModal" @onclick="() => assingTheRightPostId(recomendedPost.Id)">Delete Post</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="Profile">Visit Profile</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="dropdown-menu" aria-labelledby="dropdownToggle">
+                            <a class="dropdown-item" href="chats">Message user</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Report Post</a>
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="card-text fs-5 lh-lg">@recomendedPost.body</p>
+            </div>
+            <div class="card-footer bg-secondary rounded-pill">
+                <!-- Like, Comment, Share Buttons -->
+                @*<button id="likebutton" type="button" class="btn btn-primary rounded-pill" @onclick="() => LikeAPost(post.Id)">
+            <i class="far fa-thumbs-up"></i> Likes | @post.postLikes?.Count
+            </button>*@
+                <LikeButton OnLike="() => LikeAPost(recomendedPost.Id)" LikeCount="@recomendedPost.postLikes.Count" />
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <button type="button" class="btn btn-success rounded-pill" data-bs-toggle="modal" data-bs-target="#CommentsModal" @onclick="() => fillListWithComments(recomendedPost.comments, recomendedPost.Id)">
+                    <i class="far fa-comment-alt"></i> Comments | @recomendedPost.comments?.Count
+                </button>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <button type="button" class="btn btn-dark rounded-pill" data-bs-toggle="modal" data-bs-target="#shareModal" @onclick="() => shareThePost(recomendedPost.body, recomendedPost.Username)">
+                    <i class="fas fa-share"></i> Repost
+                </button>
+            </div>
+        </div>
+    }
+    else
+    {
+        <br />
+        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    }
 
     <br />
     <br />
@@ -42,9 +126,6 @@
                 {
                     <li><a style="cursor: pointer;" class="dropdown-item" @onclick='() => NavigateToURL(hobby.hobby.hobbyName)'>@hobby.hobby.hobbyName</a></li>
                 }
-                @*<li><a class="dropdown-item" href="Hobby/Politics">Politics</a></li>
-                <li><a class="dropdown-item" href="Hobby/Sports">Sports</a></li>
-                <li><a class="dropdown-item" href="Hobby/Cars">Cars</a></li>*@
             </ul>
         </div>
 
@@ -336,6 +417,7 @@
 
 
 @code {
+    Post recomendedPost = new();
     CommentDTO commentDTO = new();
     List<Comment> listOfComments = new();
     PostEditDTO postEditDTO = new();
@@ -345,6 +427,7 @@
     List<Post> posts = new();
     string image = string.Empty;
     int PostIdToDelete;
+    bool recomendedPostWasSelected = false;
 
     [CascadingParameter]
     public Task<AuthenticationState> AuthState { get; set; }
@@ -365,6 +448,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        recomendedPostWasSelected = false;
+        await RecomendOnePost();
         commentDTO = new();
         PostIdToDelete = -1;
         isLoading = true;
@@ -537,6 +622,31 @@
     private async Task NavigateToURL(string hobby)
     {
         navManager.NavigateTo("/Hobby/" + hobby, forceLoad: true);
+    }
+
+    private async Task RecomendOnePost()
+    {
+        var allPosts = await _postsService.GetPosts();
+
+        int index = 0;
+        foreach (var post in allPosts)
+        {
+            index++;
+            if (index.Equals(1))
+            {
+                recomendedPost = new();
+                recomendedPost = post;
+            }
+            else
+            {
+                if (recomendedPost.postLikes.Count < post.postLikes.Count)
+                {
+                    recomendedPost = new();
+                    recomendedPost = post;
+                }
+            }
+        }
+        recomendedPostWasSelected = true;
     }
 }
 
