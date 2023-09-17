@@ -108,6 +108,7 @@ public class ChatsService : IChatsService
             Message message = new();
             message.messageBody = newMessageInChatDTO.messageBody;
             message.timestamp = DateTime.Now;
+            message.messageSender = sender.username;
 
             ChatMember member1 = new ChatMember();
             member1.member = sender;
@@ -133,6 +134,7 @@ public class ChatsService : IChatsService
             Message message = new();
             message.messageBody = newMessageInChatDTO.messageBody;
             message.timestamp = DateTime.Now;
+            message.messageSender = sender.username;
 
 
             await _context.AddAsync(message);

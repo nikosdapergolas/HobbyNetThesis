@@ -15,6 +15,10 @@ public class Message
     public DateTime timestamp { get; set; }
 
     [Required]
+    [MaxLength(100)]
+    public string messageSender { get; set; }
+
+    [Required]
     [MaxLength(250)]
     public string messageBody { get; set; }
 }

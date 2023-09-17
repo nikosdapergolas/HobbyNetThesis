@@ -1,5 +1,4 @@
 /* /Pages/Chats.razor.rz.scp.css */
-/* Add this CSS to your styles file or in a style tag within your Blazor component */
 
 .container[b-dqg7pkgr8o] {
     margin-top: 30px;
@@ -71,6 +70,7 @@
     display: flex;
     align-items: flex-start;
     margin-bottom: 15px;
+    /*flex-direction: row-reverse;*/ /*This is responsible for making messages appear on the right*/
 }
 
 .profile-picture[b-dqg7pkgr8o] {

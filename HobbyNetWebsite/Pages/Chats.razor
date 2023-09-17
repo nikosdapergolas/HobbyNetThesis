@@ -51,11 +51,11 @@
                             {
                                 @foreach (var message in chatWithOneUser.chatMessages)
                                 {
-                                    <span class="text-muted">@message.timestamp</span>
+                                    <span class="text-muted text-center">@message.timestamp</span>
                                     <div class="message">
                                         <img src="https://localhost:7213/images/default.jpg" alt="Profile" class="profile-picture" />
                                         <div class="message-content">
-                                            <span class="sender">@message.timestamp</span>
+                                            <span class="sender">@message.messageSender</span>
                                             <p>@message.messageBody</p>
                                         </div>
                                     </div>
