@@ -9,4 +9,5 @@ public interface IFollowersService
     Task<IEnumerable<string>> GetAllPeopleOneUserFollows(string username);
     Task<string> UnfollowAPerson(FollowersDTO followersDTO);
     Task<string> FollowAPerson(FollowersDTO followersDTO);
+    Task<IEnumerable<User>> GetFollowersOfOnePersonAsUsers(string username);
 }

@@ -39,6 +39,23 @@ public class FollowersService : IFollowersService
         }
     }
 
+    public async Task<IEnumerable<User>> GetFollowersOfOnePersonAsUsers(string username)
+    {
+        string followersEndpoint = _config["getAllFollowersOfOneUserAsUsers"];
+
+        try
+        {
+            string requestLink = followersEndpoint + "?username=" + username;
+            var result = await _client.GetFromJsonAsync<List<User>>(requestLink);
+            return result;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null!;
+        }
+    }
+
     public async Task<IEnumerable<string>> GetAllPeopleOneUserFollows(string username)
     {
         string followersEndpoint = _config["GetAllPeopleOneUserFollows"];

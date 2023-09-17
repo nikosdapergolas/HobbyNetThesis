@@ -81,6 +81,63 @@ public class FollowersService : IFollowersService
         }
     }
 
+    public async Task<IEnumerable<User>> GetFollowersOfOnePersonAsUsers(string username)
+    {
+        try
+        {
+            // First checking if user exists
+            var user = await _context.Users
+                .Where(u => u.username == username)
+                .FirstOrDefaultAsync();
+
+            if (user is null)
+            {
+                return null!;
+            }
+
+            List<User> followersOfUser = new();
+
+            // Then checking for this user's followers
+            var followers = await _context.Followers
+                .Where(f => f.FolloweeUsername.Trim() == username)
+                .Select(f => f.FollowerUsername)
+                .ToListAsync();
+
+            if(followers is not null)
+            {
+                foreach (var follower in followers)
+                {
+                    followersOfUser.Add(
+                        await _context.Users
+                        .Where(u => u.username.Equals(follower))
+                        .FirstOrDefaultAsync()
+                    );
+                }
+            }           
+
+            //// Removing all white spaces
+            //for (int i = 0; i < followers.Count(); i++)
+            //{
+            //    followers[i] = followers[i].Trim();
+            //}
+
+            // Returning the list of followers if he has any
+            if (followersOfUser.Count > 0)
+            {
+                return followersOfUser;
+            }
+            else
+            {
+                return new List<User>();
+            }
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null!;
+        }
+    }
+
     public async Task<IEnumerable<string>> GetAllPeopleOneUserFollows(string username)
     {
         try

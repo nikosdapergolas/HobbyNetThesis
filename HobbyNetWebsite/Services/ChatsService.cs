@@ -31,6 +31,22 @@ public class ChatsService : IChatsService
         }
     }
 
+    public async Task<Chat> GetConversationBetweenTwoUsers(GetConversationOfTwoUsers twoUsers)
+    {
+        string chatEndpoint = _config["getConversationBetweenTwoUsers"];
+
+        try
+        {
+            var result = await _client.GetFromJsonAsync<Chat>(chatEndpoint + "/" + twoUsers.User1.username + "/" + twoUsers.User2.username);
+            return result;
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null;
+        }
+    }
+
     public async Task<string> CreateANewChatMessage(CreateNewMessageInChatDTO newMessageInChatDTO)
     {
         string createChatMessageEndpoint = _config["createANewChatMessageEndpoint"];

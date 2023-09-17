@@ -47,6 +47,35 @@ public class ChatsService : IChatsService
         return chats;
     }
 
+    public async Task<Chat> GetConversationBetweenTwoUsers(string username1, string username2)
+    {
+        // Get the Two Users
+        var user1 = await _context.Users
+            .Where(m => m.username == username1)
+            .FirstOrDefaultAsync();
+
+        var user2 = await _context.Users
+            .Where(m => m.username == username2)
+            .FirstOrDefaultAsync();
+
+        if (user1 is null || user2 is null)
+        {
+            return null!;
+        }
+
+        // Then get their Conversation
+        var chat = await _context.Chats
+           .Include(c => c.members)
+           .ThenInclude(m => m.member)
+           .Include(c => c.chatMessages)
+           .Where(c =>
+               c.members.Any(m => m.member.Equals(user1)) &&
+               c.members.Any(m => m.member.Equals(user2)))
+           .FirstOrDefaultAsync();
+
+        return chat;
+    }
+
     public async Task<Chat> CreateANewChat(CreateNewMessageInChatDTO newMessageInChatDTO)
     {
         var sender = await _context.Users

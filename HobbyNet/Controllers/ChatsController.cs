@@ -47,6 +47,23 @@ public class ChatsController : ControllerBase
         }
     }
 
+    // GET: api/Chats/Conversation
+    [HttpGet("Conversation/{username1}/{username2}")]
+    [Authorize]
+    public async Task<ActionResult<Chat>> GetConversationBetweenTwoUsers(string username1, string username2)
+    {
+        var chat = await _chatsService.GetConversationBetweenTwoUsers(username1, username2);
+
+        if (chat is not null)
+        {
+            return Ok(chat);
+        }
+        else
+        {
+            return BadRequest(new Chat());
+        }
+    }
+
     // GET: api/Chats/SendNewMessage
     [HttpPost("SendNewMessage")]
     [Authorize]

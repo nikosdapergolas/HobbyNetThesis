@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kAZnX74WWMSGVryYSyLyzPKg0/wJk7ljYGyq+wunEz4=",
+  "Hash": "50xQggl/ExIxuKbbEKXONLXucV7AnaEm/wr98TeEGDY=",
   "Source": "HobbyNet",
   "BasePath": "_content/HobbyNet",
   "Mode": "Default",
@@ -68,6 +68,23 @@
       "OriginalItemSpec": "wwwroot\\images\\profile_pictures\\string_ulssqq5r.png"
     },
     {
+      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\images\\profile_pictures\\user1_j232eztd.png",
+      "SourceId": "HobbyNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\",
+      "BasePath": "_content/HobbyNet",
+      "RelativePath": "images/profile_pictures/user1_j232eztd.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\profile_pictures\\user1_j232eztd.png"
+    },
+    {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\images\\profile_pictures\\user1_mgdhd5a2.png",
       "SourceId": "HobbyNet",
       "SourceType": "Discovered",
@@ -83,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\profile_pictures\\user1_mgdhd5a2.png"
+    },
+    {
+      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\images\\profile_pictures\\user1_xnkjnb23.png",
+      "SourceId": "HobbyNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\",
+      "BasePath": "_content/HobbyNet",
+      "RelativePath": "images/profile_pictures/user1_xnkjnb23.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\profile_pictures\\user1_xnkjnb23.png"
     },
     {
       "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\images\\profile_pictures\\user2_c5ojcgcn.png",
@@ -117,6 +151,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\random_girl.png"
+    },
+    {
+      "Identity": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\user_manual.pdf",
+      "SourceId": "HobbyNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\",
+      "BasePath": "_content/HobbyNet",
+      "RelativePath": "user_manual.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\user_manual.pdf"
     }
   ]
 }

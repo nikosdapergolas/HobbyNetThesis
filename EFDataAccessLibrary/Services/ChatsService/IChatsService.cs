@@ -8,5 +8,6 @@ namespace EFDataAccessLibrary.Services.ChatsService
         Task<IEnumerable<Chat>> GetAllChats();
         Task<IEnumerable<Chat>> GetAllChatsOfOneUser(string username);
         Task<Chat> CreateANewChat(CreateNewMessageInChatDTO newMessageInChatDTO);
+        Task<Chat> GetConversationBetweenTwoUsers(string username1, string username2);
     }
 }

@@ -51,6 +51,22 @@ public class FollowersController : ControllerBase
         }
     }
 
+    // GET: api/Followers/AsUsers/User/
+    [HttpGet("AsUsers/User")]
+    public async Task<ActionResult<IEnumerable<User>>> GetFollowersOfOnePersonAsUsers(string username)
+    {
+        var followersAsUsers = await _followersService.GetFollowersOfOnePersonAsUsers(username);
+
+        if (followersAsUsers is not null)
+        {
+            return Ok(followersAsUsers);
+        }
+        else
+        {
+            return NotFound();
+        }
+    }
+
     // GET: api/Followers/UserFollows/
     [HttpGet("UserFollows")]
     public async Task<ActionResult<IEnumerable<string>>> GetAllPeopleOneUserFollows(string username)

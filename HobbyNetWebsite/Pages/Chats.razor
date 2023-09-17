@@ -17,99 +17,175 @@
                 </div>
                 <div class="card-body">
                     <!-- List of users with whom the current user has chats -->
-                    @foreach (var user in users)
+                    @foreach (var user in following)
                     {
                         <div class="user-item" @onclick="()=> SelectUser(user)">
-                            <img src="https://localhost:7213/images/default.jpg" alt="@user.Username" class="profile-picture" />
-                            <span>@user.Username</span>
+                            <img src="@user.profileImage" alt="@user.username" class="profile-picture" />
+                            <span>@user.username</span>
                         </div>
                     }
                 </div>
             </div>
         </div>
 
-        <div class="col-md-8">
-            <!-- Chat window -->
-            @if (selectedUser != null)
-            {
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">@selectedUser.Username</h5>
+        @if (loading)
+        {
+            <br />
+            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-8">
+                <!-- Chat window -->
+                @if (selectedUser != null)
+                {
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">@selectedUser.username</h5>
+                        </div>
+                        <div class="card-body chat-window">
+                            <!-- Messages will be displayed here -->
+                            @if (chatWithOneUser is not null)
+                            {
+                                @foreach (var message in chatWithOneUser.chatMessages)
+                                {
+                                    <span class="text-muted">@message.timestamp</span>
+                                    <div class="message">
+                                        <img src="https://localhost:7213/images/default.jpg" alt="Profile" class="profile-picture" />
+                                        <div class="message-content">
+                                            <span class="sender">@message.timestamp</span>
+                                            <p>@message.messageBody</p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <div class="card-footer">
+                            <!-- Message input box -->
+                            <input type="text" class="form-control" @bind="@newMessage" />
+                            <button class="btn btn-primary" @onclick="SendMessage">Send</button>
+                        </div>
                     </div>
-                    <div class="card-body chat-window">
-                        <!-- Messages will be displayed here -->
-                        @foreach (var message in selectedUserMessages)
-                        {
-                            <div class="message">
-                                <img src="https://localhost:7213/images/default.jpg" alt="Profile" class="profile-picture" />
-                                <div class="message-content">
-                                    <span class="sender">@message.SenderUsername</span>
-                                    <p>@message.Content</p>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                    <div class="card-footer">
-                        <!-- Message input box -->
-                        <input type="text" class="form-control" @bind="@newMessage" />
-                        <button class="btn btn-primary" @onclick="SendMessage">Send</button>
-                    </div>
-                </div>
-            }
-        </div>
+                }
+            </div>
+        }
+
+        
     </div>
 </div>
 
 @code {
-    // Dummy data for demonstration
-    List<User> users = new List<User>
-    {
-        new User { Username = "User1" },
-        new User { Username = "User2" },
-        new User { Username = "User3" }
-    };
+    bool loading = false;
+    //List<Chat> chatsOfThisUser = new();
+    Chat chatWithOneUser = new();
+    User loggedInUser = new();
+    IEnumerable<User> following = new List<User>();
 
-    User selectedUser = null;
+    User selectedUser = new();
     List<Message> selectedUserMessages = new List<Message>();
-    string newMessage = "";
+    string newMessage = string.Empty;
 
-    void SelectUser(User user)
-    {
-        selectedUser = user;
-        // Load messages for the selected user (you will need to implement this)
-        selectedUserMessages = LoadMessages(selectedUser);
-    }
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; }
+    private string userName = string.Empty;
 
-    void SendMessage()
+    protected override async Task OnInitializedAsync()
     {
-        if (!string.IsNullOrEmpty(newMessage))
+        selectedUser = new();
+        loggedInUser = new();
+        chatWithOneUser = new();
+        //chatsOfThisUser = new();
+
+        loading = false;
+        newMessage = string.Empty;
+
+        var authState = await AuthState;
+        userName = authState.User.FindFirst(ClaimTypes.GivenName).Value;
+        try
         {
-            // Send the message to the selected user (you will need to implement this)
-            //SendMessage(selectedUser, newMessage);
-            selectedUserMessages.Add(new Message { SenderUsername = "You", Content = newMessage });
-            newMessage = "";
+            // To get the credentials of the loggen in user
+            loggedInUser = await _userService.GetOneUserByUsername(userName);
+
+            // To see who this user follows
+            following = await _followerService.GetFollowersOfOnePersonAsUsers(userName);
+
+            // Getting all the chats of the Logged in User
+            //chatsOfThisUser = await _chatService.GetAllChatsOfOneUser(loggedInUser.username);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
         }
     }
 
-    List<Message> LoadMessages(User user)
+    /// <summary>
+    /// This Function will assign a value the username that got clicked by the user,
+    /// and then call the LoadMessages() Function to actually load all the messages
+    /// between the loggen in user and the chosen user
+    /// </summary>
+    /// <param name="username">The username Chosen</param>
+    async Task SelectUser(User userThatWasSelected)
     {
-        // You will need to implement this to load messages for the selected user
-        // For demonstration, returning some dummy messages
-        return new List<Message>
+        loading = true;
+        selectedUser = userThatWasSelected;
+
+        // Load messages for the selected user
+        await LoadMessages();
+
+        //Terminate the loading animation
+        loading = false;
+    }
+
+    /// <summary>
+    /// This function Will take care of the post Request of the new message
+    /// </summary>
+    async Task SendMessage()
+    {
+        if (!string.IsNullOrEmpty(newMessage))
         {
-            new Message { SenderUsername = user.Username, Content = "Hello!" },
-            new Message { SenderUsername = "You", Content = "Hi there!" }
-        };
+            loading = true;
+
+            // Send the message to the selected user
+            CreateNewMessageInChatDTO newMessageInChatDTO = new();
+            newMessageInChatDTO.sender = loggedInUser.username;
+            newMessageInChatDTO.receiver = selectedUser.username;
+            newMessageInChatDTO.messageBody = newMessage;
+            await _chatService.CreateANewChatMessage(newMessageInChatDTO);
+
+            loading = false;
+            newMessage = string.Empty;
+            navManager.NavigateTo(navManager.Uri, forceLoad: true);
+
+            //// Send the message to the selected user (you will need to implement this)
+            ////SendMessage(selectedUser, newMessage);
+            //selectedUserMessages.Add(new Message { SenderUsername = "You", Content = newMessage });
+            //newMessage = "";
+        }
     }
 
-    class User
+    /// <summary>
+    /// This function is called when the user clicks on a user in the left side of the screen.
+    /// It's job is to call the endpoint where it loads all the messages between:
+    /// a) The Logged in User
+    /// b) The user that got clicked
+    /// </summary>
+    /// <param name="user">The user in the left card to show the messages</param>
+    /// <returns></returns>
+    async Task LoadMessages()
     {
-        public string Username { get; set; }
-    }
+        GetConversationOfTwoUsers twoUsers = new();
+        twoUsers.User1 = loggedInUser;
+        twoUsers.User2 = selectedUser;
 
-    class Message
-    {
-        public string SenderUsername { get; set; }
-        public string Content { get; set; }
+        try
+        {
+            chatWithOneUser = await _chatService.GetConversationBetweenTwoUsers(twoUsers);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 }
