@@ -52,15 +52,6 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<string> Register(RegisterUserModel registerUserModel)
     {
-        //var registerInfo = new[]
-        //{
-        //    new KeyValuePair<string, string>("username", registerUserModel.Username),
-        //    new KeyValuePair<string, string>("password", registerUserModel.Password),
-        //    new KeyValuePair<string, string>("email", registerUserModel.Username),
-        //    new KeyValuePair<string, string>("firstname", registerUserModel.Password),
-        //    new KeyValuePair<string, string>("lastname", registerUserModel.Username)
-        //};
-
         string api = _config["registrationEndpoint"];
 
         //var authResult = await _client.PostAsJsonAsync(api, registerInfo);
