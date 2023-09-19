@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\images\\logo.png"
     },
     {
+      "Id": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\images\\profile_pictures\\man_ciizlhl0.png",
+      "PackagePath": "staticwebassets\\images\\profile_pictures\\man_ciizlhl0.png"
+    },
+    {
       "Id": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\images\\profile_pictures\\string_ulssqq5r.png",
       "PackagePath": "staticwebassets\\images\\profile_pictures\\string_ulssqq5r.png"
     },
@@ -33,8 +37,8 @@
       "PackagePath": "staticwebassets\\images\\random_girl.png"
     },
     {
-      "Id": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\user_manual.pdf",
-      "PackagePath": "staticwebassets\\user_manual.pdf"
+      "Id": "S:\\visual_studio_projects\\web_projects\\Thesis\\HobbyNet\\wwwroot\\user_manual_hobbies.pdf",
+      "PackagePath": "staticwebassets\\user_manual_hobbies.pdf"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.HobbyNet.Microsoft.AspNetCore.StaticWebAssets.props",

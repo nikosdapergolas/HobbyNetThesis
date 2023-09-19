@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyNet", "HobbyNet.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFDataAccessLibrary", "..\EFDataAccessLibrary\EFDataAccessLibrary.csproj", "{21C9A004-A7EE-4526-80D0-075D56E4F0F8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyNetWebApp", "..\HobbyNetWebApp\HobbyNetWebApp.csproj", "{9123D0EB-FF3E-4061-9171-D32659636EFC}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyNetWebsite", "..\HobbyNetWebsite\HobbyNetWebsite.csproj", "{0181C35F-ECB2-4606-8217-5EDC24662DF3}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{21C9A004-A7EE-4526-80D0-075D56E4F0F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21C9A004-A7EE-4526-80D0-075D56E4F0F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21C9A004-A7EE-4526-80D0-075D56E4F0F8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9123D0EB-FF3E-4061-9171-D32659636EFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9123D0EB-FF3E-4061-9171-D32659636EFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9123D0EB-FF3E-4061-9171-D32659636EFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9123D0EB-FF3E-4061-9171-D32659636EFC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0181C35F-ECB2-4606-8217-5EDC24662DF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0181C35F-ECB2-4606-8217-5EDC24662DF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0181C35F-ECB2-4606-8217-5EDC24662DF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
