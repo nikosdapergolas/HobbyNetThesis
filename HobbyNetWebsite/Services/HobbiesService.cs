@@ -64,4 +64,20 @@ public class HobbiesService : IHobbiesService
             return null!;
         }
     }
+
+    public async Task<string> CreateNewHobby(Hobby hobby)
+    {
+        string createNewHobbyEndpoint = _config["createNewHobbyByAdmin"];
+
+        try
+        {
+            var result = await _client.PostAsJsonAsync(createNewHobbyEndpoint, hobby);
+            return result.ToString();
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+            return null!;
+        }
+    }
 }

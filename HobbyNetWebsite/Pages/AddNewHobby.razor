@@ -1,0 +1,50 @@
+﻿@page "/AddNewHobby"
+@inject IHobbiesService _hobbiesService
+@inject NavigationManager navManager
+@attribute [Authorize(Roles = "Admin")]
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Add a New Hobby</h3>
+        </div>
+        <div class="card-body">
+            <br />
+            <EditForm Model="@hobby" OnValidSubmit="SubmitANewHobby">
+                <div class="form-group">
+                    <label for="hobbyName">Hobby Name</label>
+                    <InputText id="hobbyName" @bind-Value="hobby.hobbyName" class="form-control" placeholder="Enter hobby name" />
+                </div>
+                @if (isLoading)
+                {
+                    <br />
+                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                }
+                <br />
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    private Models.Resused.Hobby hobby = new();
+    private bool isLoading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        hobby = new();
+    }
+
+    private async Task SubmitANewHobby()
+    {
+        isLoading = true;
+        hobby.Id = 0;
+        var response = await _hobbiesService.CreateNewHobby(hobby);
+        isLoading = false;
+        navManager.NavigateTo(navManager.Uri, forceLoad: true);
+    }
+}

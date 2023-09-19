@@ -10,4 +10,6 @@ public interface IHobbiesService
     Task<string> FollowAHobby(FollowHobbyDTO followHobbyDTO);
 
     Task<string> UnfollowAHobby(FollowHobbyDTO followHobbyDTO);
+
+    Task<string> CreateNewHobby(Hobby hobby);
 }
